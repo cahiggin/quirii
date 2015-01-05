@@ -13,33 +13,33 @@
 
 <form class="form-horizontal" role="form">
  
-  <div class="col-xs-10 col-xs-offset-2 form-group">
+  <div class="col-xs-12 form-group">
       <legend>Select Morphy Type</legend>
 
       <div class="col-xs-12 morphios">
       
-        <input id="delight" class="input-hidden" name="scale" type="radio" value="Delight" checked="checked"/>
+        <input id="delight" class="input-hidden col-xs-2" name="scale" type="radio" value="Delight" checked="checked"/>
         <label for="delight"><img src="http://s3.amazonaws.com/ViizbiProducts/morphies/Delight.png" style="width: 75px; height:75px;"/>
         <br />
         <center>Delight</center>
         </label>  
  
       
-        <input id="disgust" class="input-hidden" name="scale" type="radio" value="Disgust" />
+        <input id="disgust" class="input-hidden col-xs-2" name="scale" type="radio" value="Disgust" />
         <label for="disgust"><img src="http://s3.amazonaws.com/ViizbiProducts/morphies/Disgust.png" style="width: 60px; height:60px;"/>  
         <br />
         <center>Disgust</center>
         </label>  
 
       
-        <input id="disappointed" class="input-hidden" name="scale" type="radio" value="Disappointed" />
+        <input id="disappointed" class="input-hidden col-xs-2" name="scale" type="radio" value="Disappointed" />
         <label for="disappointed"><img src="http://s3.amazonaws.com/ViizbiProducts/morphies/Disappointed.png" style="width: 60px; height:60px;"/>
         <br />
         <center>Disappointed</center>
         </label>  
 
       
-        <input id="surprise" class="input-hidden" name="scale" type="radio" value="Surprise" />
+        <input id="surprise" class="input-hidden col-xs-2" name="scale" type="radio" value="Surprise" />
         <label for="surprise"><img src="http://s3.amazonaws.com/ViizbiProducts/morphies/Surprise.png" style="width: 60px; height:60px;"/>
         <br />
         <center>Surprise</center>
@@ -48,7 +48,7 @@
       
 
       
-        <input id="disbelief" class="input-hidden" name="scale" type="radio" value="Srsly" />
+        <input id="disbelief" class="input-hidden col-xs-2" name="scale" type="radio" value="Srsly" />
         <label for="disbelief"><img src="http://s3.amazonaws.com/ViizbiProducts/morphies/Srsly.png" style="width: 60px; height:60px;"/>
         <br />
         <center>Bored</center>
@@ -60,7 +60,7 @@
   </div>
   
 
-  <div class="col-xs-10 col-xs-offset-1 col-lg-4 form-group">
+  <div class="col-xs-10 col-xs-offset-1 col-lg-2 form-group">
     <legend>Morphy</legend>
     <div id="morphy-container"></div>
     <input type="range" name="intensity"  min="0" max="1" value="0" step="0.001" />
