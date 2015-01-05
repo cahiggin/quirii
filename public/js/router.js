@@ -1,5 +1,5 @@
-define(['views/index', 'views/login', 'views/logout', 'views/quirii', 'views/quiriiDetail', 'views/publicQuirii', 'models/User', 'models/Quirii','models/QuiriiCollection'],
-function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView, PublicQuiriiView, User, Quirii, QuiriiCollection) {
+define(['views/index', 'views/login', 'views/logout', 'views/quirii', 'views/quiriiDetail', 'views/publicQuirii', 'models/User', 'models/Quirii', 'models/PublicQuirii','models/QuiriiCollection'],
+function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView, PublicQuiriiView, User, Quirii, PublicQuirii, QuiriiCollection) {
   var QuiriiRouter = Backbone.Router.extend({
     currentView: null,
 
@@ -45,7 +45,7 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView, PublicQ
     },
 
     publicQuirii: function(id){
-      var model = new Quirii({ id: id });
+      var model = new PublicQuirii({ id: id });
       this.changeView(new PublicQuiriiView({
         model: model
       }));
