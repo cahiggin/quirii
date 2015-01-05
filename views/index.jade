@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  nav.navbar.navbar-default(role='navigation')
+    .navbar-header
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='#viizbi-navbar-collapse-1')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand Quirii!
+      #viizbi-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='/logout') Logout
+
+          
+
+  
+  div#content.container
+
+  
+block scripts
+  script(data-main='js/boot', type='text/javascript',src='/js/libs/require.js')
+
