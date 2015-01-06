@@ -57,7 +57,7 @@ passport.use(new TwitterStrategy({
     consumerKey: TWITTER_CONSUMER_KEY,
     consumerSecret: TWITTER_CONSUMER_SECRET,
     //callbackURL: "http://corleymbp-2.local:5000/auth/twitter/callback"
-    //callbackURL: "http://localhost:3000/auth/twitter/callback"
+    //callbackURL: "http://localhost:5000/auth/twitter/callback"
 
     callbackURL: "http://quirii.herokuapp.com/auth/twitter/callback"
   },

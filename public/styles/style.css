@@ -16,6 +16,11 @@
 
 }
 
+.boxDiv{
+  padding: 10px;
+  border:1px solid #ddd;
+}
+
 input[type="range"]::-webkit-slider-thumb{
      -webkit-appearance:none !important;  
 
@@ -45,8 +50,8 @@ input[type=radio] + label>img {
 input[type=radio]:checked + label>img {
   border: 0px solid #ddd;
   border-radius: 45px;
-  height: 70px !important;
-  width: 70px !important;
+  height: 60px !important;
+  width: 60px !important;
   box-shadow: 0 0 2px 2px #ddd;
 
 }

@@ -1,9 +1,12 @@
-define(['QuiriiNetView', 'text!templates/index.html', 'views/quirii', 'models/Quirii', 'models/QuiriiCollection'],
-function(QuiriiNetView, indexTemplate, QuiriiView, Quirii, QuiriiCollection) {
+define(['QuiriiNetView', 'text!templates/index.html', 'text!templates/createQuirii.html', 
+  'views/quirii', 'views/createQuirii', 'models/Quirii', 'models/QuiriiCollection'],
+function(QuiriiNetView, indexTemplate, createQuiriiTemplate, 
+  QuiriiView, CreateQuiriiView, Quirii, QuiriiCollection) {
   var indexView = QuiriiNetView.extend({
     el: $('#content'),
 
     events: {
+      //'click #create-quirii':'createQuiriiModal'
     },
 
     initialize: function() {
@@ -23,8 +26,14 @@ function(QuiriiNetView, indexTemplate, QuiriiView, Quirii, QuiriiCollection) {
       $(quiriiHtml).prependTo('.quirii_list').hide().fadeIn('slow');      
     },
 
+    /*createQuiriiModal: function(){
+      
+      this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui")})).render();
+    },*/
+
     render: function() {
       this.$el.html(indexTemplate);
+      this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui") })).render();
     }
   });
 
