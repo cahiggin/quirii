@@ -25,7 +25,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html'],
       });
       
       return false;
-    }
+    },
 
     render: function() {
       $(this.el).html(_.template(quiriiDetailTemplate)( {
