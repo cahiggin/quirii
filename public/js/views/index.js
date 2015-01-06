@@ -14,6 +14,10 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
       this.collection.on('reset', this.onQuiriiCollectionReset, this);
       //this.render();
       //this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui") })).render();
+      this.once('renderEvent', function () {
+        // that will be executed just once after the view has been rendered
+        this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui") })).render();
+      }); 
 
     },
 
@@ -36,8 +40,7 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
 
     render: function() {
       this.$el.html(indexTemplate);
-            this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui") })).render();
-
+      this.trigger('renderEvent');
       return this;
     }
   });
