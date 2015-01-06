@@ -39,6 +39,7 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
 
     render: function(){
       this.$el.html(createQuiriiTemplate);
+      return this;
     }
   });
 

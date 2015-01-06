@@ -36,7 +36,7 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
 
     render: function() {
       this.$el.html(indexTemplate);
-      this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui") })).render();
+            this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui") })).render();
 
       return this;
     }
