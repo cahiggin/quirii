@@ -26,11 +26,12 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
         mediaUrl: mediaUrlText
       }).done( function(data) {
         console.log(data);
-        
+
       }).fail(function() {
         // an error occurred
         console.log('an error has happened');
       });
+      $("#quiriiForm").reset();
       return false;
     },
 
