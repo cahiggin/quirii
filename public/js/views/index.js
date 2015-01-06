@@ -36,6 +36,7 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
 
     render: function() {
       this.$el.html(indexTemplate);
+      return this;
     }
   });
 
