@@ -12,8 +12,8 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
     initialize: function() {
       this.collection.on('add', this.onQuiriiAdded, this);
       this.collection.on('reset', this.onQuiriiCollectionReset, this);
-      this.render();
-      this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui") })).render();
+      //this.render();
+      //this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui") })).render();
 
     },
 
