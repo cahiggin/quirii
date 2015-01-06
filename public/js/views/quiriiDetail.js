@@ -5,6 +5,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html'],
     el: $('#content'),
 
     events: {
+      'click #deleteQuirii':'deleteQuirii'
     },
 
     initialize: function() {
@@ -12,6 +13,19 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html'],
       that.id = this.model.id;
       this.model.on('change', this.render, this);
     },
+
+    deleteQuirii: function(){
+      $.delete('/api/me/quiriis/' + this.id )
+        .done( function(data) {
+          console.log(data);
+
+        }).fail(function() {
+          // an error occurred
+          console.log('an error has happened');
+      });
+      
+      return false;
+    }
 
     render: function() {
       $(this.el).html(_.template(quiriiDetailTemplate)( {
