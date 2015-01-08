@@ -37,7 +37,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html'],
     render: function() {
       //var quiriiModel = this.model.quirii;
       //var feedbackModel = this.model.feedback;
-      console.log(quiriiModel, feedbackModel);
+      //console.log(quiriiModel, feedbackModel);
       $(this.el).html(_.template(quiriiDetailTemplate)( {
         //id: this.id,
         model: this.model.toJSON

@@ -62,6 +62,7 @@ function(QuiriiNetViewPublic, morphyUiTemplate, MorphyView, Morphy) {
       }).done( function(data) {
         console.log(data);
         //that.revCollection.add(data);
+        
       }).fail(function() {
         // an error occurred
         console.log('an error has happened');
