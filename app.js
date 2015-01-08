@@ -325,7 +325,8 @@ app.get('/api/me/quiriis/:quiriiid', ensureAuthenticated, function(req, res){
                 code: 200
               },
               data: {
-                quirii: quirii
+                quirii: quirii,
+                feedback: privateFeedback
               }
             });
   });

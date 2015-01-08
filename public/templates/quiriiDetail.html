@@ -1,9 +1,10 @@
-<div class="noBullets">
+<div class="qDetail">
     <h3> <%= model.title %> </h3> 
     <h4> <%= model.prompt %></h4>
     <div class="col-xs-12">
         <img src="<%=model.mediaUrl %>" width="300px"/>
-        <p> <a href="#/quiriis/<%=id %>">Share This Quirii</a> </p>
+        <p> <%=model.feedback %>
+        <p> <a href="#/quiriis/<%=model.id %>">Share This Quirii</a> </p>
         <button id="deleteQuirii">Delete Quirii</button>
     </div>
 </div>

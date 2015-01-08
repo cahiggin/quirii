@@ -13,16 +13,12 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
     initialize: function() {
       this.collection.on('add', this.onQuiriiAdded, this);
       this.collection.on('reset', this.onQuiriiCollectionReset, this);
-      //this.render();
-      //this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui") })).render();
-      //this.createui = new CreateQuiriiView({parent:this});
       this.once('renderEvent', function () {
         // that will be executed just once after the view has been rendered
         this.createQuiriiUi = (new CreateQuiriiView({el: $("#create-ui") })).render();
 
       }); 
 
-      //this.createui.on('quiriiAdded', this.onQuiriiAdded, this);
 
     },
 
@@ -34,6 +30,7 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
     },
 
     onQuiriiAdded: function(quirii) {
+      
       var quiriiHtml = (new QuiriiView({ model: quirii })).render().el;
       $(quiriiHtml).prependTo('.quirii_list').hide().fadeIn('slow');      
     },

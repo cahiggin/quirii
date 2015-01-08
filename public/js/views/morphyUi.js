@@ -12,6 +12,7 @@ function(QuiriiNetViewPublic, morphyUiTemplate, MorphyView, Morphy) {
 
     initialize: function(options) {
       _.bindAll(this,'render');
+      console.log("MORPHY UI MODEL IS ", this.model);
       var that = this;
       this.scaleName = $('input[name=scale]:checked').val();
       if (this.scaleName === undefined){
@@ -53,18 +54,18 @@ function(QuiriiNetViewPublic, morphyUiTemplate, MorphyView, Morphy) {
       //var usr = this.model.attributes._user;
       //console.log(usr);
       //var activityCollection = this.collection;
-      /*$.post('/products/' + this.productId + '/reviews', {
-        productId: product,
-        scale: morphyScale,
-        memo: memoText,
-        intensity: intensityVal
+      $.post('/api/quiriis/' + this.model.id + '/feedback', {
+        
+        morphyType: morphyScale,
+        comment: memoText,
+        morphyIntensity: intensityVal
       }).done( function(data) {
         console.log(data);
-        that.revCollection.add(data);
+        //that.revCollection.add(data);
       }).fail(function() {
         // an error occurred
         console.log('an error has happened');
-      });*/
+      });
       return false;
     },
 

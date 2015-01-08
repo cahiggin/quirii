@@ -8,10 +8,13 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
     },
 
     initialize: function(options) {
-      console.log("initializing quirii");
-      _.bindAll(this,'render');
+      //_.bindAll(this, 'render');
+
       var that = this;
-      this.render();
+      that.newQuiriiPost = new Quirii();
+
+      that.newQuiriiPost.on('request', this.postedQuirii, this);
+      //this.render();
     },
 
     postQuirii: function(){
@@ -19,20 +22,27 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
       var titleText = $('input[name=title]').val();
       var promptText = $('input[name=prompt]').val();
       var mediaUrlText = $('input[name=mediaUrl]').val();
-      console.log(titleText, promptText, mediaUrlText);
-      $.post('/api/me/quiriis/', {
-        title: titleText,
-        prompt: promptText,
-        mediaUrl: mediaUrlText
-      }).done( function(data) {
-        console.log(data);
 
-      }).fail(function() {
-        // an error occurred
-        console.log('an error has happened');
+      /*var newQuiriiPost = new Quirii({
+        title: titleText, 
+        prompt: promptText, 
+        mediaUrl: mediaUrlText
+      });*/
+
+      this.newQuiriiPost.set({
+        title: titleText, 
+        prompt: promptText, 
+        mediaUrl: mediaUrlText
       });
-      $("#quiriiForm").reset();
+
+      //newQuiriiPost.save();
+      this.newQuiriiPost.save();
       return false;
+    },
+
+    postedQuirii:function(){
+      console.log("posted a quirii");
+      $('#quiriiForm').reload();
     },
 
 

@@ -10,27 +10,37 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html'],
 
     initialize: function() {
       var that = this;
-      that.id = this.model.id;
       this.model.on('change', this.render, this);
+      this.model.on('destroy', this.quiriiDeleted, this);
+      console.log(this.model);
     },
 
     deleteQuirii: function(){
-      $.delete('/api/me/quiriis/' + this.id )
-        .done( function(data) {
-          console.log(data);
-
-        }).fail(function() {
-          // an error occurred
-          console.log('an error has happened');
+      var that = this;
+      this.model.destroy({
+        wait: true,
+        success:function(model, response){
+          console.log("SHITS GONE", response, model);
+        },
+        error: function(model, response){
+          console.log("error ", response);
+        }
       });
       
       return false;
     },
 
+    quiriiDeleted: function(){
+      location.href='/#index';
+    },
+
     render: function() {
+      //var quiriiModel = this.model.quirii;
+      //var feedbackModel = this.model.feedback;
+      console.log(quiriiModel, feedbackModel);
       $(this.el).html(_.template(quiriiDetailTemplate)( {
-        id: this.id,
-        model: this.model.toJSON()
+        //id: this.id,
+        model: this.model.toJSON
       }));
       return this;
     }

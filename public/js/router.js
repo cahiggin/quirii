@@ -1,5 +1,9 @@
-define(['views/index', 'views/login', 'views/logout', 'views/quirii', 'views/quiriiDetail', 'views/publicQuirii', 'models/User', 'models/Quirii', 'models/PublicQuirii','models/QuiriiCollection'],
-function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView, PublicQuiriiView, User, Quirii, PublicQuirii, QuiriiCollection) {
+define(['views/index', 'views/login', 'views/logout', 'views/quirii', 'views/quiriiDetail', 
+  'views/publicQuirii', 'models/User', 'models/Quirii', 'models/PublicQuirii',
+  'models/QuiriiCollection', 'models/PublicQuiriiCollection'],
+function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView, 
+  PublicQuiriiView, User, Quirii, PublicQuirii, 
+  QuiriiCollection, PublicQuiriiCollection) {
   var QuiriiRouter = Backbone.Router.extend({
     currentView: null,
 
@@ -21,11 +25,10 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView, PublicQ
 
     index: function(){
       var allQuiriisCollection = new QuiriiCollection();
-      allQuiriisCollection.url = '/api/me/quiriis';
       this.changeView(new IndexView({
         collection: allQuiriisCollection
       }));
-      allQuiriisCollection.fetch({reset:true});
+      allQuiriisCollection.fetch();
     },
 
     login: function(){
@@ -38,10 +41,13 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView, PublicQ
 
     quiriiDetail: function(id){
       var model = new Quirii({ id: id });
+      model.url = '/api/me/quiriis/' + id;
       this.changeView(new QuiriiDetailView({
-        model: model
+        model: model,
+        
       }));
-      model.fetch({reset:true});    
+      model.fetch({reset:true});  
+      //model.fetch();
     },
 
     publicQuirii: function(id){
