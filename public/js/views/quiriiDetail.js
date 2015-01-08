@@ -40,7 +40,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html'],
       //console.log(quiriiModel, feedbackModel);
       $(this.el).html(_.template(quiriiDetailTemplate)( {
         //id: this.id,
-        model: this.model.toJSON
+        model: this.model.toJSON()
       }));
       return this;
     }
