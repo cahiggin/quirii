@@ -1,5 +1,5 @@
 define(['models/PublicQuirii'], function(PublicQuirii) {
-  var PublicQuiriiCollection = Backbone.Collection.extend({
+  var PublicQuiriis = Backbone.Collection.extend({
 
     model: PublicQuirii,
 
@@ -11,5 +11,5 @@ define(['models/PublicQuirii'], function(PublicQuirii) {
  	
   });
 
-  return PublicQuiriiCollection;
+  return PublicQuiriis;
 });

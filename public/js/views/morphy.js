@@ -1,4 +1,4 @@
-define(['QuiriiNetViewPublic', 'text!templates/morphyUi.html', 'models/Morphy', 'views/morphy'], 
+define(['QuiriiNetViewPublic', 'text!templates/morphyUi.html', 'models/Morphii', 'views/morphy'], 
   function(QuiriiNetViewPublic, morphyUiTemplate, Morphy, MorphyView){
     
     var morphyView = QuiriiNetViewPublic.extend({

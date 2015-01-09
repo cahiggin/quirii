@@ -1,5 +1,7 @@
-define(['QuiriiNetViewPublic', 'text!templates/publicQuirii.html', 'text!templates/morphyUi.html', 'models/Morphy', 'views/morphy', 'views/morphyUi'], 
-  function(QuiriiNetViewPublic, publicQuiriiTemplate, morphyUiTemplate, Morphy, MorphyView, MorphyUiView) {
+define(['QuiriiNetViewPublic', 'text!templates/publicQuirii.html', 'text!templates/morphyUi.html', 
+  'models/Morphii', 'views/morphy', 'views/morphyUi', 'models/QuiriiFeedbackItems', 'models/PublicQuiriis'], 
+  function(QuiriiNetViewPublic, publicQuiriiTemplate, morphyUiTemplate, 
+    Morphy, MorphyView, MorphyUiView, QuiriiFeedbackItems, PublicQuiriis) {
   var publicQuiriiView = QuiriiNetViewPublic.extend({
    
     el: $('#content'),

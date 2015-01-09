@@ -1,5 +1,5 @@
 define(['QuiriiNetView', 'text!templates/index.html', 'text!templates/createQuirii.html', 
-  'views/quirii', 'views/createQuirii', 'models/Quirii', 'models/QuiriiCollection'],
+  'views/quirii', 'views/createQuirii', 'models/Quirii', 'models/Quiriis'],
 function(QuiriiNetView, indexTemplate, createQuiriiTemplate, 
   QuiriiView, CreateQuiriiView, Quirii, QuiriiCollection) {
   var indexView = QuiriiNetView.extend({

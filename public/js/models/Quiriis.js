@@ -1,5 +1,5 @@
 define(['models/Quirii'], function(Quirii) {
-  var QuiriiCollection = Backbone.Collection.extend({
+  var Quiriis = Backbone.Collection.extend({
 
   	url: '/api/me/quiriis',
 
@@ -12,5 +12,5 @@ define(['models/Quirii'], function(Quirii) {
  	
   });
 
-  return QuiriiCollection;
+  return Quiriis;
 });
