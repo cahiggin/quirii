@@ -11,7 +11,6 @@ define(['QuiriiNetViewPublic', 'text!templates/morphyUi.html', 'models/Morphii',
       },
       
       render: function(morphObj){
-        console.log(morphObj);
         var cell = document.getElementById("morphy");
         if (cell != null)
         {
@@ -136,7 +135,6 @@ define(['QuiriiNetViewPublic', 'text!templates/morphyUi.html', 'models/Morphii',
       updateMorphy: function(e){
         var inputSlider = this.$('input[name=intensity]').val();
         this.morphMe(this.anchor, inputSlider, this.delta);
-        //this.render();
       }
 
 

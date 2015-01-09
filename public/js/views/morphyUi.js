@@ -12,7 +12,6 @@ function(QuiriiNetViewPublic, morphyUiTemplate, MorphyView, Morphy) {
 
     initialize: function(options) {
       _.bindAll(this,'render');
-      console.log("MORPHY UI MODEL IS ", this.model);
       var that = this;
       this.scaleName = $('input[name=scale]:checked').val();
       if (this.scaleName === undefined){
@@ -22,7 +21,6 @@ function(QuiriiNetViewPublic, morphyUiTemplate, MorphyView, Morphy) {
       
       $.get('/api/morphiis/' + this.scaleName , function(data){
         var morphii = data.data.morphii;
-        console.log("MORPHII IS ", morphii);
 
         that.morphView = new MorphyView({el:$('#morphy-container'),model: morphii});
         that.anch = JSON.parse(morphii.anchor);
@@ -50,10 +48,7 @@ function(QuiriiNetViewPublic, morphyUiTemplate, MorphyView, Morphy) {
       var morphyScale = this.scaleName;
       var memoText = $('textarea[name=memo]').val();
       var intensityVal = $('input[name=intensity]').val();
-      //var product = this.productId;
-      //var usr = this.model.attributes._user;
-      //console.log(usr);
-      //var activityCollection = this.collection;
+     
       $.post('/api/quiriis/' + this.model.id + '/feedback', {
         
         morphyType: morphyScale,
@@ -61,7 +56,6 @@ function(QuiriiNetViewPublic, morphyUiTemplate, MorphyView, Morphy) {
         morphyIntensity: intensityVal
       }).done( function(data) {
         console.log(data);
-        //that.revCollection.add(data);
         
       }).fail(function() {
         // an error occurred
@@ -71,13 +65,11 @@ function(QuiriiNetViewPublic, morphyUiTemplate, MorphyView, Morphy) {
     },
 
     switchMorphy: function(){
-      //console.log($('input[name=scale]:checked').val());
       this.scaleName = $('input[name=scale]:checked').val();
       var sliderVal = $('input[name=intensity]').val();
       var that = this;
       $.get('/api/morphiis/' + this.scaleName , function(data){
         var morphii = data.data.morphii;
-        console.log("MORPHII IS ",morphii);
         that.morphView = new MorphyView({el:$('#morphy-container'),model: morphii});
         that.anch = JSON.parse(morphii.anchor);
         that.delt = JSON.parse(morphii.delta);

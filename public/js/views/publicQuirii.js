@@ -1,7 +1,7 @@
-define(['QuiriiNetViewPublic', 'text!templates/publicQuirii.html', 'text!templates/morphyUi.html', 
-  'models/Morphii', 'views/morphy', 'views/morphyUi', 'models/QuiriiFeedbackItems', 'models/PublicQuiriis'], 
-  function(QuiriiNetViewPublic, publicQuiriiTemplate, morphyUiTemplate, 
-    Morphy, MorphyView, MorphyUiView, QuiriiFeedbackItems, PublicQuiriis) {
+define(['QuiriiNetViewPublic', 'text!templates/publicQuirii.html', 'models/PublicQuiriis', 
+  'views/giveQuiriiFeedback'], 
+  function(QuiriiNetViewPublic, publicQuiriiTemplate, PublicQuiriis, 
+    GiveQuiriiFeedbackView) {
   var publicQuiriiView = QuiriiNetViewPublic.extend({
    
     el: $('#content'),
@@ -10,18 +10,19 @@ define(['QuiriiNetViewPublic', 'text!templates/publicQuirii.html', 'text!templat
     },
 
     initialize: function() {
-      var that = this;
-      that.id = this.model.id;
+      var thisView = this;
+      console.log("collection is ", this.collection);
+      console.log("model is ", this.model);
       this.model.on('change', this.render, this);
       //this.morphyUi = (new MorphyUiView({el: $("#morphy-ui"), model: this.model})).render();
+      this.giveFeedbackView = (new GiveQuiriiFeedbackView({collection:this.collection}));
     },
 
     render: function() {
       $(this.el).html(_.template(publicQuiriiTemplate)( {
-        id: this.id,
         model: this.model.toJSON()
       }));
-      this.morphyUi = (new MorphyUiView({el: $("#morphy-ui"), model: this.model})).render();
+      //this.morphyUi = (new MorphyUiView({el: $("#morphy-ui"), model: this.model})).render();
 
       return this;
     }

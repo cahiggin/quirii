@@ -7,6 +7,7 @@ define(['models/Morphii'], function(Morphii) {
 
     parse: function(response){
     	//console.log("QuiriiCollection data is ", data);
+    	console.log("MORPHIIS ARE ", response);
   		return response.data.morphiis;
  	}
  	

@@ -1,9 +1,9 @@
 define(['views/index', 'views/login', 'views/logout', 'views/quirii', 'views/quiriiDetail', 
   'views/publicQuirii', 'models/User', 'models/Quirii', 'models/Quiriis', 
-  'models/PublicQuirii', 'models/PublicQuiriis', 'model/QuiriiFeedbackItem', 'model/QuiriiFeedbackItems'],
+  'models/PublicQuirii', 'models/PublicQuiriis', 'models/QuiriiFeedbackItems'],
 function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView, 
   PublicQuiriiView, User, Quirii, Quiriis, 
-  PublicQuirii, PublicQuiriis, QuiriiFeedbackItem, QuiriiFeedbackItems) {
+  PublicQuirii, PublicQuiriis, QuiriiFeedbackItems) {
   var QuiriiRouter = Backbone.Router.extend({
     currentView: null,
 

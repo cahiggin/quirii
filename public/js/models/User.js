@@ -1,11 +1,9 @@
-define(['models/QuiriiCollection'], function(QuiriiCollection) {
+define(['models/Quiriis'], function(Quiriis) {
   var User = Backbone.Model.extend({
     urlRoot: '/users',
 
     initialize: function() {
-      this.quiriis       = new QuiriiCollection();
-      this.quiriis.url   = '/api/me/quiriis/';
-      console.log(this.quiriis);
+      
       
     }
   });

@@ -3,7 +3,7 @@ define(['models/QuiriiFeedbackItem'], function(QuiriiFeedbackItem) {
 
     model: QuiriiFeedbackItem,
 
-    url: '/api/quiriis/' + this.id + '/feedback',
+    //url: '/api/quiriis/' + this.id + '/feedback',
 
     parse: function(response){
   		return response.data.feedback;
