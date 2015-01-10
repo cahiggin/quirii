@@ -12,7 +12,6 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html'],
       var that = this;
       this.model.on('change', this.render, this);
       this.model.on('destroy', this.quiriiDeleted, this);
-      console.log(this.model);
     },
 
     deleteQuirii: function(){

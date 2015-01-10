@@ -1,76 +1,98 @@
-define(['QuiriiNetViewPublic', 'text!templates/morphyUi.html', 'models/Morphii', 'models/Morphiis',
-  'models/QuiriiFeedbackItem', 'views/morphiiStaticThumb'],
-function(QuiriiNetViewPublic, morphyUiTemplate, Morphii, Morphiis, 
-  QuiriiFeedbackItem, MorphiiStaticThumbView) {
+define(['QuiriiNetViewPublic', 'text!templates/morphyUi.html', 'models/Morphii',
+  'models/QuiriiFeedbackItem', 'views/morphiiStaticThumb', 'text!templates/giveQuiriiFeedback.html',
+  'views/morphy'],
+function(QuiriiNetViewPublic, morphyUiTemplate, Morphii, 
+  QuiriiFeedbackItem, MorphiiStaticThumbView, giveQuiriiFeedbackTemplate,
+  MorphiiView) {
   var giveQuiriiFeedbackView = QuiriiNetViewPublic.extend({
-    el: '#morphy-ui',
+    el: '#quirii-feedback',
 
     events: {
       
-      "input input[name=intensity]": "updateMorphy",
-      "click input[name=scale]:checked": "switchMorphy",
-      "click #postMorphy":"postMorphy"
+      "input input[name=intensity]": "updateMorphii",
+      "click input[name=scale]:checked": "switchMorphii",
+      "click #postMorphy":"postMorphii"
     },
 
     initialize: function(options) {
       _.bindAll(this,'render');
-
-
+      this.options = options;
       var thisView = this;
 
       //check that this.collection was set by the parent view
-      console.log("this.collection has been defined by the parent view ", this.collection);
+      //console.log("this.collection has been defined by the parent view ", this.collection);
       
       //define this.model to be an instance of QuiriiFeedbackItem
       this.model = new QuiriiFeedbackItem();
 
-      //init a collection of morphiis
-      this.morphiisCollection = new Morphiis();
-      //this.morphiisCollection.url = '/api/morphiis';
-      this.morphiisCollection.on('reset', this.makeRender, this);
-      this.morphiisCollection.on('add', this.makeRender, this);
-      //this.morphiisCollection.on('change', this.makeRender, this); 
-      this.morphiisCollection.fetch({reset: true});
+      //check that this.morphiis has been set by parent view
+      this.morphiisCollection = options.morphiis;
+
+      //convert this.morphiis to an array to use underscore all over it
+      this.morphiis = this.morphiisCollection.toJSON();
+
+      //attach handlers to the morphiis collection
+      this.morphiisCollection.on('reset', this.renderMorphiiThumbs, this);
+      this.morphiisCollection.on('change', this.renderMorphiiThumbs, this);
+      this.morphiisCollection.on('add', this.renderMorphiiThumbs, this);
       
+      //render the template
       this.render();
+
+      //render the morphiis collection thumbs
+      this.renderMorphiiThumbs();
+
+      //call switchMorphii to make sure a type is selected
+      this.switchMorphii();
+
+      //call renderMorphii to make sure morphii is loaded
+      this.renderMorphii(this.morphiiType);
+
+
     },
 
-    updateMorphy: function(){
-      
+    updateMorphii: function(){
+      intensityVal = $('input[name=intensity]').val();
+      this.morphView.morphMe(this.anch, intensityVal, this.delt);
     },
 
-    postMorphy: function() {
+    postMorphii: function() {
      
     },
 
-    switchMorphy: function(){
-      
+    renderMorphii: function(morphiiType){
+      var thisView = this;
+      var morphii = _.findWhere(this.morphiis, {name: morphiiType});
+      thisView.morphView = new MorphiiView({el:$('#morphii-container'),model: morphii});
+      thisView.anch = JSON.parse(morphii.anchor);
+      thisView.delt = JSON.parse(morphii.delta);
+      thisView.intensity = $('input[name=intensity]').val();
+      thisView.morphView.morphMe(thisView.anch, thisView.intensity, thisView.delt);
     },
 
-    makeRender: function(){
-
-      //thisView
+    switchMorphii: function(){
       var thisView = this;
+      thisView.morphiiType = $('input[name=scale]:checked').val();
+      if (thisView.morphiiType === undefined){
+        thisView.morphiiType = "Delight";
+      };
+      thisView.renderMorphii(thisView.morphiiType); 
+    },
 
-      //check that morphiis have been fetched
-      console.log("making render ", this.morphiisCollection);
-
-      //render each morphii
-      this.morphiisCollection.each(function(morphii){
+    renderMorphiiThumbs: function(){
+      var thisView = this;
+      _.each(this.morphiis, function(morphii){
         var morphiiRadioView = new MorphiiStaticThumbView({
           model: morphii
         });
         morphiiRadioView.parentView = thisView;
         morphiiRadioView.render();
       });
-
     },
-
-    
 
     render: function() {
       //render the template
-      this.$el.html(morphyUiTemplate);
+      this.$el.html(giveQuiriiFeedbackTemplate);
 
       return this;
     }

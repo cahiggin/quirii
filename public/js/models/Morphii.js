@@ -4,7 +4,6 @@ define(function(require) {
   	urlRoot: '/api/morphiis',
 
   	parse: function(response){
-  		console.log("parsing morphii ", response.data.morphiis);
   		return response.data.morphiis;
   	}
   });
