@@ -16,6 +16,11 @@
 
 }
 
+.big-btn{
+  height: 40px;
+  width: 70px;
+}
+
 .boxDiv{
   padding: 10px;
   border:1px solid #ddd;
