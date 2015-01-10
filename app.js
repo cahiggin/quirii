@@ -44,22 +44,22 @@ var models = {
 
 // Quirii Heroku Twitter App Credentials
 ////these are for HEROKU Quirii app:
-//var TWITTER_CONSUMER_KEY = "Iv0X7n8zG5zq9TxkKj66A";
-//var TWITTER_CONSUMER_SECRET = "3TiJdWG9p4JNzHdJz1MVKMwhJlClwH7HL9PUvbwXs";
+var TWITTER_CONSUMER_KEY = "Iv0X7n8zG5zq9TxkKj66A";
+var TWITTER_CONSUMER_SECRET = "3TiJdWG9p4JNzHdJz1MVKMwhJlClwH7HL9PUvbwXs";
 
 // Moodl Me Local Env Twitter App Credentials
 //Local Env Twitter app credentials:
-var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
-var TWITTER_CONSUMER_SECRET = 'VUvrJsap9MA8UWULi2oPasj31FyFtiI2Nt3sNYqb6E';
+//var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
+//var TWITTER_CONSUMER_SECRET = 'VUvrJsap9MA8UWULi2oPasj31FyFtiI2Nt3sNYqb6E';
 
 //set up Twitter Passport strategy
 passport.use(new TwitterStrategy({
     consumerKey: TWITTER_CONSUMER_KEY,
     consumerSecret: TWITTER_CONSUMER_SECRET,
     //callbackURL: "http://corleymbp-2.local:5000/auth/twitter/callback"
-    callbackURL: "http://localhost:5000/auth/twitter/callback"
+    //callbackURL: "http://localhost:5000/auth/twitter/callback"
 
-    //callbackURL: "http://quirii.herokuapp.com/auth/twitter/callback"
+    callbackURL: "http://quirii.herokuapp.com/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, done) {
     models.User.findById(profile.id, function(user) {

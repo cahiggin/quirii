@@ -41,12 +41,15 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
 
     quiriiDetail: function(id){
       var model = new Quirii({ id: id });
-      model.url = '/api/me/quiriis/' + id;
+      //model.url = '/api/me/quiriis/' + id;
+      var feedbackCollection = new QuiriiFeedbackItems();
+      feedbackCollection.url = '/api/quiriis/' + id + '/feedback';
       this.changeView(new QuiriiDetailView({
         model: model,
-        
+        collection: feedbackCollection
       }));
-      model.fetch({reset:true});  
+      model.fetch({reset:true});
+      feedbackCollection.fetch({reset:true});  
       //model.fetch();
     },
 

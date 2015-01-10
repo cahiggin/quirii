@@ -4,8 +4,8 @@ module.exports = function(mongoose) {
   var Feedback = new mongoose.Schema({
     userId: { type: mongoose.Schema.ObjectId, ref:'User' },
     userName: { type: String },
-    morphyType: { type: String }, //we could make this a ref to morphyScale
-    morphyIntensity: { type: Number, min: 0, max: 1 }, //a number 0 - 1, rounded to thousandth
+    morphiiType: { type: String }, //we could make this a ref to morphiiScale
+    morphiiIntensity: { type: Number, min: 0, max: 1 }, //a number 0 - 1, rounded to thousandth
     comment: { type: String }, //an optional text comment
     created_at: { type: Date, default: Date.now }
   });
@@ -29,7 +29,7 @@ module.exports = function(mongoose) {
   };
 
   var findAll = function(callback){
-    Quirii.find().populate('owner').exec(function(err, docs){
+    Quirii.find().populate('owner').sort({ created : 1}).exec(function(err, docs){
       var publicQuiriis = [];
       docs.forEach(function(doc){
         publicQuiriis.push({ _id: doc._id,
@@ -48,8 +48,25 @@ module.exports = function(mongoose) {
 /* stopped editing here */
 
 
-  var findForUser = function(userid, callback){
+  /*var findForUser = function(userid, callback){
     Quirii.find({ owner: userid }, function(err, docs){
+      var publicQuiriis = [];
+      docs.forEach(function(doc){
+        publicQuiriis.push({ _id: doc._id,
+                            //owner: doc.owner,
+                            title: doc.title,
+                            mediaUrl: doc.mediaUrl,
+                            prompt: doc.prompt,
+                            created: doc.created
+        });
+
+      });
+      callback(publicQuiriis);
+    });
+  }*/
+
+  var findForUser = function(userid, callback){
+    Quirii.find({ owner: userid }).sort({ created : 1}).exec(function(err, docs){
       var publicQuiriis = [];
       docs.forEach(function(doc){
         publicQuiriis.push({ _id: doc._id,
@@ -125,8 +142,8 @@ module.exports = function(mongoose) {
       var newFeedback = {
           userId: user._id, 
           userName: user.name,
-          morphyType: feedbackBody.morphyType,
-          morphyIntensity: feedbackBody.morphyIntensity, //a number 0 - 1, rounded to thousandth
+          morphiiType: feedbackBody.morphiiType,
+          morphiiIntensity: feedbackBody.morphiiIntensity, //a number 0 - 1, rounded to thousandth
           comment: feedbackBody.comment,
           created_at: new Date()
       }
@@ -147,19 +164,19 @@ module.exports = function(mongoose) {
     });
   };
 
-  var aggregateMorphy = function(quiriiId, callback){
+  var aggregateMorphii = function(quiriiId, callback){
     var ObjId = mongoose.Types.ObjectId;
     var evtId = new ObjId(quiriiId);
     Quirii.aggregate({ $match: { _id: evtId }}, { $unwind: '$feedback' })
       .project({ _id: 0,
         feedback: {
-          morphyType: 1,
-          morphyIntensity: 1
+          morphiiType: 1,
+          morphiiIntensity: 1
         } 
       })
-      .group({ _id: '$feedback.morphyType',
+      .group({ _id: '$feedback.morphiiType',
                count: { $sum: 1 },
-               avgIntensity: { $avg: '$feedback.morphyIntensity' }
+               avgIntensity: { $avg: '$feedback.morphiiIntensity' }
              }).sort({ count: -1 }).exec( function(err, agg){
               if (err) {
                 console.log('aggregation err');
@@ -192,7 +209,7 @@ module.exports = function(mongoose) {
     removeQuirii: removeQuirii,
     addFeedback: addFeedback,
     getFeedback: getFeedback,
-    aggregateMorphy: aggregateMorphy,
+    aggregateMorphii: aggregateMorphii,
     findQuiriiFeedbackForUser: findQuiriiFeedbackForUser,
     Quirii: Quirii
   }

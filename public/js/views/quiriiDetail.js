@@ -1,5 +1,5 @@
-define(['QuiriiNetView', 'text!templates/quiriiDetail.html'], 
-  function(QuiriiNetView, quiriiDetailTemplate) {
+define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem'], 
+  function(QuiriiNetView, quiriiDetailTemplate, FeedbackItemView) {
   var quiriiDetailView = QuiriiNetView.extend({
    
     el: $('#content'),
@@ -9,7 +9,14 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html'],
     },
 
     initialize: function() {
+      _.bindAll(this,'render');
       var that = this;
+      console.log("MODEL", this.model);
+      console.log("Collection", this.collection);
+
+      this.collection.on('add', this.onFeedbackAdded, this);
+      this.collection.on('reset', this.onFeedbackCollectionReset, this);
+
       this.model.on('change', this.render, this);
       this.model.on('destroy', this.quiriiDeleted, this);
     },
@@ -33,12 +40,25 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html'],
       location.href='/#index';
     },
 
+    onFeedbackCollectionReset: function(collection) {
+      var that = this;
+      collection.each(function (model) {
+        console.log("feedback model", model);
+        that.onFeedbackAdded(model);
+      });
+    },
+
+    onFeedbackAdded: function(feedbackItem) {
+      
+      var feedbackHtml = (new FeedbackItemView({ model: feedbackItem })).render().el;
+      $(feedbackHtml).prependTo('.feedback_list').hide().fadeIn('slow');  
+
+      //var morphySvg = (new MorphiiFeedbackView({ el: $("#intensity-gram"), model: feedbackItem }));
+
+    },
+
     render: function() {
-      //var quiriiModel = this.model.quirii;
-      //var feedbackModel = this.model.feedback;
-      //console.log(quiriiModel, feedbackModel);
       $(this.el).html(_.template(quiriiDetailTemplate)( {
-        //id: this.id,
         model: this.model.toJSON()
       }));
       return this;

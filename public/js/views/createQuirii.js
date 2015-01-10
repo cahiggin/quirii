@@ -23,11 +23,6 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
       var promptText = $('input[name=prompt]').val();
       var mediaUrlText = $('input[name=mediaUrl]').val();
 
-      /*var newQuiriiPost = new Quirii({
-        title: titleText, 
-        prompt: promptText, 
-        mediaUrl: mediaUrlText
-      });*/
 
       this.newQuiriiPost.set({
         title: titleText, 
@@ -37,7 +32,8 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
 
       //newQuiriiPost.save();
       this.newQuiriiPost.save();
-      return false;
+      this.render();
+      //return false;
     },
 
     postedQuirii:function(){
