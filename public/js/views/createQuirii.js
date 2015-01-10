@@ -1,7 +1,7 @@
 define(['QuiriiNetView', 'text!templates/createQuirii.html', 'views/createQuirii', 'models/Quirii'],
 function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
   var createQuiriiView = QuiriiNetView.extend({
-    el: $('#create-ui'),
+    el: '#create-ui',
 
     events: {
       "click #postQuirii":"postQuirii"
@@ -11,39 +11,31 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
       //_.bindAll(this, 'render');
 
       var that = this;
-      that.newQuiriiPost = new Quirii();
+      console.log(this.collection.url);
+      this.model = new Quirii();
+      this.model.url = this.collection.url;
 
-      that.newQuiriiPost.on('request', this.postedQuirii, this);
+      //this.model.on('request', this.postedQuirii, this);
       //this.render();
     },
 
     postQuirii: function(){
-      var that = this;
+      
+      var thisView = this;
       var titleText = $('input[name=title]').val();
       var promptText = $('input[name=prompt]').val();
       var mediaUrlText = $('input[name=mediaUrl]').val();
-
-
-      this.newQuiriiPost.set({
-        title: titleText, 
-        prompt: promptText, 
+      thisView.model.set({
+        title: titleText,
+        prompt: promptText,
         mediaUrl: mediaUrlText
       });
 
-      //newQuiriiPost.save();
-      this.newQuiriiPost.save();
+      thisView.model.save();
       this.render();
-      //return false;
+      console.log("current model is ", thisView.model);
     },
-
-    postedQuirii:function(){
-      console.log("posted a quirii");
-      $('#quiriiForm').reload();
-    },
-
-
     
-
     render: function(){
       this.$el.html(createQuiriiTemplate);
       return this;
