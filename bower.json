@@ -1,9 +1,0 @@
-{
-  "name": "quirii",
-  "description": "A starter project for Quirii on Backbone",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "html5-boilerplate": "~4.3.0"
-  }
-}
