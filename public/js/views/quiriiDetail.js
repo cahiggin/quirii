@@ -37,7 +37,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     },
 
     quiriiDeleted: function(){
-      location.href='/#index';
+      location.href='/';
     },
 
     onFeedbackCollectionReset: function(collection) {
