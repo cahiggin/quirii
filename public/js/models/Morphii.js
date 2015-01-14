@@ -1,5 +1,7 @@
-define(function(require) {
-  var Morphii = Backbone.Model.extend({
+//define(function(require) {
+define(["authenticated-model"], function(AuthenticatedModel){
+  	var Morphii = AuthenticatedModel.extend({
+  	//var Morphii = Backbone.Model.extend({
 
   	urlRoot: '/api/morphiis',
 

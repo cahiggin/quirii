@@ -1,9 +1,10 @@
 define(['router'], function(router) {
   var initialize = function() {
-    checkLogin(runApplication);
+    //checkLogin(runApplication);
+    Backbone.history.start();
   };
 
-  var checkLogin = function(callback) {
+  /*var checkLogin = function(callback) {
     $.ajax("/api/me/authenticated", {
       method: "GET",
       success: function() {
@@ -18,12 +19,14 @@ define(['router'], function(router) {
 
   var runApplication = function(authenticated) {
     if (!authenticated) {
+      console.log("User must login.");
       window.location.hash = 'login';
     } else {
+      console.log("User is logged in.");
       window.location.hash = 'index';
     }
     Backbone.history.start();
-  };
+  };*/
 
   return {
     initialize: initialize

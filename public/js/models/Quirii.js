@@ -1,5 +1,8 @@
-define(function(require) {
-  var Quirii = Backbone.Model.extend({
+//define(function(require) {
+//  var Quirii = Backbone.Model.extend({
+
+define(["authenticated-model"], function(AuthenticatedModel){
+    var Quirii = AuthenticatedModel.extend({
 
     urlRoot: '/api/me/quiriis/',
 

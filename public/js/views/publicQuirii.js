@@ -1,8 +1,10 @@
-define(['QuiriiNetViewPublic', 'text!templates/publicQuirii.html', 'models/PublicQuiriis', 
+define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiriis', 
   'views/giveQuiriiFeedback'], 
-  function(QuiriiNetViewPublic, publicQuiriiTemplate, PublicQuiriis, 
+  function(QuiriiNetView, publicQuiriiTemplate, PublicQuiriis, 
     GiveQuiriiFeedbackView) {
-  var publicQuiriiView = QuiriiNetViewPublic.extend({
+  var publicQuiriiView = QuiriiNetView.extend({
+
+    requireLogin: false,
    
     el: '#content',
 

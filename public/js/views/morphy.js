@@ -1,7 +1,9 @@
-define(['QuiriiNetViewPublic', 'text!templates/morphyUi.html', 'models/Morphii', 'views/morphy'], 
-  function(QuiriiNetViewPublic, morphyUiTemplate, Morphy, MorphyView){
+define(['QuiriiNetView', 'text!templates/morphyUi.html', 'models/Morphii', 'views/morphy'], 
+  function(QuiriiNetView, morphyUiTemplate, Morphy, MorphyView){
     
-    var morphyView = QuiriiNetViewPublic.extend({
+    var morphyView = QuiriiNetView.extend({
+
+      requireLogin: false,
       
       el: $('#morphy-container'),
       

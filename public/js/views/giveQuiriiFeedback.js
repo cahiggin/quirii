@@ -1,10 +1,13 @@
-define(['QuiriiNetViewPublic', 'text!templates/morphyUi.html', 'models/Morphii',
+define(['QuiriiNetView', 'text!templates/morphyUi.html', 'models/Morphii',
   'models/QuiriiFeedbackItem', 'views/morphiiStaticThumb', 'text!templates/giveQuiriiFeedback.html',
   'views/morphy'],
-function(QuiriiNetViewPublic, morphyUiTemplate, Morphii, 
+function(QuiriiNetView, morphyUiTemplate, Morphii, 
   QuiriiFeedbackItem, MorphiiStaticThumbView, giveQuiriiFeedbackTemplate,
   MorphiiView) {
-  var giveQuiriiFeedbackView = QuiriiNetViewPublic.extend({
+  var giveQuiriiFeedbackView = QuiriiNetView.extend({
+
+    requireLogin: false,
+    
     el: '#quirii-feedback',
 
     events: {

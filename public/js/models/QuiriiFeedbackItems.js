@@ -1,5 +1,7 @@
-define(['models/QuiriiFeedbackItem'], function(QuiriiFeedbackItem) {
-  var QuiriiFeedbackItems = Backbone.Collection.extend({
+//define(['models/QuiriiFeedbackItem'], function(QuiriiFeedbackItem) {
+//  var QuiriiFeedbackItems = Backbone.Collection.extend({
+define(['authenticated-collection', 'models/QuiriiFeedbackItem'], function(AuthenticatedCollection, QuiriiFeedbackItem){
+    var QuiriiFeedbackItems = AuthenticatedCollection.extend({	
 
     model: QuiriiFeedbackItem,
 

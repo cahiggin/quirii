@@ -11,14 +11,14 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     initialize: function() {
       _.bindAll(this,'render');
       var that = this;
-      console.log("MODEL", this.model);
-      console.log("Collection", this.collection);
 
       this.collection.on('add', this.onFeedbackAdded, this);
       this.collection.on('reset', this.onFeedbackCollectionReset, this);
 
       this.model.on('change', this.render, this);
       this.model.on('destroy', this.quiriiDeleted, this);
+
+      this.render();
     },
 
     deleteQuirii: function(){
@@ -49,9 +49,9 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     },
 
     onFeedbackAdded: function(feedbackItem) {
-      
+      console.log("feedback added");
       var feedbackHtml = (new FeedbackItemView({ model: feedbackItem })).render().el;
-      $(feedbackHtml).prependTo('.feedback_list').hide().fadeIn('slow');  
+      $(feedbackHtml).prependTo('.feedback-list').hide().fadeIn('slow');  
 
       //var morphySvg = (new MorphiiFeedbackView({ el: $("#intensity-gram"), model: feedbackItem }));
 

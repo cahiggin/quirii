@@ -1,6 +1,9 @@
-define(['QuiriiNetViewPublic', 'text!templates/morphiiStaticThumb.html'],
-function(QuiriiNetViewPublic, morphiiStaticThumbTemplate) {
-  var morphiiStaticThumbView = QuiriiNetViewPublic.extend({
+define(['QuiriiNetView', 'text!templates/morphiiStaticThumb.html'],
+function(QuiriiNetView, morphiiStaticThumbTemplate) {
+  var morphiiStaticThumbView = QuiriiNetView.extend({
+  	
+  	requireLogin: false,
+
     el: '.morphiiTypeRadios',
 
     render: function() {

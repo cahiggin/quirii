@@ -1,5 +1,7 @@
-define(['models/PublicQuirii'], function(PublicQuirii) {
-  var PublicQuiriis = Backbone.Collection.extend({
+//define(['models/PublicQuirii'], function(PublicQuirii) {
+//  var PublicQuiriis = Backbone.Collection.extend({
+define(['authenticated-collection', 'models/PublicQuirii'], function(AuthenticatedCollection, PublicQuirii){
+    var PublicQuiriis = AuthenticatedCollection.extend({	
 
     model: PublicQuirii,
 

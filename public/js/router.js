@@ -8,7 +8,8 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
     currentView: null,
 
     routes: {
-      'index': 'index',
+      '': 'index',
+      'api/me/settings': 'loggedin',
       'login': 'login',
       'me/quiriis/:id': 'quiriiDetail',
       'quiriis/:id': 'publicQuirii',
@@ -33,6 +34,10 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
 
     login: function(){
       this.changeView(new LoginView);
+    },
+
+    loggedin: function(){
+      window.location.hash = '/'
     },
 
     logout: function(){

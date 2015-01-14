@@ -1,5 +1,7 @@
-define(function(require) {
-  var Quirii = Backbone.Model.extend({
+//define(function(require) {
+  //var Quirii = Backbone.Model.extend({
+define(["authenticated-model"], function(AuthenticatedModel){
+    var PublicQuirii = AuthenticatedModel.extend({
     urlRoot: '/api/quiriis/',
     //idAttribute: "_id",
 
@@ -7,6 +9,7 @@ define(function(require) {
     	if (!this.id){
     		return data
     	} else {
+        console.log("public quirii data is ", data);
   			return data.data.quirii;
     	};
       //console.log("DATa ", data);
@@ -17,6 +20,6 @@ define(function(require) {
 
   });
   
-  return Quirii;
+  return PublicQuirii;
 
 });

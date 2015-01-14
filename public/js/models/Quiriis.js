@@ -1,5 +1,8 @@
-define(['models/Quirii'], function(Quirii) {
-  var Quiriis = Backbone.Collection.extend({
+//define(['models/Quirii'], function(Quirii) {
+//  var Quiriis = Backbone.Collection.extend({
+
+define(['authenticated-collection', 'models/Quirii'], function(AuthenticatedCollection, Quirii){
+    var Quiriis = AuthenticatedCollection.extend({	
 
   	url: '/api/me/quiriis',
 
