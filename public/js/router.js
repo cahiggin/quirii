@@ -51,7 +51,7 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
       feedbackCollection.url = '/api/quiriis/' + id + '/feedback';
       this.changeView(new QuiriiDetailView({
         model: model,
-        collection: feedbackCollection
+        fbCollection: feedbackCollection
       }));
       model.fetch({reset:true});
       feedbackCollection.fetch({reset:true});  
@@ -65,7 +65,7 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
       var morphiisCollection = new Morphiis();
       this.changeView(new PublicQuiriiView({
         model: quiriiModel,
-        collection: feedbackCollection,
+        fbCollection: feedbackCollection,
         morphiis: morphiisCollection
 
       }));

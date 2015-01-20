@@ -8,12 +8,13 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       'click #deleteQuirii':'deleteQuirii'
     },
 
-    initialize: function() {
+    initialize: function(options) {
       _.bindAll(this,'render');
       var that = this;
-
-      this.collection.on('add', this.onFeedbackAdded, this);
-      this.collection.on('reset', this.onFeedbackCollectionReset, this);
+      
+      this.feedbackCollection = options.fbCollection;
+      this.feedbackCollection.on('add', this.onFeedbackAdded, this);
+      this.feedbackCollection.on('reset', this.onFeedbackCollectionReset, this);
 
       this.model.on('change', this.render, this);
       this.model.on('destroy', this.quiriiDeleted, this);

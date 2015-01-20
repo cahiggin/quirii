@@ -21,13 +21,12 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       _.bindAll(this,'render');
       this.options = options;
       var thisView = this;
-      console.log(options.collection.url);
-      //check that this.collection was set by the parent view
-      //console.log("this.collection has been defined by the parent view ", this.collection);
-      
+      //define this.feedbackCollection from options
+      this.feedbackCollection = options.feedbackCollection;
+
       //define this.model to be an instance of QuiriiFeedbackItem
       this.model = new QuiriiFeedbackItem();
-      this.model.url = options.collection.url;
+      this.model.url = options.feedbackCollection.url;
 
       //check that this.morphiis has been set by parent view
       this.morphiisCollection = options.morphiis;

@@ -1,6 +1,7 @@
 define(['router'], function(router) {
   var initialize = function() {
     //checkLogin(runApplication);
+    //Backbone.history.start({pushState: true});
     Backbone.history.start();
   };
 

@@ -12,6 +12,7 @@ define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiri
       var thisView = this;
       this.options = options;
       this.morphiis = options.morphiis;
+      this.feedbackCollection = options.fbCollection;
       this.morphiis.on('reset', this.renderGetFeedback, this);
       this.morphiis.on('change', this.renderGetFeedback, this);
       this.morphiis.on('add', this.renderGetFeedback, this);
@@ -19,7 +20,10 @@ define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiri
     },
 
     renderGetFeedback: function(){
-      this.giveFeedbackView = (new GiveQuiriiFeedbackView({collection:this.collection, morphiis:this.morphiis}));
+      this.giveFeedbackView = (new GiveQuiriiFeedbackView({
+        feedbackCollection:this.feedbackCollection, 
+        morphiis:this.morphiis
+      }));
     },
 
     render: function() {

@@ -25,8 +25,19 @@ app.configure(function(){
   app.use(express.session({ secret: 'keyboard cat' }));
   app.use(passport.initialize());
   app.use(passport.session());
+
+  //rewrite the urls to strip the /api
+  /*app.all('*', function(req, res, next){
+    req.url = req.url.replace(/^(?!\/api)(\/me|\/users|\/quiriis|\/morphiis)/, '/api$&');
+    console.log("NEW REQ URL IS ", req.url);
+    next();
+  });*/
+
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+
+  
+
   //connect to mongoose:
   mongoose.connect(dbPath, function onMongooseError(err) {
   //mongoose.connect(process.env.MONGOHQ_URL, function onMongooseError(err){
@@ -139,6 +150,12 @@ function ensureAuthenticated(req, res, next) {
             }
   });
 }
+
+//middleware to parse out /api and return resources
+app.use('/api', function (req, res, next) {
+  res.send("GOT IT");
+  next();
+})
 
 /*
 // OUR USER ROUTES
