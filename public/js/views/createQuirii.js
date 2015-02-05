@@ -25,12 +25,15 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
       console.log("beginning s3 upload");
       var filename = $('input[type=file]').val().replace(/.*(\/|\\)/, '');
       console.log("FILE NAME ", filename);
+      var currDate = Date.now();
+      var uploadFilename = currDate + filename;
+      console.log("File is ", uploadFilename);
       var status_elem = $('#status');
       var url_elem = $('#image_url');
       var preview_elem = $('#preview');
       var s3upload = new S3Upload({
         file_dom_selector: 'files',
-        s3_object_name: filename,
+        s3_object_name: uploadFilename,
         s3_sign_put_url: '/api/sign_s3',
         onProgress: function(percent, message) {
             console.log('PROGRESS: ' + percent + '% ' + message);
