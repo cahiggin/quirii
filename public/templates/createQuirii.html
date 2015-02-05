@@ -1,11 +1,15 @@
 <div class="col-xs-12 boxDiv" >
 <form class="form-horizontal" id="quiriiForm" role="form">
 	<h1>Create A Quirii</h1>
+	<p id="status">Please select a file</p>
+	<input type="file" id="files" class="big-btn-blue"/>
+	<br />
+	<div style="border:1px solid gray;width:300px;"  id="preview"><img src="/images/default.png" style="width:300px;" /></div>
+	<input type="hidden" id="image_url" name="image_url" value="/public/images/default.png" />
+	<br />
 	Title: <input class="sixteen-px" type="text" id="title" name="title" placeholder="name your quirii"/>
 	<br />
 	Prompt: <input class="sixteen-px" type="text" id="prompt" name="prompt" placeholder="enter prompt(optional)"/>
-	<br />
-	MediaUrl: <input class="sixteen-px" type="text" id="mediaUrl" name="mediaUrl" placeholder="http://www.deepriversnacks.com/images/slide-kettle-original.png"/>
 	<br />
 	<input type="submit" class="big-btn" id="postQuirii" value="Create">
 </form>

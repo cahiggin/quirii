@@ -4,11 +4,15 @@ require.config({
     jQuery: '/js/libs/jquery',
     Underscore: '/js/libs/underscore',
     Backbone: '/js/libs/backbone',
+    S3Upload: '/js/libs/s3upload',
     bootstrap: '/js/libs/bootstrap',
     models: 'models',
     text: '/js/libs/text',
     templates: '../templates',
-    SocialNetView: '/js/QuiriiNetView'
+    //SocialNetView: '/js/QuiriiNetView',
+    QuiriiNetView: '/js/QuiriiNetView'
+    
+
   },
 
   shim: {
@@ -21,8 +25,8 @@ require.config({
 });
 
 
-require(['jQuery', 'QuiriiNet', 'bootstrap'], function($, QuiriiNet) {
-  
+require(['jQuery', 'QuiriiNet', 'bootstrap', 'S3Upload'], function($, QuiriiNet) {
+  console.log("test s3", S3Upload);
   QuiriiNet.initialize();
   return{};
 });

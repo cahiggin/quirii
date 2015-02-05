@@ -55,13 +55,19 @@ var models = {
 
 // Quirii Heroku Twitter App Credentials
 ////these are for HEROKU Quirii app:
-var TWITTER_CONSUMER_KEY = "Iv0X7n8zG5zq9TxkKj66A";
-var TWITTER_CONSUMER_SECRET = "3TiJdWG9p4JNzHdJz1MVKMwhJlClwH7HL9PUvbwXs";
+//var TWITTER_CONSUMER_KEY = "Iv0X7n8zG5zq9TxkKj66A";
+//var TWITTER_CONSUMER_SECRET = "3TiJdWG9p4JNzHdJz1MVKMwhJlClwH7HL9PUvbwXs";
 
 // Moodl Me Local Env Twitter App Credentials
 //Local Env Twitter app credentials:
 //var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
 //var TWITTER_CONSUMER_SECRET = 'VUvrJsap9MA8UWULi2oPasj31FyFtiI2Nt3sNYqb6E';
+
+var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
+var TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
+var TWITTER_CALLBACK_URL = process.env.TWITTER_CALLBACK_URL;
+
+//console.log("TWITTER  ", TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_CALLBACK_URL);
 
 //set up Twitter Passport strategy
 passport.use(new TwitterStrategy({
@@ -69,8 +75,9 @@ passport.use(new TwitterStrategy({
     consumerSecret: TWITTER_CONSUMER_SECRET,
     //callbackURL: "http://corleymbp-2.local:5000/auth/twitter/callback"
     //callbackURL: "http://localhost:5000/auth/twitter/callback"
+    callbackUrl: TWITTER_CALLBACK_URL
 
-    callbackURL: "http://quirii.herokuapp.com/auth/twitter/callback"
+    //callbackURL: "http://quirii.herokuapp.com/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, done) {
     models.User.findById(profile.id, function(user) {
@@ -436,7 +443,39 @@ app.get('/api/me/quiriis', ensureAuthenticated, function(req, res){
 
 // Handle the S3 upload request
 
+app.get('/api/sign_s3', function(req, res){
+    aws.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
+    console.log("THE key IS NAMED ", AWS_ACCESS_KEY);
+    var user = req.user;
+    var object_name = req.query.s3_object_name;
+    var s3 = new aws.S3();
+    var s3_params = {
+        Bucket: S3_BUCKET,
+        Key: req.query.s3_object_name,
+        Expires: 60,
+        ContentType: req.query.s3_object_type,
+        ACL: 'public-read'
+    };
+    s3.getSignedUrl('putObject', s3_params, function(err, data){
+        if(err){
+            console.log(err);
+        }
+        else{
+            var return_data = {
+                signed_request: data,
+                //url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+req.query.s3_object_name
+                //ideal but requires us to pass user to s3upload.js
+                //url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+user.uid+'_'+object_name
+                url: 'https://s3.amazonaws.com/quirii/'+req.query.s3_object_name
+            };
+            res.write(JSON.stringify(return_data));
+            res.end();
+        }
+    });
+});
+
 /*app.get('/api/sign_s3', function(req, res){
+  console.log("SIGNING REQUEST ", req);
     var user = req.user;
     var object_name = req.query.s3_object_name;
     var mime_type = req.query.s3_object_type;
@@ -464,7 +503,7 @@ app.get('/api/me/quiriis', ensureAuthenticated, function(req, res){
  * Respond to GET requests to /sign_s3.
  * Upon request, return JSON containing the temporarily-signed S3 request and the
  * anticipated URL of the image.
- */
+ 
 app.get('/sign_s3', function(req, res){
     aws.config.update({accessKeyId: AWS_ACCESS_KEY , secretAccessKey: AWS_SECRET_KEY });
     var s3 = new aws.S3(); 
@@ -490,7 +529,7 @@ app.get('/sign_s3', function(req, res){
         } 
     });
 });
-
+*/
 
 
 // Current User POST Quirii
