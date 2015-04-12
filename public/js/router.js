@@ -53,9 +53,14 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
         model: model,
         fbCollection: feedbackCollection
       }));
-      model.fetch({reset:true});
-      feedbackCollection.fetch({reset:true});  
-      //model.fetch();
+      model.fetch({
+	    reset: true,
+		success: function () {
+		  feedbackCollection.fetch({
+		    reset: true
+	      });
+		}
+      });
     },
 
     publicQuirii: function(id){
