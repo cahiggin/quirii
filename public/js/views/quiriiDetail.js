@@ -44,13 +44,11 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     onFeedbackCollectionReset: function(collection) {
       var that = this;
       collection.each(function (model) {
-        console.log("feedback model", model);
         that.onFeedbackAdded(model);
       });
     },
 
     onFeedbackAdded: function(feedbackItem) {
-      console.log("feedback added");
       var feedbackHtml = (new FeedbackItemView({ model: feedbackItem })).render().el;
       $(feedbackHtml).prependTo('.feedback-list').hide().fadeIn('slow');  
 

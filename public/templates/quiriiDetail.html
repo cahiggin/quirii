@@ -1,12 +1,13 @@
 <div class="qDetail">
-    <h3> <%= model.title %> </h3> 
-    <h4> <%= model.prompt %></h4>
+    <h3><%= model.title %> </h3> 
+    <h4><%= model.prompt %></h4>
     <div class="col-xs-12">
         <img src="<%=model.mediaUrl %>" width="300px"/>
         <br />
-        <button class="big-btn-blue"><a href="#/quiriis/<%=model.id %>">Share This Quirii</a></button> 
+        <button class="big-btn-blue">
+		  <a href="#/quiriis/<%=model.id %>">Share This Quirii</a>
+		</button> 
         <button class="big-btn-destroy" id="deleteQuirii">Delete Quirii</button>
-        <br />
     </div>
     <div class="col-xs-12">
 		<h1><strong>Feedback</strong></h1>
