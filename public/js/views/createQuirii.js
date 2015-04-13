@@ -9,6 +9,8 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
     },
 
     initialize: function(options) {
+	  _.bindAll(this, 'render', 'postQuirii');
+	  this.collection = options.collection;
       this.model = new Quirii();
       this.model.url = this.collection.url;
     },
@@ -61,6 +63,7 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
 
       this.model.save();
       this.render();
+	  this.collection.fetch();
     },
     
     render: function(){
