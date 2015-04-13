@@ -29,7 +29,6 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
       this.changeView(new IndexView({
         collection: allQuiriis
       }));
-      allQuiriis.fetch();
     },
 
     login: function(){

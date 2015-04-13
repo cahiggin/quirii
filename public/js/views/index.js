@@ -10,8 +10,9 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
 
     },
 
-    initialize: function() {
-      _.bindAll(this,'render');
+    initialize: function(options) {
+      _.bindAll(this, 'render');
+	  this.collection.fetch();
       this.collection.on('add', this.onQuiriiAdded, this);
       this.collection.on('reset', this.onQuiriiCollectionReset, this);
 
