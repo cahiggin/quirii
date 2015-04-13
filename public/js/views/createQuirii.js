@@ -9,8 +9,8 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
     },
 
     initialize: function(options) {
-	  _.bindAll(this, 'render', 'postQuirii');
-	  this.collection = options.collection;
+      _.bindAll(this, 'render', 'postQuirii');
+      this.collection = options.collection;
       this.model = new Quirii();
       this.model.url = this.collection.url;
     },
@@ -50,7 +50,8 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
     //end s3 trial run
 
     postQuirii: function(e) {
-      var titleText = $('input[name=title]').val(),
+      var self = this,
+          titleText = $('input[name=title]').val(),
           promptText = $('input[name=prompt]').val(),
           mediaUrlText = $('input[name=image_url]').val();
           
@@ -61,9 +62,12 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
         mediaUrl: mediaUrlText
       });
 
-      this.model.save();
-      this.render();
-	  this.collection.fetch();
+      this.model.save(null, {
+        success: function () {
+          self.render();
+          self.collection.fetch();
+        }
+      });
     },
     
     render: function(){
