@@ -16,7 +16,7 @@ define([
 
         //handle success condition
         options.success = function(response, status, xhr) {
-              console.log('SUCCESS RESPONSE IS ', response.meta.code);
+              console.log('SUCCESS RESPONSE IS ', response);
               success(response, status, xhr);
               if (response.meta.code === 401) {
                 console.log("USER NOT LOGGED IN");
