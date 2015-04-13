@@ -5,14 +5,9 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
   var indexView = QuiriiNetView.extend({
     el: $('#content'),
 
-    events: {
-      //'click #create-quirii':'createQuiriiModal'
-
-    },
-
     initialize: function(options) {
       _.bindAll(this, 'render');
-	  this.collection.fetch();
+      this.collection.fetch();
       this.collection.on('add', this.onQuiriiAdded, this);
       this.collection.on('reset', this.onQuiriiCollectionReset, this);
 
