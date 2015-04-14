@@ -31,7 +31,9 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     },
 
     quiriiDeleted: function() {
-      location.href = '/';
+      Backbone.history.navigate("", {
+        trigger: true
+      });
     },
 
     onFeedbackCollectionReset: function(collection) {
