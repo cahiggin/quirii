@@ -9,6 +9,8 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
 
     routes: {
       '': 'index',
+      'create': 'index',
+      'view': 'index',
       'api/me/settings': 'loggedin',
       'login': 'login',
       'me/quiriis/:id': 'quiriiDetail',
