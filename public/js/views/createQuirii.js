@@ -66,6 +66,11 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
         success: function () {
           self.render();
           self.collection.fetch();
+          
+          Backbone.history.navigate("view");
+          $('#create-ui').fadeOut(function () {
+            $('#your-quiriis-ui').fadeIn();
+          });
         }
       });
     },
