@@ -7,10 +7,9 @@ var aws = require('aws-sdk');
 
 //mongo hq 
 //this is the quirii mongo path
+//TO DO: put this in heroku env var ASAP
 var dbPath = 'mongodb://quiriidbuser:Charlie123@dogen.mongohq.com:10042/Quirii';
 
-//local db
-//var dbPath = 'mongodb://localhost/moodl-me';
 var mongoose    = require('mongoose');
 
 // Configure the application
@@ -60,13 +59,14 @@ var models = {
 
 // Moodl Me Local Env Twitter App Credentials
 //Local Env Twitter app credentials:
-/*var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
+var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
 var TWITTER_CONSUMER_SECRET = 'VUvrJsap9MA8UWULi2oPasj31FyFtiI2Nt3sNYqb6E';
-var TWITTER_CALLBACK_URL = 'http://localhost:5000/auth/twitter/callback';*/
+var TWITTER_CALLBACK_URL = 'http://localhost:5000/auth/twitter/callback';
 
-var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
+//UPDATE WITH CONFIG VARS FOR HEROKU
+/*var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
-var TWITTER_CALLBACK_URL = process.env.TWITTER_CALLBACK_URL;
+var TWITTER_CALLBACK_URL = process.env.TWITTER_CALLBACK_URL;*/
 
 //console.log("TWITTER  ", TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_CALLBACK_URL);
 
@@ -75,8 +75,8 @@ passport.use(new TwitterStrategy({
     consumerKey: TWITTER_CONSUMER_KEY,
     consumerSecret: TWITTER_CONSUMER_SECRET,
     //callbackURL: "http://corleymbp-2.local:5000/auth/twitter/callback"
-    //callbackURL: "http://localhost:5000/auth/twitter/callback"
-    callbackUrl: TWITTER_CALLBACK_URL
+    callbackURL: "http://localhost:5000/auth/twitter/callback"
+    //callbackUrl: TWITTER_CALLBACK_URL
 
     //callbackURL: "http://quirii.herokuapp.com/auth/twitter/callback"
   },
@@ -334,6 +334,22 @@ app.get('/api/quiriis/:quiriiid', function(req, res){
 });
 
 
+//GET the aggregate morphii for a Quirii with specified id
+app.get('/api/quiriis/:quiriiid/aggregate', function(req, res){
+  var quiriiId = req.params.quiriiid;
+  models.Quirii.aggregateMorphii(quiriiId, function(quirii, aggregatemorphii){
+    res.send({
+              meta: {
+                code: 200
+              },
+              data: {
+                aggregateMorphii: aggregatemorphii
+              }
+    });
+  });
+});
+
+
 /*
 // Current User Quirii [/api/me/quiriis/:quiriiid]
 */
@@ -475,62 +491,6 @@ app.get('/api/sign_s3', function(req, res){
     });
 });
 
-/*app.get('/api/sign_s3', function(req, res){
-  console.log("SIGNING REQUEST ", req);
-    var user = req.user;
-    var object_name = req.query.s3_object_name;
-    var mime_type = req.query.s3_object_type;
-
-    var now = new Date();
-    var expires = Math.ceil((now.getTime() + 1000000)/1000); // 1000 seconds from now
-    var amz_headers = "x-amz-acl:public-read";
-
-    var put_request = "PUT\n\n"+mime_type+"\n"+expires+"\n"+amz_headers+"\n/"+S3_BUCKET+"/"+object_name;
-
-    var signature = crypto.createHmac('sha1', AWS_SECRET_KEY).update(put_request).digest('base64');
-    signature = encodeURIComponent(signature.trim());
-
-    var url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+user.uid+object_name;
-
-    var credentials = {
-        signed_request: url+"?AWSAccessKeyId="+AWS_ACCESS_KEY+"&Expires="+expires+"&Signature="+signature,
-        url: url
-    };
-    res.write(JSON.stringify(credentials));
-    res.end();
-});*/
-
-/*
- * Respond to GET requests to /sign_s3.
- * Upon request, return JSON containing the temporarily-signed S3 request and the
- * anticipated URL of the image.
- 
-app.get('/sign_s3', function(req, res){
-    aws.config.update({accessKeyId: AWS_ACCESS_KEY , secretAccessKey: AWS_SECRET_KEY });
-    var s3 = new aws.S3(); 
-    var s3_params = { 
-        Bucket: S3_BUCKET, 
-        Key: req.query.s3_object_name, 
-        Expires: 60, 
-        ContentType: req.query.s3_object_type, 
-        ACL: 'public-read'
-    }; 
-    s3.getSignedUrl('putObject', s3_params, function(err, data){ 
-        if(err){ 
-            console.log(err); 
-        }
-        else{ 
-            var return_data = {
-                signed_request: data,
-                url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+req.query.s3_object_name 
-            };
-            console.log(JSON.stringify(return_data));
-            res.write(JSON.stringify(return_data));
-            res.end();
-        } 
-    });
-});
-*/
 
 
 // Current User POST Quirii
@@ -702,8 +662,8 @@ app.get('/api/morphiis/:id', function(req, res){
 
 
 // configuration:
-var port = process.env.PORT || CONFIG.port || 3000;
+//var port = process.env.PORT || CONFIG.port || 3000;
 //local port
-//var port = 3000;
+var port = 3000;
 app.listen(port);
 console.log("The magic is happening on port "+ port);
