@@ -5,12 +5,11 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     el: $('#content'),
 
     events: {
-      'click #deleteQuirii':'deleteQuirii'
+      'click #deleteQuirii': 'deleteQuirii'
     },
 
     initialize: function(options) {
       _.bindAll(this,'render');
-      var that = this;
       
       this.feedbackCollection = options.fbCollection;
       this.feedbackCollection.on('add', this.onFeedbackAdded, this);
@@ -22,35 +21,29 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       this.render();
     },
 
-    deleteQuirii: function(){
-      var that = this;
-      this.model.destroy({
-        wait: true,
-        success:function(model, response){
-          console.log("SHITS GONE", response, model);
-        },
-        error: function(model, response){
-          console.log("error ", response);
-        }
-      });
-      
-      return false;
+    deleteQuirii: function() {
+      var self = this,
+          confirmed = confirm('Are you sure you would like to delete this Quirii?');
+          
+      if (confirmed) {
+        this.model.destroy({ wait: true });
+      }
     },
 
-    quiriiDeleted: function(){
-      location.href='/';
+    quiriiDeleted: function() {
+      Backbone.history.navigate("view", {
+        trigger: true
+      });
     },
 
     onFeedbackCollectionReset: function(collection) {
       var that = this;
       collection.each(function (model) {
-        console.log("feedback model", model);
         that.onFeedbackAdded(model);
       });
     },
 
     onFeedbackAdded: function(feedbackItem) {
-      console.log("feedback added");
       var feedbackHtml = (new FeedbackItemView({ model: feedbackItem })).render().el;
       $(feedbackHtml).prependTo('.feedback-list').hide().fadeIn('slow');  
 

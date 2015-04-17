@@ -4,20 +4,15 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
     el: '#create-ui',
 
     events: {
-      "click #postQuirii":"postQuirii",
-      "change #files":"s3upload"
+      "submit #quirii-form": "postQuirii",
+      "change #files": "s3upload"
     },
 
     initialize: function(options) {
-      //_.bindAll(this, 'render');
-
-      var that = this;
-      console.log("USER IS ", options);
+      _.bindAll(this, 'render', 'postQuirii');
+      this.collection = options.collection;
       this.model = new Quirii();
       this.model.url = this.collection.url;
-
-      //this.model.on('request', this.postedQuirii, this);
-      //this.render();
     },
 
     //s3 upload trial run
@@ -54,22 +49,30 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
     },
     //end s3 trial run
 
-    postQuirii: function(){
-      
-      var thisView = this;
-      var titleText = $('input[name=title]').val();
-      var promptText = $('input[name=prompt]').val();
-      //var mediaUrlText = $('input[name=mediaUrl]').val();
-      var mediaUrlText = $('input[name=image_url]').val();
-      thisView.model.set({
+    postQuirii: function(e) {
+      var self = this,
+          titleText = $('input[name=title]').val(),
+          promptText = $('input[name=prompt]').val(),
+          mediaUrlText = $('input[name=image_url]').val();
+          
+      e.preventDefault();
+      this.model.set({
         title: titleText,
         prompt: promptText,
         mediaUrl: mediaUrlText
       });
 
-      thisView.model.save();
-      this.render();
-      console.log("current model is ", thisView.model);
+      this.model.save(null, {
+        success: function () {
+          self.render();
+          self.collection.fetch();
+          
+          Backbone.history.navigate("view");
+          $('#create-ui').fadeOut(function () {
+            $('#your-quiriis-ui').fadeIn();
+          });
+        }
+      });
     },
     
     render: function(){

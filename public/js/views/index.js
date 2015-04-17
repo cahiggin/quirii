@@ -5,44 +5,39 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
   var indexView = QuiriiNetView.extend({
     el: $('#content'),
 
-    events: {
-      //'click #create-quirii':'createQuiriiModal'
+    initialize: function(options) {
+      var url = Backbone.history.getFragment();
+      
+      _.bindAll(this, 'render');
 
-    },
-
-    initialize: function() {
-      _.bindAll(this,'render');
+      this.route = (url === '' || url === 'view') ? 'view' : 'create';
+      this.collection.fetch();
       this.collection.on('add', this.onQuiriiAdded, this);
       this.collection.on('reset', this.onQuiriiCollectionReset, this);
-
       this.quiriiModel = new Quirii();
-
     },
 
     onQuiriiCollectionReset: function(collection) {
-      var that = this;
+      var self = this;
       collection.each(function (model) {
-        that.onQuiriiAdded(model);
+        self.onQuiriiAdded(model);
       });
     },
 
     onQuiriiAdded: function(quirii) {
-      
       var quiriiHtml = (new QuiriiView({ model: quirii })).render().el;
-      $(quiriiHtml).prependTo('.quirii_list').hide().fadeIn('slow');      
+      $(quiriiHtml).prependTo('#your-quiriis-ui ul');
     },
 
-    newQuiriiAdd: function(quirii){
-      console.log(quirii);
-    },
-
-    makeRender: function(){
+    createQuirii: function(){
       this.createQuiriiUi = (new CreateQuiriiView({collection: this.collection})).render();
     },
 
     render: function() {
       this.$el.html(indexTemplate);
-      this.makeRender();
+      $(this.route === 'create' ? '#your-quiriis-ui' : '#create-ui').hide();
+      
+      this.createQuirii();
       return this;
     }
   });
