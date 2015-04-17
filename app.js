@@ -52,31 +52,26 @@ var models = {
   Quirii: require('./models/Quirii')(mongoose)
 };
 
-// Quirii Heroku Twitter App Credentials
-////these are for HEROKU Quirii app:
-//var TWITTER_CONSUMER_KEY = "Iv0X7n8zG5zq9TxkKj66A";
-//var TWITTER_CONSUMER_SECRET = "3TiJdWG9p4JNzHdJz1MVKMwhJlClwH7HL9PUvbwXs";
 
 // Moodl Me Local Env Twitter App Credentials
 //Local Env Twitter app credentials:
-var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
+/*var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
 var TWITTER_CONSUMER_SECRET = 'VUvrJsap9MA8UWULi2oPasj31FyFtiI2Nt3sNYqb6E';
-var TWITTER_CALLBACK_URL = 'http://localhost:5000/auth/twitter/callback';
+var TWITTER_CALLBACK_URL = 'http://localhost:5000/auth/twitter/callback';*/
 
 //UPDATE WITH CONFIG VARS FOR HEROKU
-/*var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
+var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
-var TWITTER_CALLBACK_URL = process.env.TWITTER_CALLBACK_URL;*/
+var TWITTER_CALLBACK_URL = process.env.TWITTER_CALLBACK_URL;
 
-//console.log("TWITTER  ", TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_CALLBACK_URL);
 
 //set up Twitter Passport strategy
 passport.use(new TwitterStrategy({
     consumerKey: TWITTER_CONSUMER_KEY,
     consumerSecret: TWITTER_CONSUMER_SECRET,
     //callbackURL: "http://corleymbp-2.local:5000/auth/twitter/callback"
-    callbackURL: "http://localhost:5000/auth/twitter/callback"
-    //callbackUrl: TWITTER_CALLBACK_URL
+    //callbackURL: "http://localhost:5000/auth/twitter/callback"
+    callbackURL: TWITTER_CALLBACK_URL
 
     //callbackURL: "http://quirii.herokuapp.com/auth/twitter/callback"
   },
@@ -334,22 +329,6 @@ app.get('/api/quiriis/:quiriiid', function(req, res){
 });
 
 
-//GET the aggregate morphii for a Quirii with specified id
-app.get('/api/quiriis/:quiriiid/aggregate', function(req, res){
-  var quiriiId = req.params.quiriiid;
-  models.Quirii.aggregateMorphii(quiriiId, function(quirii, aggregatemorphii){
-    res.send({
-              meta: {
-                code: 200
-              },
-              data: {
-                aggregateMorphii: aggregatemorphii
-              }
-    });
-  });
-});
-
-
 /*
 // Current User Quirii [/api/me/quiriis/:quiriiid]
 */
@@ -427,6 +406,33 @@ app.delete('/api/me/quiriis/:quiriiid', ensureAuthenticated, function(req, res){
   });
 }
 });
+
+//GET the aggregate morphii for the current user's Quirii with specified id
+app.get('/api/me/quiriis/:quiriiid/aggregate', ensureAuthenticated, function(req, res){
+  if (!req.user){
+    res.send({
+              meta: {
+                code: 404, 
+                message: "user not signed in"
+              }
+            });
+  } else {
+  var quiriiId = req.params.quiriiid;
+  models.Quirii.aggregateMorphii(quiriiId, function(aggregatemorphii){
+    console.log("AGGREGATE MORPHII IS " + aggregatemorphii);
+    res.send({
+              meta: {
+                code: 200
+              },
+              data: {
+                aggMorphii: aggregatemorphii
+              }
+    });
+  });
+}
+});
+
+
 
 /*
 // Current User Quirii Collection [/api/me/quiriis]
@@ -662,8 +668,8 @@ app.get('/api/morphiis/:id', function(req, res){
 
 
 // configuration:
-//var port = process.env.PORT || CONFIG.port || 3000;
+var port = process.env.PORT || CONFIG.port || 3000;
 //local port
-var port = 3000;
+//var port = 3000;
 app.listen(port);
 console.log("The magic is happening on port "+ port);
