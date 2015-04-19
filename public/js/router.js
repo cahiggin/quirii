@@ -23,7 +23,6 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
         this.currentView.undelegateEvents();
       }
       this.currentView = view;
-      this.sharedNamespace();
       this.currentView.render();
     },
 
@@ -78,20 +77,6 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
       quiriiModel.fetch({reset:true});
       feedbackCollection.fetch({reset: true});  
       morphiisCollection.fetch({reset: true});  
-    },
-    
-    sharedNamespace: function () {
-      var scope = {},
-          $nav = $('#navigation');
-      
-      scope.setTitle = function (title) {
-          title = title || '';
-          
-          $('.title', $nav).text(title);
-          document.title = title;
-      };
-      
-      window.QuiriiScope = scope;
     }
 
   });
