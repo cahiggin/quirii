@@ -6050,8 +6050,19 @@ td.visible-print {
     display: none !important;
   }
 }
+#navigation {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  text-align: center;
+  background: #eee;
+  font-size: 2em;
+}
+#navigation.hidden + #content {
+  padding: 0;
+}
 #content {
-  padding-top: 30px;
+  padding-top: 40px;
 }
 input[type="range"] {
   -webkit-appearance: none !important;

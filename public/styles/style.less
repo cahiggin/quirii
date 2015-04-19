@@ -1,10 +1,23 @@
 @import (less) "bootstrap.css";
 
-#content{
-  padding-top:30px;
+#navigation {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  text-align: center;
+  background: #eee;
+  font-size: 2em;
+  
+  &.hidden + #content {
+    padding: 0;
+  }
 }
 
- input[type="range"]{
+#content{
+  padding-top: 40px;
+}
+
+input[type="range"]{
   -webkit-appearance:none !important;
   width:250px;
   height:50px;
