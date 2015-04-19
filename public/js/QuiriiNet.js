@@ -9,6 +9,14 @@ define(['router'], function(router) {
       $('.title', $nav).text(title);
       document.title = title;
     };
+    
+    scope.hideNavigation = function () {
+      $nav.addClass('hidden');
+    };
+    
+    scope.showNavigation = function () {
+      $nav.removeClass('hidden');
+    };
       
     window.QuiriiScope = scope;
     Backbone.history.start();

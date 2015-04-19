@@ -33,7 +33,8 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
       }));
     },
 
-    login: function(){
+    login: function () {
+      QuiriiScope.hideNavigation();
       this.changeView(new LoginView);
     },
 
