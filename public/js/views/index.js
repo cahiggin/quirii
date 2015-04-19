@@ -35,7 +35,14 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
 
     render: function() {
       this.$el.html(indexTemplate);
-      $(this.route === 'create' ? '#your-quiriis-ui' : '#create-ui').hide();
+      
+      if (this.route === 'create') {
+        QuiriiScope.setTitle('Create Quirii');
+        $('#your-quiriis-ui').hide();
+      } else {
+        QuiriiScope.setTitle('Your Quiriis');
+        $('#create-ui').hide();
+      }        
       
       this.createQuirii();
       return this;

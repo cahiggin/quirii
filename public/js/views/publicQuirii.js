@@ -27,6 +27,8 @@ define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiri
     },
 
     render: function() {
+      QuiriiScope.setTitle('Quirii');
+      
       $(this.el).html(_.template(publicQuiriiTemplate)( {
         model: this.model.toJSON()
       }));

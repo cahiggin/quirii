@@ -52,6 +52,8 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     },
 
     render: function() {
+      QuiriiScope.setTitle('Quirii Details');
+    
       $(this.el).html(_.template(quiriiDetailTemplate)( {
         model: this.model.toJSON()
       }));

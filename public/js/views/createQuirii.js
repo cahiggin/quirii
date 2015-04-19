@@ -69,6 +69,7 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
           
           Backbone.history.navigate("view");
           $('#create-ui').fadeOut(function () {
+            QuiriiScope.setTitle('Your Quiriis');
             $('#your-quiriis-ui').fadeIn();
           });
         }
