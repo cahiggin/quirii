@@ -3,9 +3,7 @@ define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiri
   function(QuiriiNetView, publicQuiriiTemplate, PublicQuiriis, 
     GiveQuiriiFeedbackView) {
   var publicQuiriiView = QuiriiNetView.extend({
-
     requireLogin: false,
-   
     el: '#content',
 
     initialize: function(options) {
