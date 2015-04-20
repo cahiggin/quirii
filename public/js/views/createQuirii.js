@@ -56,25 +56,32 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
           mediaUrlText = $('input[name=image_url]').val();
           
       e.preventDefault();
-      this.model.set({
-        title: titleText,
-        prompt: promptText,
-        mediaUrl: mediaUrlText
+      
+      $('[required]', this.$el).each(function () {
+        $(this).toggleClass('error', !this.value);
       });
+      
+      if (!this.$el.find('.error').length) {
+        this.model.set({
+          title: titleText,
+          prompt: promptText,
+          mediaUrl: mediaUrlText
+        });
 
-      this.model.save(null, {
-        success: function () {
-          self.render();
-          self.collection.fetch();
+        this.model.save(null, {
+          success: function () {
+            self.render();
+            self.collection.fetch();
           
-          Backbone.history.navigate('#/view', { replace: true });
-          $('#create-ui').fadeOut(function () {
-            QuiriiScope.setTitle('Your Quiriis');
-            $('#navigation .cancel').hide();
-            $('#your-quiriis-ui').fadeIn();
-          });
-        }
-      });
+            Backbone.history.navigate('#/view', { replace: true });
+            $('#create-ui').fadeOut(function () {
+              QuiriiScope.setTitle('Your Quiriis');
+              $('#navigation .cancel').hide();
+              $('#your-quiriis-ui').fadeIn();
+            });
+          }
+        });
+      }
     },
     
     render: function(){

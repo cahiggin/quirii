@@ -1,12 +1,12 @@
 <div class="col-xs-12">
-  <form id="quirii-form" class="form-horizontal" role="form">
+  <form id="quirii-form" class="form-horizontal" novalidate="novalidate" role="form">
     <p id="status">Please select a file</p>
     <input type="file" id="files" class="big-btn-blue"/>
     <br />
     <div style="width:150px;"  id="preview"><img src="/images/default.png" style="width:145px;" /></div>
-    <input type="hidden" id="image_url" name="image_url" value="/images/default.png" />
+    <input type="hidden" id="image_url" name="image_url" value="/images/default.png" required="required"/>
     <br />
-    Title: <input class="sixteen-px" type="text" id="title" name="title" placeholder="name your quirii"/>
+    Title: <input class="sixteen-px" type="text" id="title" name="title" placeholder="name your quirii" required="required"/>
     <br />
     Prompt: <input class="sixteen-px" type="text" id="prompt" name="prompt" placeholder="enter prompt(optional)"/>
     <br />
