@@ -6174,18 +6174,19 @@ td.visible-print {
   height: auto;
   max-width: 100%;
 }
-#public-quirii .prompt {
+#public-quirii .prompt,
+#public-quirii .selected-morphii {
   text-align: center;
   margin-top: 1.4em;
+  font-size: 1.5em;
 }
 #public-quirii .morphii-radios {
-  display: table;
-  margin: auto;
   text-align: center;
   background: #f2f2f2;
-  padding: 0.2em 1.6em;
+  padding: 0 10px;
   position: relative;
-  margin-bottom: 2em;
+  white-space: nowrap;
+  margin: 0 -15px 2em;
 }
 #public-quirii .morphii-radios img {
   max-width: 60px;
@@ -6207,8 +6208,9 @@ td.visible-print {
   transform: rotate(45deg);
   position: absolute;
   top: 100%;
-  margin-top: -18px;
+  margin-top: -24px;
   margin-left: 20px;
+  border: 1px solid #555;
   z-index: -1;
 }
 #public-quirii .morphii-radios input[type=radio]:checked + label img {
@@ -6241,4 +6243,9 @@ td.visible-print {
   background-color: #D9D9D9;
   border: none;
   border-radius: 20px;
+}
+@media (max-width: 420px) {
+  #public-quirii .morphii-radios {
+    padding: 0;
+  }
 }

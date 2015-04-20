@@ -65,9 +65,7 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       });
 
       thisView.model.save();
-      this.render();
-      console.log("current model is ", thisView.model);
-     
+      this.render();     
     },
 
     renderMorphii: function(morphiiType){
