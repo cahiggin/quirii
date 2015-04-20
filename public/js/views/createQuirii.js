@@ -67,9 +67,10 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
           self.render();
           self.collection.fetch();
           
-          Backbone.history.navigate("view");
+          Backbone.history.navigate('#/view', { replace: true });
           $('#create-ui').fadeOut(function () {
             QuiriiScope.setTitle('Your Quiriis');
+            $('#navigation .cancel').hide();
             $('#your-quiriis-ui').fadeIn();
           });
         }
