@@ -6052,6 +6052,8 @@ td.visible-print {
 }
 #navigation {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   z-index: 100;
   text-align: center;
@@ -6092,6 +6094,7 @@ td.visible-print {
 }
 #content {
   padding-top: 40px;
+  margin-top: 10px;
 }
 input[type="range"] {
   -webkit-appearance: none !important;

@@ -39,9 +39,10 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
       if (this.route === 'create') {
         QuiriiScope.setTitle('Create Quirii');
         $('#your-quiriis-ui').hide();
+        $('#navigation .cancel').show();
       } else {
         QuiriiScope.setTitle('Your Quiriis');
-        $('#create-ui').hide();
+        $('#create-ui, #navigation .cancel').hide();
       }        
       
       this.createQuirii();

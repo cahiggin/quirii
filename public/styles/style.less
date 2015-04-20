@@ -2,6 +2,7 @@
 
 #navigation {
   position: fixed;
+  top: 0; left: 0;
   width: 100%;
   z-index: 100;
   text-align: center;
@@ -15,7 +16,7 @@
   &.hidden + #content {
     padding: 0;
   }
-  .prev, .next {
+  .prev, .next, .cancel {
     display: none;
     position: absolute;
     font-size: 0.8em;
@@ -41,6 +42,7 @@
 
 #content{
   padding-top: 40px;
+  margin-top: 10px;
 }
 
 input[type="range"]{
