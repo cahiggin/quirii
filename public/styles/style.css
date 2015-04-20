@@ -6248,4 +6248,15 @@ td.visible-print {
   #public-quirii .morphii-radios {
     padding: 0;
   }
+  #public-quirii .morphii-radios img {
+    max-width: 45px;
+    margin: 5px 0;
+  }
+  #public-quirii .morphii-radios label span {
+    display: none;
+  }
+  #public-quirii .morphii-radios input[type=radio]:checked + label:before {
+    margin-top: -26px;
+    margin-left: 8px;
+  }
 }
