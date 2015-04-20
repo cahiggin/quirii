@@ -1,8 +1,12 @@
 <div id="public-quirii" class="row">
-  <div class="col-xs-12">
-    <h3> <%= model.prompt %></h3>
-    <img src="<%=model.mediaUrl %>" width="300px"/>   
-    <h4>Give Feedback</h4>
+  <div class="col-sm-8 col-sm-offset-2">
+    <h3>Give Feedback</h3>
+    <div class="responsive-img">
+      <img src="<%=model.mediaUrl %>" />
+    </div>
+    
+    <h4 class="prompt"><%= model.prompt %></h4>
+    
     <div id="quirii-feedback"></div>
   </div>
 </div>

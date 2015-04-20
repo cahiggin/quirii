@@ -7,7 +7,7 @@ function(QuiriiNetView, morphiiStaticThumbTemplate) {
     el: '.morphiiTypeRadios',
 
     render: function() {
-      this.parentView.$el.prepend(_.template(morphiiStaticThumbTemplate)({model: this.model}));
+      this.$el.prepend(_.template(morphiiStaticThumbTemplate)({model: this.model}));
       return this;
     }
 
