@@ -120,20 +120,40 @@
 }
 
 #public-quirii {
+  .prompt {
+    text-align: center;
+    margin-top: 1.4em;
+  }
+  .morphii-radios {
+    display: table;
+    margin: auto;
+  }
+  #morphii-container {
+    text-align: center;
+    
+    svg {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
   input[type="range"]{
-    -webkit-appearance:none !important;
-    width:250px;
-    height:50px;
+    display: block;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 250px;
+    height: 50px;
+    margin: 0.6em auto;
     background-color: #f2f2f2;
     border-radius: 20px;
   }
   input[type="range"]::-webkit-slider-thumb{
-    -webkit-appearance:none !important;  
-    height: 40px !important;
-    width: 40px !important;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 40px;
+    width: 40px;
     background-color: #D9D9D9;
-    border-width:0px;
-    border-radius: 20px !important;
+    border: none;
+    border-radius: 20px;
   }
   .input-hidden {
     position: absolute;
