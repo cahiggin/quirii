@@ -43,6 +43,7 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
       } else {
         QuiriiScope.setTitle('Your Quiriis');
         $('#create-ui, #navigation .cancel').hide();
+        $('#navigation .create').show();
       }        
       
       this.createQuirii();
