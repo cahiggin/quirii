@@ -6065,16 +6065,30 @@ td.visible-print {
 #navigation.hidden + #content {
   padding: 0;
 }
-#navigation .prev {
-  float: left;
+#navigation .prev,
+#navigation .next {
+  display: none;
+  position: absolute;
+  font-size: 0.8em;
+  color: #7474ff;
+  cursor: pointer;
+}
+#navigation .prev:hover,
+#navigation .next:hover {
+  color: #4444ff;
 }
 #navigation .prev span,
-#navigation .prev i {
+#navigation .next span,
+#navigation .prev i,
+#navigation .next i {
   display: inline-block;
   vertical-align: middle;
 }
+#navigation .prev {
+  left: 10px;
+}
 #navigation .prev i {
-  margin: 0 8px 2px 0;
+  margin-right: 6px;
 }
 #content {
   padding-top: 40px;

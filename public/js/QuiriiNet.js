@@ -41,7 +41,9 @@ define(['router'], function(router) {
       }
     }
     
-    $(document).on('click.CUSTOMLALLSDLASDLLDSA', '#navigation .prev', function (e) {
+    $(document).off('click.QuiriiScope');
+    
+    $(document).on('click.QuiriiScope', '#navigation .prev', function (e) {
       QuiriiScope.previousPage();
     });
       
