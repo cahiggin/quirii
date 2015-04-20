@@ -5,11 +5,36 @@
   width: 100%;
   z-index: 100;
   text-align: center;
-  background: #eee;
-  font-size: 2em;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e7e7e7;
+  font-size: 1.6em;
+  color: #555;
+  padding: 0.2em 0;
+  line-height: 30px;
   
   &.hidden + #content {
     padding: 0;
+  }
+  .prev, .next {
+    position: absolute;
+    font-size: 0.8em;
+    color: #7474ff;
+    cursor: pointer;
+    
+    &:hover {
+      color: #4444ff;
+    }
+    span, i {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  .prev {
+    left: 10px;
+    
+    i {
+      margin-right: 6px;
+    }
   }
 }
 

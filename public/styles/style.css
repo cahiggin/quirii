@@ -6055,11 +6055,26 @@ td.visible-print {
   width: 100%;
   z-index: 100;
   text-align: center;
-  background: #eee;
-  font-size: 2em;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e7e7e7;
+  font-size: 1.6em;
+  color: #555;
+  padding: 0.2em 0;
+  line-height: 30px;
 }
 #navigation.hidden + #content {
   padding: 0;
+}
+#navigation .prev {
+  float: left;
+}
+#navigation .prev span,
+#navigation .prev i {
+  display: inline-block;
+  vertical-align: middle;
+}
+#navigation .prev i {
+  margin: 0 8px 2px 0;
 }
 #content {
   padding-top: 40px;
