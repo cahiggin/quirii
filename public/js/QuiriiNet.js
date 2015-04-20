@@ -17,28 +17,20 @@ define(['router'], function(router) {
       showNavigation: function () {
         $nav.removeClass('hidden');
       },
-      handlePageChange: function () {        
-        if (Backbone.history.getFragment().indexOf('?prev') === -1) {
+      handlePageChange: function () {      
+        var fragment = Backbone.history.getFragment();      
+        if (fragment.indexOf('?prev') === -1) {
           QuiriiScope.history.push(Backbone.history.getFragment());
         }
 
-        $('.prev', $nav).toggle(QuiriiScope.history.length > 1 && this.isAvailable(QuiriiScope.history[0]));
-      },
-      isAvailable: function (url) {
-        var frag = Backbone.history.getFragment();
-        if (url !== undefined && frag.indexOf('create') !== 0 && (!(url === '' && fragment.indexOf('view') > -1))) {
-          return true;
-        }
-        return false;
+        $('.prev', $nav).toggle(QuiriiScope.history.length > 1 && fragment.indexOf('create') !== 0 && fragment.indexOf('view') !== 0);
       },
       previousPage: function () {
         var url = QuiriiScope.history[QuiriiScope.history.length - 2],
             previous = url ? url + '?prev=true' : 'view';
 
-        if (this.isAvailable(url)) {
-          Backbone.history.navigate('#/' + previous, { replace: true });
-          QuiriiScope.history = QuiriiScope.history.slice(0, -1);
-        }
+        Backbone.history.navigate('#/' + previous, { replace: true });
+        QuiriiScope.history = QuiriiScope.history.slice(0, -1);
       }
     }
     
