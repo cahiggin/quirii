@@ -10,7 +10,7 @@ function(QuiriiNetView, indexTemplate, createQuiriiTemplate,
       
       _.bindAll(this, 'render');
 
-      this.route = (url === '' || url === 'view') ? 'view' : 'create';
+      this.route = (url === '' || url.indexOf('view') > -1) ? 'view' : 'create';
       this.collection.fetch();
       this.collection.on('add', this.onQuiriiAdded, this);
       this.collection.on('reset', this.onQuiriiCollectionReset, this);

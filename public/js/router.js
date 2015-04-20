@@ -6,7 +6,6 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
   PublicQuirii, PublicQuiriis, QuiriiFeedbackItems) {
   var QuiriiRouter = Backbone.Router.extend({
     currentView: null,
-
     routes: {
       '': 'index',
       'create': 'index',
@@ -24,6 +23,8 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
       }
       this.currentView = view;
       this.currentView.render();
+      
+      QuiriiScope.handlePageChange();
     },
 
     index: function(){
