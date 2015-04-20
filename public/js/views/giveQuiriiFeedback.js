@@ -11,7 +11,6 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
     el: '#quirii-feedback',
 
     events: {
-      
       "input input[name=intensity]": "updateMorphii",
       "click input[name=scale]:checked": "switchMorphii",
       "click #postMorphy":"postMorphii"
@@ -85,8 +84,10 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       var thisView = this;
       thisView.morphiiType = $('input[name=scale]:checked').val();
       if (thisView.morphiiType === undefined){
+        this.$el.find('#Delight').prop('checked', 'checked');
         thisView.morphiiType = "Delight";
       };
+      this.$el.find('.selected-morphii').text(thisView.morphiiType);
       thisView.renderMorphii(thisView.morphiiType); 
     },
 
