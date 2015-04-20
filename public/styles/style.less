@@ -16,9 +16,11 @@
   &.hidden + #content {
     padding: 0;
   }
-  .prev, .next, .cancel {
+  .prev, .cancel,
+  .next, .create  {
     display: none;
     position: absolute;
+    top: 0;
     font-size: 0.8em;
     color: #7474ff;
     cursor: pointer;
@@ -31,8 +33,15 @@
       vertical-align: middle;
     }
   }
-  .prev {
+  .prev, .cancel {
     left: 10px;
+    
+    i {
+      margin-right: 6px;
+    }
+  }
+  .next, .create {
+    right: 10px;
     
     i {
       margin-right: 6px;
