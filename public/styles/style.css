@@ -6162,6 +6162,36 @@ td.visible-print {
   height: auto;
   max-width: 100%;
 }
+#your-quiriis-ui li {
+  border-bottom: 2px solid #ccc;
+  padding: 6px;
+}
+#your-quiriis-ui li .view-img,
+#your-quiriis-ui li .view-text {
+  float: left;
+}
+#your-quiriis-ui li:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+#your-quiriis-ui li .view-img {
+  width: 20%;
+}
+#your-quiriis-ui li .view-img img {
+  max-width: 100%;
+}
+#your-quiriis-ui li .view-text {
+  position: relative;
+  width: 80%;
+}
+#your-quiriis-ui li .view-text a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
 #public-quirii .prompt,
 #public-quirii .selected-morphii {
   text-align: center;
@@ -6246,6 +6276,10 @@ td.visible-print {
   font-size: 7em;
 }
 @media (max-width: 420px) {
+  #your-quiriis-ui .col-sm-8 {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
   #public-quirii .morphii-radios {
     padding: 0;
   }
