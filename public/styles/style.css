@@ -6187,7 +6187,12 @@ td.visible-print {
   display: block;
 }
 #your-quiriis-ui li .view-text h3 {
+  font-size: 20px;
+  font-weight: bold;
   margin-top: 0;
+}
+#your-quiriis-ui li .view-text h4 {
+  font-size: 16px;
 }
 #your-quiriis-ui li .view-text .fa {
   position: absolute;
@@ -6280,9 +6285,15 @@ td.visible-print {
   font-size: 7em;
 }
 @media (max-width: 420px) {
-  #your-quiriis-ui .col-sm-8 {
+  #your-quiriis-ui .col-sm-8 ul {
     margin-left: -15px;
     margin-right: -15px;
+  }
+  #your-quiriis-ui li .view-text h3 {
+    font-size: 16px;
+  }
+  #your-quiriis-ui li .view-text h4 {
+    font-size: 14px;
   }
   #public-quirii .morphii-radios {
     padding: 0;
