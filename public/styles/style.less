@@ -105,6 +105,39 @@
   }
 }
 
+#your-quiriis-ui {
+  li {
+    border-bottom: 2px solid #ccc;
+    padding: 6px;
+    
+    .view-img, .view-text {
+      float: left;
+    }
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+    .view-img {
+      width: 20%;
+      
+      img {
+        max-width: 100%;
+      }
+    }
+    .view-text {
+      position: relative;
+      width: 80%;
+      
+      a {
+        position: absolute;
+        top: 0; right: 0;
+        bottom: 0; left: 0;
+      }
+    }
+  }
+}
+
 #public-quirii {
   .prompt,
   .selected-morphii {

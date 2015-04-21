@@ -1,10 +1,9 @@
-<div class="row list-unstyled">
-  <div class="col-xs-8 col-sm-8">
-    <h3><%= model.title %> </h3> 
+<div class="view-img">
+  <img src="<%=model.mediaUrl %>" />
+</div>
+<div class="view-text">
+  <a href="#/me/quiriis/<%=model._id %>">
+    <h3><%= model.title %></h3> 
     <h4> <%= model.prompt %></h4>
-    <div class="col-xs-8">
-      <img src="<%=model.mediaUrl %>" width="300px"/>
-      <button class="big-btn-blue"> <a href="#/me/quiriis/<%=model._id %>">View Quirii</a> </button>
-    </div>
-  </div>
+  </a>
 </div>
