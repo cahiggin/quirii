@@ -57,15 +57,22 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
         morphiiIntensity = "0"
       };
 
+      if (comment) {
+        this.$el.removeClass('has-error');
+        this.$el.find('[name=comment] + label').addClass('hidden');
+        
+        thisView.model.set({
+          morphiiType: morphiiType,
+          morphiiIntensity: morphiiIntensity,
+          comment: comment
+        });
 
-      thisView.model.set({
-        morphiiType: morphiiType,
-        morphiiIntensity: morphiiIntensity,
-        comment: comment
-      });
-
-      thisView.model.save();
-      this.render();     
+        thisView.model.save();
+        //this.render();
+      } else {
+        this.$el.addClass('has-error');
+        this.$el.find('.control-label').removeClass('hidden');
+      } 
     },
 
     renderMorphii: function(morphiiType){

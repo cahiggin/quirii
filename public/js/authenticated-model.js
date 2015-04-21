@@ -49,7 +49,6 @@ define([
     // response code is unauthorized, and if so, navigate to the login page
     return Backbone.Model.extend({
         sync: function(method, model, options) {
-            console.log("BACKBONE MODEL OPTIONS ARE", options.success);
             wrapBackboneError(options);
             Backbone.Model.prototype.sync.apply(this, arguments);
         }
