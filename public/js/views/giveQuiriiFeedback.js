@@ -70,9 +70,12 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
 
         self.model.save(null, {
           success: function () {
-            var container = $('#public-quirii');
+            var container = $('#public-quirii'),
+                shareAnchor = $('<a>').attr('href', QuiriiScope.twitterShareLink('Quirii:')).addClass('big-btn blue').html('<i class="fa fa-twitter"></i> Tweet this Quirii');
+                
             $('.col-sm-8:not(.hidden)', container).remove();
             $('.col-sm-8.hidden', container).removeClass('hidden');
+            $('.col-sm-8', container).append(shareAnchor);
           }
         });
       } else {
