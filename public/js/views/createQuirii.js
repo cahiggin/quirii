@@ -70,10 +70,10 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
 
         this.model.save(null, {
           success: function () {
-            self.render();
-            self.collection.fetch();
+            //self.render();
+            //self.collection.fetch();
           
-            Backbone.history.navigate('#/view', { replace: true });
+            Backbone.history.navigate('#/view', { trigger: true, replace: true });
             $('#create-ui').fadeOut(function () {
               QuiriiScope.setTitle('Your Quiriis');
               $('#navigation .cancel').hide();
