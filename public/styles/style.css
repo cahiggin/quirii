@@ -6135,9 +6135,18 @@ td.visible-print {
   color: #28d425;
 }
 .big-btn.block {
-  min-width: 120px;
   display: block;
+  min-width: 140px;
   margin: 0.6em 0;
+  text-align: center;
+}
+.big-btn.twitter {
+  border-color: #0080ff;
+  color: #0080ff;
+  display: inline-block;
+  min-width: 280px;
+  padding: 8px;
+  text-align: center;
 }
 .big-btn[disabled] {
   cursor: not-allowed;
@@ -6226,15 +6235,8 @@ td.visible-print {
 #public-quirii .success-circle {
   width: 150px;
   height: 150px;
-  margin: auto;
-  background: #87fc70;
-  background: -moz-linear-gradient(top, #87fc70 0%, #0bd318 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #87fc70), color-stop(100%, #0bd318));
-  background: -webkit-linear-gradient(top, #87fc70 0%, #0bd318 100%);
-  background: -o-linear-gradient(top, #87fc70 0%, #0bd318 100%);
-  background: -ms-linear-gradient(top, #87fc70 0%, #0bd318 100%);
-  background: linear-gradient(to bottom, #87fc70 0%, #0bd318 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#87fc70', endColorstr='#0bd318', GradientType=0);
+  margin: 2em auto;
+  background-color: #4CD964;
   border-radius: 50%;
   color: #fff;
   text-align: center;

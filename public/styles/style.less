@@ -74,9 +74,18 @@
     color: #28d425;
   }
   &.block {
-    min-width: 120px;
     display: block;
+    min-width: 140px;
     margin: 0.6em 0;
+    text-align: center;
+  }
+  &.twitter {
+    border-color: #0080ff;
+    color: #0080ff;
+    display: inline-block;
+    min-width: 280px;
+    padding: 8px;
+    text-align: center;
   }
   &[disabled] {
     cursor: not-allowed;
@@ -172,15 +181,8 @@
   .success-circle {
       width: 150px;
       height: 150px;
-      margin: auto;
-      background: rgb(135,252,112);
-      background: -moz-linear-gradient(top, rgba(135,252,112,1) 0%, rgba(11,211,24,1) 100%);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(135,252,112,1)), color-stop(100%,rgba(11,211,24,1)));
-      background: -webkit-linear-gradient(top, rgba(135,252,112,1) 0%,rgba(11,211,24,1) 100%);
-      background: -o-linear-gradient(top, rgba(135,252,112,1) 0%,rgba(11,211,24,1) 100%);
-      background: -ms-linear-gradient(top, rgba(135,252,112,1) 0%,rgba(11,211,24,1) 100%);
-      background: linear-gradient(to bottom, rgba(135,252,112,1) 0%,rgba(11,211,24,1) 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87fc70', endColorstr='#0bd318',GradientType=0 );
+      margin: 2em auto;
+      background-color: #4CD964;
       border-radius: 50%;
       color: #fff;
       text-align: center;
