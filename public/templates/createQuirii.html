@@ -1,11 +1,11 @@
 <div class="col-sm-8 col-sm-offset-2">
   <form id="quirii-form" novalidate="novalidate" role="form">
     <div class="form-group">
-      <label for="title">Quirii Title:</label>
+      <label for="title" class="control-label">Quirii Title:</label>
       <input type="text" id="title" class="form-control" name="title" placeholder="Name Your Quirii" required="required"/>
     </div>
     <div class="form-group">
-      <label for="files">Please select a file</label>
+      <label for="files" class="control-label">Please select a file</label>
       <input type="file" id="files" class="form-control" />
     </div>
     <div class="form-group">
@@ -15,8 +15,11 @@
     </div>
     <input type="hidden" id="image_url" name="image_url" value="/images/default.png" required="required"/>
     <div class="form-group">
-      <label for="prompt"><span>Prompt or question: </span><sub>(optional)</sub></label>
+      <label for="prompt" class="control-label"><span>Prompt or question: </span><sub>(optional)</sub></label>
       <input type="text" id="prompt" class="form-control" name="prompt" placeholder="Add a prompt or question"/>
+    </div>
+    <div id="fields-errors" class="form-group has-error hidden">
+      <label class="control-label">Please fill in the required fields.</label>
     </div>
     <button type="submit" class="big-btn blue block" id="postQuirii">Create</button>
   </form>

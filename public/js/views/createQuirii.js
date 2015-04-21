@@ -58,10 +58,10 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
       e.preventDefault();
       
       $('[required]', this.$el).each(function () {
-        $(this).toggleClass('error', !this.value);
+        $(this).closest('.form-group').toggleClass('has-error', !this.value);
       });
       
-      if (!this.$el.find('.error').length) {
+      if (!this.$el.find('.has-error').not('#fields-errors').length) {
         this.model.set({
           title: titleText,
           prompt: promptText,
@@ -69,10 +69,7 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
         });
 
         this.model.save(null, {
-          success: function () {
-            //self.render();
-            //self.collection.fetch();
-          
+          success: function () {          
             Backbone.history.navigate('#/view', { trigger: true, replace: true });
             $('#create-ui').fadeOut(function () {
               QuiriiScope.setTitle('Your Quiriis');
@@ -81,6 +78,8 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
             });
           }
         });
+      } else {
+        $('#fields-errors').removeClass('hidden');
       }
     },
     
