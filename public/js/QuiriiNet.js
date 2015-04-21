@@ -46,7 +46,7 @@ define(['router'], function(router) {
     $(document).on('click.QuiriiScope', '#navigation .cancel', function (e) {
       Backbone.history.navigate('#/view', { replace: true });
     });
-    $(document).on('click.QuiriiScope', '#navigation .create', function (e) {
+    $(document).on('click.QuiriiScope', '#navigation .create, #add-new-quirii', function (e) {
       Backbone.history.navigate('#/create', { replace: true });
     });
       

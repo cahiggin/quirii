@@ -6210,6 +6210,9 @@ td.visible-print {
   right: 5px;
   font-size: 40px;
 }
+#your-quiriis-ui #add-new-quirii {
+  cursor: pointer;
+}
 #public-quirii .prompt,
 #public-quirii .selected-morphii {
   text-align: center;
