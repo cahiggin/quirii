@@ -6162,6 +6162,15 @@ td.visible-print {
   height: auto;
   max-width: 100%;
 }
+#create-ui label sub {
+  margin-top: 6px;
+  display: inline-block;
+  vertical-align: top;
+}
+#create-ui .responsive-img,
+#create-ui .responsive-img > img {
+  margin: 0;
+}
 #your-quiriis-ui li {
   border-bottom: 2px solid #ccc;
   padding: 6px;

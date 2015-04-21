@@ -1,15 +1,23 @@
 <div class="col-sm-8 col-sm-offset-2">
-  <form id="quirii-form" class="form-horizontal" novalidate="novalidate" role="form">
-    <p id="status">Please select a file</p>
-    <input type="file" id="files" class="big-btn-blue"/>
-    <br />
-    <div style="width:150px;"  id="preview"><img src="/images/default.png" style="width:145px;" /></div>
+  <form id="quirii-form" novalidate="novalidate" role="form">
+    <div class="form-group">
+      <label for="title">Quirii Title:</label>
+      <input type="text" id="title" class="form-control" name="title" placeholder="Name Your Quirii" required="required"/>
+    </div>
+    <div class="form-group">
+      <label for="files">Please select a file</label>
+      <input type="file" id="files" class="form-control" />
+    </div>
+    <div class="form-group">
+      <div class="responsive-img" id="preview">
+        <img src="/images/default.png" />
+      </div>
+    </div>
     <input type="hidden" id="image_url" name="image_url" value="/images/default.png" required="required"/>
-    <br />
-    Title: <input class="sixteen-px" type="text" id="title" name="title" placeholder="name your quirii" required="required"/>
-    <br />
-    Prompt: <input class="sixteen-px" type="text" id="prompt" name="prompt" placeholder="enter prompt(optional)"/>
-    <br />
-    <input type="submit" class="big-btn" id="postQuirii" value="Create">
+    <div class="form-group">
+      <label for="prompt"><span>Prompt or question: </span><sub>(optional)</sub></label>
+      <input type="text" id="prompt" class="form-control" name="prompt" placeholder="Add a prompt or question"/>
+    </div>
+    <button type="submit" class="big-btn blue block" id="postQuirii">Create</button>
   </form>
 </div>
