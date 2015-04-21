@@ -6165,15 +6165,12 @@ td.visible-print {
 #your-quiriis-ui li {
   border-bottom: 2px solid #ccc;
   padding: 6px;
+  font-size: 0;
 }
 #your-quiriis-ui li .view-img,
 #your-quiriis-ui li .view-text {
-  float: left;
-}
-#your-quiriis-ui li:after {
-  content: '';
-  display: table;
-  clear: both;
+  display: inline-block;
+  vertical-align: middle;
 }
 #your-quiriis-ui li .view-img {
   width: 20%;
@@ -6184,13 +6181,20 @@ td.visible-print {
 #your-quiriis-ui li .view-text {
   position: relative;
   width: 80%;
+  padding: 10px 22px 10px 10px;
 }
 #your-quiriis-ui li .view-text a {
+  display: block;
+}
+#your-quiriis-ui li .view-text h3 {
+  margin-top: 0;
+}
+#your-quiriis-ui li .view-text .fa {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  top: 50%;
+  margin-top: -20px;
+  right: 5px;
+  font-size: 40px;
 }
 #public-quirii .prompt,
 #public-quirii .selected-morphii {
