@@ -43,11 +43,13 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       this.morphView.morphMe(this.anch, intensityVal, this.delt);
     },
 
-    postMorphii: function() {
-      var thisView = this;
+    postMorphii: function(e) {
+      var self = this;
       var morphiiType = $('input[name=scale]:checked').val();
       var morphiiIntensity = $('input[name=intensity]').val();
       var comment = $('textArea[name=comment]').val();
+      
+      e.preventDefault();
 
       if (morphiiType === undefined){
         morphiiType = "Delight";
@@ -58,17 +60,21 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       };
 
       if (comment) {
-        this.$el.removeClass('has-error');
-        this.$el.find('[name=comment] + label').addClass('hidden');
+        this.$el.find('#postMorphy, textarea[name=comment]').prop('disabled', 'disabled');
         
-        thisView.model.set({
+        self.model.set({
           morphiiType: morphiiType,
           morphiiIntensity: morphiiIntensity,
           comment: comment
         });
 
-        thisView.model.save();
-        //this.render();
+        self.model.save(null, {
+          success: function () {
+            var container = $('#public-quirii');
+            $('.col-sm-8:not(.hidden)', container).remove();
+            $('.col-sm-8.hidden', container).removeClass('hidden');
+          }
+        });
       } else {
         this.$el.addClass('has-error');
         this.$el.find('.control-label').removeClass('hidden');

@@ -6139,6 +6139,10 @@ td.visible-print {
   display: block;
   margin: 0.6em 0;
 }
+.big-btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 .responsive-img {
   max-width: 300px;
   margin: auto;
@@ -6218,6 +6222,26 @@ td.visible-print {
   background-color: #D9D9D9;
   border: none;
   border-radius: 20px;
+}
+#public-quirii .success-circle {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  background: #87fc70;
+  background: -moz-linear-gradient(top, #87fc70 0%, #0bd318 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #87fc70), color-stop(100%, #0bd318));
+  background: -webkit-linear-gradient(top, #87fc70 0%, #0bd318 100%);
+  background: -o-linear-gradient(top, #87fc70 0%, #0bd318 100%);
+  background: -ms-linear-gradient(top, #87fc70 0%, #0bd318 100%);
+  background: linear-gradient(to bottom, #87fc70 0%, #0bd318 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#87fc70', endColorstr='#0bd318', GradientType=0);
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+}
+#public-quirii .success-circle .fa {
+  line-height: 150px;
+  font-size: 7em;
 }
 @media (max-width: 420px) {
   #public-quirii .morphii-radios {
