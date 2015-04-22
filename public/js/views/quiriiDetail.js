@@ -26,9 +26,11 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       this.render();
     },
 
-    deleteQuirii: function() {
+    deleteQuirii: function(e) {
       var self = this,
           confirmed = confirm('Are you sure you would like to delete this Quirii?');
+          
+      e.preventDefault();
           
       if (confirmed) {
         this.model.destroy({ wait: true });
@@ -73,6 +75,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     onFeedbackAdded: function(feedbackItem) {
       var feedbackHtml = (new FeedbackItemView({ model: feedbackItem })).render().el;
       $(feedbackHtml).prependTo('.feedback-list').hide().fadeIn('slow');
+      $('.no-feedback').remove();
     },
 
     render: function() {
