@@ -33,8 +33,8 @@ define(['router'], function(router) {
         Backbone.history.navigate('#/' + previous, { replace: true });
         QuiriiScope.history = QuiriiScope.history.slice(0, -1);
       },
-      twitterShareLink: function (text) {
-        return 'http://twitter.com/share?text=' + text + '&url=' + encodeURIComponent(window.location.href);
+      twitterShareLink: function (text, url) {
+        return 'http://twitter.com/share?text=' + text + '&url=' + encodeURIComponent(url || window.location.href);
       }
     }
     
