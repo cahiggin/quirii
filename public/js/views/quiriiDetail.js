@@ -81,6 +81,8 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       $(this.el).html(_.template(quiriiDetailTemplate)( {
         model: this.model.toJSON()
       }));
+      
+      $('#share-twitter').attr('href', QuiriiScope.twitterShareLink('Quirii:', location.origin + '/' + $('#share-twitter').data('url')));
       return this;
     }
 
