@@ -25,6 +25,7 @@ define(['router'], function(router) {
 
         $('.prev', $nav).toggle(QuiriiScope.history.length > 1 && fragment.indexOf('create') !== 0 && fragment.indexOf('view') !== 0);
         $('.create', $nav).toggle(fragment.indexOf('view') !== -1 || fragment === '');
+        $('#view-all-quiriis').toggle(fragment.indexOf('me/quiriis') !== -1);
       },
       previousPage: function () {
         var url = QuiriiScope.history[QuiriiScope.history.length - 2],
@@ -43,7 +44,7 @@ define(['router'], function(router) {
     $(document).on('click.QuiriiScope', '#navigation .prev', function (e) {
       QuiriiScope.previousPage();
     });
-    $(document).on('click.QuiriiScope', '#navigation .cancel', function (e) {
+    $(document).on('click.QuiriiScope', '#navigation .cancel, #view-all-quiriis', function (e) {
       Backbone.history.navigate('#/view', { replace: true });
     });
     $(document).on('click.QuiriiScope', '#navigation .create, #add-new-quirii', function (e) {
