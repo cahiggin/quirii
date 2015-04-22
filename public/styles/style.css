@@ -6368,6 +6368,17 @@ td.visible-print {
   margin-top: 0.4em;
   font-size: 1.6em;
 }
+#login .login-twitter {
+  display: inline-block;
+  margin: 1em 0;
+}
+#login p:first-of-type {
+  margin-bottom: 0;
+}
+.modal-body {
+  max-height: 400px;
+  overflow: auto;
+}
 @media (max-width: 420px) {
   #your-quiriis-ui .col-sm-8 ul {
     margin-left: -15px;
