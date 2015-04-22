@@ -6335,12 +6335,24 @@ td.visible-print {
   width: 100%;
   vertical-align: middle;
 }
+.quirii-details .feedback-item .wrapper .comment p {
+  position: relative;
+  display: inline-block;
+  padding: 0 16px;
+  margin: 10px;
+}
 .quirii-details .feedback-item .wrapper .comment .fa-quote-left,
 .quirii-details .feedback-item .wrapper .comment .fa-quote-right {
-  margin: 8px;
-  position: relative;
-  top: -8px;
-  font-size: 12px;
+  position: absolute;
+  font-size: 10px;
+}
+.quirii-details .feedback-item .wrapper .comment .fa-quote-left {
+  left: 0;
+  top: 0;
+}
+.quirii-details .feedback-item .wrapper .comment .fa-quote-right {
+  right: 0;
+  bottom: 0;
 }
 .quirii-details .feedback-item h3 {
   margin-top: 0.4em;
