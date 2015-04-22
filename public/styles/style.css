@@ -6296,6 +6296,13 @@ td.visible-print {
   line-height: 150px;
   font-size: 7em;
 }
+.quirii-details #aggregate-morphii svg {
+  min-width: 150px;
+  max-height: 150px;
+}
+.quirii-details #aggregate-morphii p {
+  font-size: 16px;
+}
 .quirii-details .well {
   margin: 10px -15px;
   border-radius: 0;
