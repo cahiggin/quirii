@@ -52,14 +52,19 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
         success: function (data) {
           var obj = data.data.aggMorphii,
               total = 0;
-              
-          console.log(obj);
           
           for (prop in obj) {
             total += obj[prop].count;
           }
-          self.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii'));
-          $('#aggregate-morphi svg').removeAttr('height').removeAttr('width');
+          self.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii > .morphii'));
+          $('#aggregate-morphii svg').removeAttr('height').removeAttr('width');
+          $('#total-reviews').text(function () {
+            return $(this).text().replace('{0}', total);
+          });
+          $('#aggregate-status').text(function () {
+            return $(this).text().replace('{0}', (obj[0].avgIntensity * 100).toFixed(0)).replace('{1}', obj[0]._id);
+          });
+          $('#aggregate-morphii').removeClass('hidden');
         }
       });
     },
