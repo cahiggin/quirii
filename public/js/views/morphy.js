@@ -29,7 +29,6 @@ define(['QuiriiNetView', 'text!templates/morphyUi.html', 'models/Morphii', 'view
         morphy.setAttribute("width", width);
         morphy.setAttribute("height", height);
         morphy.setAttribute("viewBox", "0 0 " + vbx1 + " " + vbx2);
-        morphy.setAttribute("id", "morphy");
 
         var partArray = [];
         for (var part in morphObj){
@@ -53,8 +52,8 @@ define(['QuiriiNetView', 'text!templates/morphyUi.html', 'models/Morphii', 'view
           path.setAttribute("stroke-width", "0");
           morphy.appendChild(path);
         });
-       
-      this.$el.append(morphy);
+
+      this.$el.html(morphy);
       
       },
 

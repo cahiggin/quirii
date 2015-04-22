@@ -19,9 +19,9 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       this.model.on('destroy', this.quiriiDeleted, this);
       
       this.morphiis = options.morphiis;
-      this.morphiis.on('reset', this.renderMorphii, this);
-      this.morphiis.on('change', this.renderMorphii, this);
-      this.morphiis.on('add', this.renderMorphii, this);
+      this.morphiis.on('reset', this.addMorphiiToFeedbackItem, this);
+      this.morphiis.on('change', this.addMorphiiToFeedbackItem, this);
+      this.morphiis.on('add', this.addMorphiiToFeedbackItem, this);
 
       this.render();
     },
@@ -35,14 +35,25 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       }
     },
     
-    renderMorphii: function (morphiiType){
+    addMorphiiToFeedbackItem: function () {
       var self = this;
-      var morphii = _.findWhere(this.morphiis.toJSON(), {name: 'Delight'});
-      this.morphView = new MorphiiView({el:$('#morphii-container'),model: morphii});
+      $('.feedback-list .feedback-item').each(function () {
+        var type = $(this).data('type'),
+            intensity = $(this).data('intensity'),
+            target = $(this).find('.morphii-icon');
+            
+        self.renderMorphii(type, intensity, target);
+      });
+    },
+    
+    renderMorphii: function (type, intensity, targetEl){
+      var self = this;
+      
+      var morphii = _.findWhere(this.morphiis.toJSON(), {name: type});
+      this.morphView = new MorphiiView({el: targetEl, model: morphii});
       this.anch = JSON.parse(morphii.anchor);
       this.delt = JSON.parse(morphii.delta);
-      this.intensity = $('input[name=intensity]').val();
-      this.morphView.morphMe(self.anch, self.intensity, self.delt);
+      this.morphView.morphMe(self.anch, intensity, self.delt);
     },
 
     quiriiDeleted: function() {
@@ -60,10 +71,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
 
     onFeedbackAdded: function(feedbackItem) {
       var feedbackHtml = (new FeedbackItemView({ model: feedbackItem })).render().el;
-      $(feedbackHtml).prependTo('.feedback-list').hide().fadeIn('slow');  
-
-      //var morphySvg = (new MorphiiFeedbackView({ el: $("#intensity-gram"), model: feedbackItem }));
-
+      $(feedbackHtml).prependTo('.feedback-list').hide().fadeIn('slow');
     },
 
     render: function() {

@@ -1,7 +1,6 @@
-<div class="row list-unstyled">
-  <div class="col-xs-8 col-sm-8">
-    <h3><%= model.userName %>
-    <h4><%= model.morphiiType %> <%= model.morphiiIntensity %></h4>
-    <p><%= model.comment %></p>
-  </div>
+<div class="feedback-item" data-type="<%= model.morphiiType %>" data-intensity="<%= model.morphiiIntensity %>">
+  <div class="morphii-icon"></div>
+  <h3><%= model.userName %>
+  <h4><%= model.morphiiType %> <%= model.morphiiIntensity %></h4>
+  <p><%= model.comment %></p>
 </div>
