@@ -43,6 +43,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
             target = $(this).find('.morphii-icon');
             
         self.renderMorphii(type, intensity, target);
+        target.find('svg').removeAttr('height').removeAttr('width');
       });
     },
     

@@ -6296,6 +6296,56 @@ td.visible-print {
   line-height: 150px;
   font-size: 7em;
 }
+.quirii-details .well {
+  margin: 10px -15px;
+}
+.quirii-details .well h2,
+.quirii-details .well h3,
+.quirii-details .well h4,
+.quirii-details .well h5 {
+  margin: 0;
+}
+.quirii-details .feedback-list {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.quirii-details .feedback-list > li {
+  border-top: 2px solid grey;
+  padding: 0 8px;
+}
+ + .quirii-details .feedback-list > li {
+  border-top: none;
+}
+.quirii-details .feedback-item .wrapper {
+  display: table;
+}
+.quirii-details .feedback-item .wrapper .morphii-icon-wrapper,
+.quirii-details .feedback-item .wrapper .comment {
+  display: table-cell;
+}
+.quirii-details .feedback-item .wrapper .morphii-icon-wrapper {
+  width: 200px;
+  text-align: center;
+}
+.quirii-details .feedback-item .wrapper .morphii-icon-wrapper svg {
+  min-width: 80px;
+  max-height: 100px;
+}
+.quirii-details .feedback-item .wrapper .comment {
+  width: 100%;
+  vertical-align: middle;
+}
+.quirii-details .feedback-item .wrapper .comment .fa-quote-left,
+.quirii-details .feedback-item .wrapper .comment .fa-quote-right {
+  margin: 8px;
+  position: relative;
+  top: -8px;
+  font-size: 12px;
+}
+.quirii-details .feedback-item h3 {
+  margin-top: 0.4em;
+  font-size: 1.6em;
+}
 @media (max-width: 420px) {
   #your-quiriis-ui .col-sm-8 ul {
     margin-left: -15px;

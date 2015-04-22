@@ -254,6 +254,61 @@
   }
 }
 
+.quirii-details {
+  .well {
+    margin: 10px -15px;
+    
+    h2, h3, h4, h5 {
+      margin: 0;
+    }
+  }
+  .feedback-list {
+    margin-left: -15px;
+    margin-right: -15px;
+    > li {
+      border-top: 2px solid grey;
+      border-top: 2px solid grey;
+      padding: 0 8px;
+      
+      + & {
+        border-top: none;
+      }
+    }
+  }
+  .feedback-item {
+    .wrapper {
+      display: table;
+      .morphii-icon-wrapper, .comment {
+        display: table-cell;
+      }
+      .morphii-icon-wrapper {
+        width: 200px;
+        text-align: center;
+        
+        svg {
+          min-width: 80px;
+          max-height: 100px;
+        }
+      }
+      .comment {
+        width: 100%;
+        vertical-align: middle;
+        
+        .fa-quote-left, .fa-quote-right {
+          margin: 8px;
+          position: relative;
+          top: -8px;
+          font-size: 12px;
+        }
+      }
+    }
+    h3 {
+      margin-top: 0.4em;
+      font-size: 1.6em;
+    }
+  }
+}
+
 @media (max-width: 420px) {
   #your-quiriis-ui {
     .col-sm-8 ul {

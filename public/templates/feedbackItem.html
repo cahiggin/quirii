@@ -1,6 +1,16 @@
 <div class="feedback-item" data-type="<%= model.morphiiType %>" data-intensity="<%= model.morphiiIntensity %>">
-  <div class="morphii-icon"></div>
-  <h3><%= model.userName %>
-  <h4><%= model.morphiiType %> <%= model.morphiiIntensity %></h4>
-  <p><%= model.comment %></p>
+  <h3><%= model.userName %></h3>
+  <div class="wrapper">
+    <div class="morphii-icon-wrapper">
+      <div class="morphii-icon"></div>
+      <p><%= model.morphiiType %></p>
+    </div>
+    <div class="comment">
+      <p>
+        <i class="fa fa-quote-left"></i>
+        <span><%= model.comment %></span>
+        <i class="fa fa-quote-right"></i>
+      </p>
+    </div>
+  </div>
 </div>
