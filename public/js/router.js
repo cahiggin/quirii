@@ -61,11 +61,13 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
         reset: true,
         success: function () {
           feedbackCollection.fetch({
-            reset: true
+            reset: true,
+            success: function () {
+              morphiisCollection.fetch({reset: true});
+            }
           });
         }
       });
-      morphiisCollection.fetch({reset: true});
     },
 
     publicQuirii: function(id){
