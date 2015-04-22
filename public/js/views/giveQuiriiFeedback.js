@@ -132,6 +132,15 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
 
       //call renderMorphii to make sure morphii is loaded
       this.renderMorphii(this.morphiiType);
+      
+      $('.morphii-radios img').one("load", function() {
+        $('#Delight').prop('checked', false);
+        setTimeout(function () {
+          $('#Delight').prop('checked', true);
+        }, 5);
+      }).each(function() {
+        if(this.complete) $(this).load();
+      });
 
       return this;
     }
