@@ -47,6 +47,21 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
         self.renderMorphii(type, intensity, target);
         target.find('svg').removeAttr('height').removeAttr('width');
       });
+      $.ajax({
+        url: location.origin + '/api/me/quiriis/' + location.hash.split('/').pop() + '/aggregate',
+        success: function (data) {
+          var obj = data.data.aggMorphii,
+              total = 0;
+              
+          console.log(obj);
+          
+          for (prop in obj) {
+            total += obj[prop].count;
+          }
+          self.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii'));
+          $('#aggregate-morphi svg').removeAttr('height').removeAttr('width');
+        }
+      });
     },
     
     renderMorphii: function (type, intensity, targetEl){
