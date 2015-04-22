@@ -3,17 +3,32 @@
     <div class="responsive-img">
       <img src="<%=model.mediaUrl %>" />
     </div>
-    <h3><%= model.title %> </h3> 
+    <h3><%= model.title %></h3> 
     <h4><%= model.prompt %></h4>
-      <div id="morphii-container"></div>
-      <button class="big-btn-blue">
-        <a href="#/quiriis/<%=model.id %>">Share This Quirii</a>
-      </button> 
-      <button class="big-btn-destroy" id="deleteQuirii">Delete Quirii</button>
-
-      <div class="well well-sm">
-        <h4>Your Feedback</h4>
+    
+    <div class="well well-sm">
+      <h4>Share</h4>
+    </div>
+    
+    <div class="text-center">
+      <div style="margin-bottom: 10px;">
+        <a id="share-twitter" class="big-btn twitter" data-url="#/quiriis/<%=model.id %>">
+          <i class="fa fa-twitter"></i> Tweet this Quirii
+        </a>
       </div>
-      <ul class="feedback-list list-unstyled"></ul>
+      <div>
+        <a href="#/quiriis/<%=model.id %>" class="big-btn blue">Go to Quirii</a>
+        <button class="big-btn destroy" id="deleteQuirii">Delete Quirii</button>
+      </div>
+    </div>
+    
+    <div class="well well-sm">
+      <h4>At-a-glance</h4>
+    </div>
+
+    <div class="well well-sm">
+      <h4>Your Feedback</h4>
+    </div>
+    <ul class="feedback-list list-unstyled"></ul>
     </div>
 </div>

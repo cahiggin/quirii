@@ -6298,12 +6298,15 @@ td.visible-print {
 }
 .quirii-details .well {
   margin: 10px -15px;
+  border-radius: 0;
 }
-.quirii-details .well h2,
-.quirii-details .well h3,
-.quirii-details .well h4,
-.quirii-details .well h5 {
+.quirii-details .well h4 {
   margin: 0;
+  font-size: 16px;
+}
+.quirii-details .big-btn.twitter {
+  min-width: 0;
+  padding: 6px 12px;
 }
 .quirii-details .feedback-list {
   margin-left: -15px;
