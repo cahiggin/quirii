@@ -50,10 +50,12 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
     quiriiDetail: function(id){
       var model = new Quirii({ id: id });
       var feedbackCollection = new QuiriiFeedbackItems();
+      var morphiisCollection = new Morphiis();
       feedbackCollection.url = '/api/quiriis/' + id + '/feedback';
       this.changeView(new QuiriiDetailView({
         model: model,
-        fbCollection: feedbackCollection
+        fbCollection: feedbackCollection,
+        morphiis: morphiisCollection
       }));
       model.fetch({
         reset: true,
@@ -63,6 +65,7 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
           });
         }
       });
+      morphiisCollection.fetch({reset: true});
     },
 
     publicQuirii: function(id){

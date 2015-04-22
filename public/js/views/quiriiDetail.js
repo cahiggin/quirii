@@ -1,5 +1,5 @@
-define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem'], 
-  function(QuiriiNetView, quiriiDetailTemplate, FeedbackItemView) {
+define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem', 'views/morphy'], 
+  function(QuiriiNetView, quiriiDetailTemplate, FeedbackItemView, MorphiiView) {
   var quiriiDetailView = QuiriiNetView.extend({
    
     el: $('#content'),
@@ -17,6 +17,11 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
 
       this.model.on('change', this.render, this);
       this.model.on('destroy', this.quiriiDeleted, this);
+      
+      this.morphiis = options.morphiis;
+      this.morphiis.on('reset', this.renderMorphii, this);
+      this.morphiis.on('change', this.renderMorphii, this);
+      this.morphiis.on('add', this.renderMorphii, this);
 
       this.render();
     },
@@ -28,6 +33,16 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       if (confirmed) {
         this.model.destroy({ wait: true });
       }
+    },
+    
+    renderMorphii: function (morphiiType){
+      var self = this;
+      var morphii = _.findWhere(this.morphiis.toJSON(), {name: 'Delight'});
+      this.morphView = new MorphiiView({el:$('#morphii-container'),model: morphii});
+      this.anch = JSON.parse(morphii.anchor);
+      this.delt = JSON.parse(morphii.delta);
+      this.intensity = $('input[name=intensity]').val();
+      this.morphView.morphMe(self.anch, self.intensity, self.delt);
     },
 
     quiriiDeleted: function() {
