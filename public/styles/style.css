@@ -6321,10 +6321,14 @@ td.visible-print {
 }
 .quirii-details .feedback-list > li {
   border-top: 2px solid grey;
+  border-bottom: 2px solid grey;
   padding: 0 8px;
 }
- + .quirii-details .feedback-list > li {
-  border-top: none;
+.quirii-details .feedback-list > li:first-of-type {
+  border: none;
+}
+.quirii-details .feedback-list > li + li {
+  border-bottom: none;
 }
 .quirii-details .feedback-item .wrapper {
   display: table;

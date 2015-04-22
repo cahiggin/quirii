@@ -282,11 +282,14 @@
     margin-right: -15px;
     > li {
       border-top: 2px solid grey;
-      border-top: 2px solid grey;
+      border-bottom: 2px solid grey;
       padding: 0 8px;
       
-      + & {
-        border-top: none;
+      &:first-of-type {
+        border: none;
+      }
+      + li {
+        border-bottom: none;
       }
     }
   }
