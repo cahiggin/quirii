@@ -42,8 +42,8 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       var self = this,
           quiriiLink = prompt("Copy Link Below", "http://quirii.herokuapp.com/#/quiriis/" + this.model.id);
 
-      console.log();
-
+          location.href = "sms:"
+      
       e.preventDefault();
     },
     
