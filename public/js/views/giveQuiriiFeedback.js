@@ -48,6 +48,7 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       var morphiiType = $('input[name=scale]:checked').val();
       var morphiiIntensity = $('input[name=intensity]').val();
       var comment = $('textArea[name=comment]').val();
+      var anonymous = $('#anonymous').prop('checked');
       
       e.preventDefault();
 
@@ -61,17 +62,19 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
 
       if (comment) {
         this.$el.find('#postMorphy, textarea[name=comment]').prop('disabled', 'disabled');
-        
+
         self.model.set({
           morphiiType: morphiiType,
           morphiiIntensity: morphiiIntensity,
-          comment: comment
+          comment: comment,
+          anonymous: anonymous
         });
 
         self.model.save(null, {
           success: function () {
             self.renderFeedbackSuccessView();
-          }
+          },
+          patch: true
         });
       } else {
         this.$el.addClass('has-error');
