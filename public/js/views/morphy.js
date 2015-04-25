@@ -53,7 +53,7 @@ define(['QuiriiNetView', 'text!templates/morphyUi.html', 'models/Morphii', 'view
           morphy.appendChild(path);
         });
 
-      this.$el.html(morphy);
+      this.$el.html($(morphy).clone(true));
       
       },
 
