@@ -5,7 +5,8 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     el: $('#content'),
 
     events: {
-      'click #deleteQuirii': 'deleteQuirii'
+      'click #deleteQuirii': 'deleteQuirii',
+      'click #copyQuirii': 'copyQuirii'
     },
 
     initialize: function(options) {
@@ -35,6 +36,15 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       if (confirmed) {
         this.model.destroy({ wait: true });
       }
+    },
+
+    copyQuirii: function(e) {
+      var self = this,
+          quiriiLink = prompt("Copy Link Below", "http://quirii.herokuapp.com/#/quiriis/" + this.model.id + "/feedback");
+
+      console.log();
+
+      e.preventDefault();
     },
     
     addMorphiiToFeedbackItem: function () {
