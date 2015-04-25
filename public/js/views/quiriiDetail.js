@@ -74,11 +74,9 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
         $('#aggregate-status').html(function () {
           return $(this).text().replace('{0}', '<strong>' + ((obj[0].count / total) * 100).toFixed(0) + '%</strong>').replace('{1}', '<em>' + obj[0]._id + '</em>');
         });
-      } else {
-        $aggregateMorphii.html('<p class="no-feedback">You need feedback to view the aggregate morphii.</p>')
+        
+        $aggregateMorphii.removeClass('hidden').end().prev('.no-feedback').hide();
       }
-      
-      $aggregateMorphii.removeClass('hidden');
     },
     
     renderMorphii: function (type, intensity, targetEl){
