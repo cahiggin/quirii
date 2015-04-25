@@ -52,7 +52,7 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       e.preventDefault();
 
       if (morphiiType === undefined){
-        morphiiType = "Delight";
+        morphiiType = "Delighted";
       };
 
       if (!morphiiIntensity) {
@@ -102,8 +102,8 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       var thisView = this;
       thisView.morphiiType = $('input[name=scale]:checked').val();
       if (thisView.morphiiType === undefined){
-        this.$el.find('#Delight').prop('checked', 'checked');
-        thisView.morphiiType = "Delight";
+        this.$el.find('#Delighted').prop('checked', 'checked');
+        thisView.morphiiType = "Delighted";
       };
       this.$el.find('.selected-morphii').text(thisView.morphiiType);
       thisView.renderMorphii(thisView.morphiiType); 
@@ -134,9 +134,9 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       this.renderMorphii(this.morphiiType);
       
       $('.morphii-radios img').one("load", function() {
-        $('#Delight').prop('checked', false);
+        $('#Delighted').prop('checked', false);
         setTimeout(function () {
-          $('#Delight').prop('checked', true);
+          $('#Delighted').prop('checked', true);
         }, 5);
       }).each(function() {
         if(this.complete) $(this).load();

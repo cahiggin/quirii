@@ -6,7 +6,6 @@ define(['authenticated-collection', 'models/Quirii'], function(AuthenticatedColl
     model: Quirii,
 
     parse: function(data){
-        console.log("QuiriiCollection data is ", data);
         return data.data.quiriis;
     }
     

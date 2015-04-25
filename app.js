@@ -419,7 +419,6 @@ app.get('/api/me/quiriis/:quiriiid/aggregate', ensureAuthenticated, function(req
   } else {
   var quiriiId = req.params.quiriiid;
   models.Quirii.aggregateMorphii(quiriiId, function(aggregatemorphii){
-    console.log("AGGREGATE MORPHII IS " + aggregatemorphii);
     res.send({
               meta: {
                 code: 200

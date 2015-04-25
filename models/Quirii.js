@@ -182,7 +182,6 @@ module.exports = function(mongoose) {
                 console.log('aggregation err');
                 callback(null);
               };
-              console.log(agg);
             callback(agg);
     });
              

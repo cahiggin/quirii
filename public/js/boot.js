@@ -26,7 +26,6 @@ require.config({
 
 
 require(['jQuery', 'QuiriiNet', 'bootstrap', 'S3Upload'], function($, QuiriiNet) {
-  console.log("test s3", S3Upload);
   QuiriiNet.initialize();
   return{};
 });
