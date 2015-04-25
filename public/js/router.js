@@ -82,8 +82,12 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
 
       }));
       quiriiModel.fetch({reset:true});
-      feedbackCollection.fetch({reset: true});  
-      morphiisCollection.fetch({reset: true});  
+      feedbackCollection.fetch({
+        reset: true,
+        success: function () {
+          morphiisCollection.fetch({reset: true});
+        }
+      });
     }
 
   });
