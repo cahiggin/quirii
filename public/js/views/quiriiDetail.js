@@ -50,23 +50,27 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       $.ajax({
         url: location.origin + '/api/me/quiriis/' + location.hash.split('/').pop().split('?').shift() + '/aggregate',
         success: function (data) {
-          var obj = data.data.aggMorphii,
-              total = 0;
-          
-          for (prop in obj) {
-            total += obj[prop].count;
-          }
-          self.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii > .morphii'));
-          $('#aggregate-morphii svg').removeAttr('height').removeAttr('width');
-          $('#total-reviews').text(function () {
-            return $(this).text().replace('{0}', total);
-          });
-          $('#aggregate-status').html(function () {
-            return $(this).text().replace('{0}', '<strong>' + ((obj[0].count / total) * 100).toFixed(0) + '%</strong>').replace('{1}', '<em>' + obj[0]._id + '</em>');
-          });
-          $('#aggregate-morphii').removeClass('hidden');
+            self.addAggregateData(data);
         }
       });
+    },
+    
+    addAggregateData: function (data) {
+      var obj = data.data.aggMorphii,
+          total = 0;
+
+      for (prop in obj) {
+        total += obj[prop].count;
+      }
+      this.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii > .morphii'));
+      $('#aggregate-morphii svg').removeAttr('height').removeAttr('width');
+      $('#total-reviews').text(function () {
+        return $(this).text().replace('{0}', total);
+      });
+      $('#aggregate-status').html(function () {
+        return $(this).text().replace('{0}', '<strong>' + ((obj[0].count / total) * 100).toFixed(0) + '%</strong>').replace('{1}', '<em>' + obj[0]._id + '</em>');
+      });
+      $('#aggregate-morphii').removeClass('hidden');
     },
     
     renderMorphii: function (type, intensity, targetEl){
