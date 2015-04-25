@@ -42,11 +42,18 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       var self = this,
           quiriiLink = prompt("Copy Link Below", "http://quirii.herokuapp.com/#/quiriis/" + this.model.id);
 
-      var isIphone = !!agent.match(/iPhone/i);
-      if (isIphone){
+      if(navigator.userAgent.match(/Android/i)
+          || navigator.userAgent.match(/webOS/i)
+          || navigator.userAgent.match(/iPhone/i)
+          || navigator.userAgent.match(/iPad/i)
+          || navigator.userAgent.match(/iPod/i)
+          || navigator.userAgent.match(/BlackBerry/i)
+          || navigator.userAgent.match(/Windows Phone/i)) {
+
         location.href = "sms:";
+
       } else {
-        
+        alert("you are not using a mobile device");
       }
       
       e.preventDefault();
