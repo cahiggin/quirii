@@ -47,8 +47,9 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
         self.renderMorphii(type, intensity, target);
         target.find('svg').removeAttr('height').removeAttr('width');
       });
+
       $.ajax({
-        url: location.origin + '/api/me/quiriis/' + location.hash.split('/').pop().split('?').shift() + '/aggregate',
+        url: location.origin + '/api/me/quiriis/' + self.id + '/aggregate',
         success: function (data) {
             self.addAggregateData(data);
         }
