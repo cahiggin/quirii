@@ -43,6 +43,22 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
         var type = $(this).data('type'),
             intensity = $(this).data('intensity'),
             target = $(this).find('.morphii-icon');
+
+            //exp
+            if (type == "Srsly"){
+              type = "Frustrated";
+              console.log("CHANGED SERIOUSLY TO ", type);
+            } else if (type === "Delight"){
+              type = "Delighted";
+              console.log("CHANGED DELIGHT TO " + type);
+            } else if (type === "Surprise"){
+              type = "Surprised";
+              console.log("CHANGED SURPRISE TO " + type);
+            } else if (type === "Disgust"){
+              type = "Disgusted"
+              console.log("CHANGED DISGUSTED TO " + type);
+            }
+            //END exp
             
         self.renderMorphii(type, intensity, target);
         target.find('svg').removeAttr('height').removeAttr('width');
