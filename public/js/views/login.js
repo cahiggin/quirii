@@ -4,9 +4,17 @@ function(QuiriiNetView, loginTemplate) {
     el: $('#content'),
 
     events: {
+      'click .login-twitter': 'loginWithTwitter'
     },
 
     initialize: function() {
+    },
+
+    loginWithTwitter: function(e){
+      e.preventDefault();
+      var target = $(e.currentTarget);
+      console.log("THE TARGET IS ", target);
+      location.href = $( e.currentTarget ).attr( "href" );
     },
 
     render: function() {
