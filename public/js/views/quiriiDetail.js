@@ -39,6 +39,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     
     addMorphiiToFeedbackItem: function () {
       var self = this;
+      
       $('.feedback-list .feedback-item').each(function () {
         var type = $(this).data('type'),
             intensity = $(this).data('intensity'),
@@ -58,20 +59,26 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     
     addAggregateData: function (data) {
       var obj = data.data.aggMorphii,
+          $aggregateMorphii = $('#aggregate-morphii'),
           total = 0;
 
-      for (prop in obj) {
-        total += obj[prop].count;
+      if (obj[0]) {
+        for (prop in obj) {
+          total += obj[prop].count;
+        }
+        this.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii > .morphii'));
+        $('#aggregate-morphii svg').removeAttr('height').removeAttr('width');
+        $('#total-reviews').text(function () {
+          return $(this).text().replace('{0}', total);
+        });
+        $('#aggregate-status').html(function () {
+          return $(this).text().replace('{0}', '<strong>' + ((obj[0].count / total) * 100).toFixed(0) + '%</strong>').replace('{1}', '<em>' + obj[0]._id + '</em>');
+        });
+      } else {
+        $aggregateMorphii.html('<p class="no-feedback">You need feedback to view the aggregate morphii.</p>')
       }
-      this.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii > .morphii'));
-      $('#aggregate-morphii svg').removeAttr('height').removeAttr('width');
-      $('#total-reviews').text(function () {
-        return $(this).text().replace('{0}', total);
-      });
-      $('#aggregate-status').html(function () {
-        return $(this).text().replace('{0}', '<strong>' + ((obj[0].count / total) * 100).toFixed(0) + '%</strong>').replace('{1}', '<em>' + obj[0]._id + '</em>');
-      });
-      $('#aggregate-morphii').removeClass('hidden');
+      
+      $aggregateMorphii.removeClass('hidden');
     },
     
     renderMorphii: function (type, intensity, targetEl){
