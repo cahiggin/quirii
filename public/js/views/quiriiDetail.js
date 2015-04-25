@@ -42,7 +42,12 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       var self = this,
           quiriiLink = prompt("Copy Link Below", "http://quirii.herokuapp.com/#/quiriis/" + this.model.id);
 
-          location.href = "sms:"
+      var isIphone = !!agent.match(/iPhone/i);
+      if (isIphone){
+        location.href = "sms:";
+      } else {
+        
+      }
       
       e.preventDefault();
     },
