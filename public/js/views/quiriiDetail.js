@@ -60,22 +60,29 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     addAggregateData: function (data) {
       var obj = data.data.aggMorphii,
           $aggregateMorphii = $('#aggregate-morphii'),
-          total = 0;
+          max, total = 0;
 
       if (obj[0]) {
         for (prop in obj) {
           total += obj[prop].count;
         }
-        this.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii > .morphii'));
-        $('#aggregate-morphii svg').removeAttr('height').removeAttr('width');
-        $('#total-reviews').text(function () {
-          return $(this).text().replace('{0}', total);
-        });
-        $('#aggregate-status').html(function () {
-          return $(this).text().replace('{0}', '<strong>' + ((obj[0].count / total) * 100).toFixed(0) + '%</strong>').replace('{1}', '<em>' + obj[0]._id + '</em>');
-        });
-        
-        $aggregateMorphii.removeClass('hidden').end().prev('.no-feedback').hide();
+
+        max = _.where(obj, {count: _.max(obj, function(obj){ return obj.count; }).count });
+
+        if (max.length > 1) {
+          $aggregateMorphii.prev('.no-feedback').text('No one feeling has emerged as dominant yet.');
+        } else {
+          this.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii > .morphii'));
+          $('#aggregate-morphii svg').removeAttr('height').removeAttr('width');
+          $('#total-reviews').text(function () {
+            return $(this).text().replace('{0}', total);
+          });
+          $('#aggregate-status').html(function () {
+            return $(this).text().replace('{0}', '<strong>' + ((obj[0].count / total) * 100).toFixed(0) + '%</strong>').replace('{1}', '<em>' + obj[0]._id + '</em>');
+          });
+          $aggregateMorphii.removeClass('hidden');
+          $aggregateMorphii.prev('.no-feedback').hide();
+        }
       }
     },
     
@@ -107,7 +114,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     onFeedbackAdded: function(feedbackItem) {
       var feedbackHtml = (new FeedbackItemView({ model: feedbackItem })).render().el;
       $(feedbackHtml).prependTo('.feedback-list').hide().fadeIn('slow');
-      $('.no-feedback').remove();
+      $('.feedback-list .no-feedback').remove();
     },
 
     render: function() {
