@@ -80,13 +80,15 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     },
     
     renderMorphii: function (type, intensity, targetEl){
-      var self = this;
-      
-      var morphii = _.findWhere(this.morphiis.toJSON(), {name: type});
-      this.morphView = new MorphiiView({el: targetEl, model: morphii});
-      this.anch = JSON.parse(morphii.anchor);
-      this.delt = JSON.parse(morphii.delta);
-      this.morphView.morphMe(self.anch, intensity, self.delt);
+      var self = this,
+          morphii = _.findWhere(this.morphiis.toJSON(), {name: type});
+          
+      if (morphii) {
+        this.morphView = new MorphiiView({el: targetEl, model: morphii});
+        this.anch = JSON.parse(morphii.anchor);
+        this.delt = JSON.parse(morphii.delta);
+        this.morphView.morphMe(self.anch, intensity, self.delt);
+      }
     },
 
     quiriiDeleted: function() {
