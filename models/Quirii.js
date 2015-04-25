@@ -142,6 +142,7 @@ module.exports = function(mongoose) {
       var newFeedback = {
           userId: user._id, 
           userName: user.name,
+          anonymous: feedbackBody.anonymous,
           morphiiType: feedbackBody.morphiiType,
           morphiiIntensity: feedbackBody.morphiiIntensity, //a number 0 - 1, rounded to thousandth
           comment: feedbackBody.comment,
