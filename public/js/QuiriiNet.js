@@ -23,7 +23,7 @@ define(['router'], function(router) {
           QuiriiScope.history.push(Backbone.history.getFragment());
         }
 
-        $('.prev', $nav).toggle(fragment.indexOf('create') !== 0 && fragment.indexOf('view') !== 0);
+        $('.prev', $nav).toggle(fragment.indexOf('create') !== 0 && fragment.indexOf('view') !== 0 && fragment !== '');
         $('.create', $nav).toggle(fragment.indexOf('view') !== -1 || fragment === '');
         $('#view-all-quiriis').toggle(fragment.indexOf('me/quiriis') !== -1);
       },
