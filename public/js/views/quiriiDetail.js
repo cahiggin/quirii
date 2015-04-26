@@ -61,6 +61,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     
     addMorphiiToFeedbackItem: function () {
       var self = this;
+      
       $('.feedback-list .feedback-item').each(function () {
         var type = $(this).data('type'),
             intensity = $(this).data('intensity'),
@@ -85,16 +86,31 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
         self.renderMorphii(type, intensity, target);
         target.find('svg').removeAttr('height').removeAttr('width');
       });
+
       $.ajax({
-        url: location.origin + '/api/me/quiriis/' + location.hash.split('/').pop().split('?').shift() + '/aggregate',
+        url: location.origin + '/api/me/quiriis/' + self.id + '/aggregate',
         success: function (data) {
-          var obj = data.data.aggMorphii,
-              total = 0;
-          
-          for (prop in obj) {
-            total += obj[prop].count;
-          }
-          self.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii > .morphii'));
+            self.addAggregateData(data);
+        }
+      });
+    },
+    
+    addAggregateData: function (data) {
+      var obj = data.data.aggMorphii,
+          $aggregateMorphii = $('#aggregate-morphii'),
+          max, total = 0;
+
+      if (obj[0]) {
+        for (prop in obj) {
+          total += obj[prop].count;
+        }
+
+        max = _.where(obj, {count: _.max(obj, function(obj){ return obj.count; }).count });
+
+        if (max.length > 1) {
+          $aggregateMorphii.prev('.no-feedback').text('No one feeling has emerged as dominant yet.');
+        } else {
+          this.renderMorphii(obj[0]._id, obj[0].avgIntensity, $('#aggregate-morphii > .morphii'));
           $('#aggregate-morphii svg').removeAttr('height').removeAttr('width');
           $('#total-reviews').text(function () {
             return $(this).text().replace('{0}', total);
@@ -102,19 +118,22 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
           $('#aggregate-status').html(function () {
             return $(this).text().replace('{0}', '<strong>' + ((obj[0].count / total) * 100).toFixed(0) + '%</strong>').replace('{1}', '<em>' + obj[0]._id + '</em>');
           });
-          $('#aggregate-morphii').removeClass('hidden');
+          $aggregateMorphii.removeClass('hidden');
+          $aggregateMorphii.prev('.no-feedback').hide();
         }
-      });
+      }
     },
     
     renderMorphii: function (type, intensity, targetEl){
-      var self = this;
-      
-      var morphii = _.findWhere(this.morphiis.toJSON(), {name: type});
-      this.morphView = new MorphiiView({el: targetEl, model: morphii});
-      this.anch = JSON.parse(morphii.anchor);
-      this.delt = JSON.parse(morphii.delta);
-      this.morphView.morphMe(self.anch, intensity, self.delt);
+      var self = this,
+          morphii = _.findWhere(this.morphiis.toJSON(), {name: type});
+          
+      if (morphii) {
+        this.morphView = new MorphiiView({el: targetEl, model: morphii});
+        this.anch = JSON.parse(morphii.anchor);
+        this.delt = JSON.parse(morphii.delta);
+        this.morphView.morphMe(self.anch, intensity, self.delt);
+      }
     },
 
     quiriiDeleted: function() {
@@ -133,7 +152,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     onFeedbackAdded: function(feedbackItem) {
       var feedbackHtml = (new FeedbackItemView({ model: feedbackItem })).render().el;
       $(feedbackHtml).prependTo('.feedback-list').hide().fadeIn('slow');
-      $('.no-feedback').remove();
+      $('.feedback-list .no-feedback').remove();
     },
 
     render: function() {

@@ -54,12 +54,17 @@
   margin-top: 10px;
 }
 
+input, button, textarea, .form-control {
+  font-size: 16px;
+}
+
 .big-btn {
   padding: 6px 12px;
   background-color: #fff;
   border: 1px solid #28d425;
   border-radius: 20px;
   color: #28d425;
+  display: inline-block;
   
   &.destroy {
     border-color: #fb1e14;
@@ -292,6 +297,13 @@
         border-bottom: none;
       }
     }
+    p.no-feedback {
+      margin: 0 15px;
+    }
+  }
+  .no-feedback {
+    font-size: 14px;
+    text-align: left;
   }
   .feedback-item {
     .wrapper {

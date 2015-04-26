@@ -55,7 +55,8 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
       this.changeView(new QuiriiDetailView({
         model: model,
         fbCollection: feedbackCollection,
-        morphiis: morphiisCollection
+        morphiis: morphiisCollection,
+        id: id
       }));
       model.fetch({
         reset: true,
@@ -82,8 +83,12 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
 
       }));
       quiriiModel.fetch({reset:true});
-      feedbackCollection.fetch({reset: true});  
-      morphiisCollection.fetch({reset: true});  
+      feedbackCollection.fetch({
+        reset: true,
+        success: function () {
+          morphiisCollection.fetch({reset: true});
+        }
+      });
     }
 
   });
