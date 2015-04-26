@@ -23,7 +23,7 @@ define(['router'], function(router) {
           QuiriiScope.history.push(Backbone.history.getFragment());
         }
 
-        $('.prev', $nav).toggle(QuiriiScope.history.length > 1 && fragment.indexOf('create') !== 0 && fragment.indexOf('view') !== 0);
+        $('.prev', $nav).toggle(fragment.indexOf('create') !== 0 && fragment.indexOf('view') !== 0);
         $('.create', $nav).toggle(fragment.indexOf('view') !== -1 || fragment === '');
         $('#view-all-quiriis').toggle(fragment.indexOf('me/quiriis') !== -1);
       },
@@ -31,7 +31,11 @@ define(['router'], function(router) {
         var url = QuiriiScope.history[QuiriiScope.history.length - 2],
             previous = url ? url + '?prev=true' : 'view';
 
-        Backbone.history.navigate('#/' + previous, { replace: true });
+        if (QuiriiScope.history.length > 1) {
+          Backbone.history.navigate('#/' + previous, { replace: true });
+        } else {
+          Backbone.history.navigate('#/view', { replace: true });
+        }
         QuiriiScope.history = QuiriiScope.history.slice(0, -1);
       },
       twitterShareLink: function (text, url) {
