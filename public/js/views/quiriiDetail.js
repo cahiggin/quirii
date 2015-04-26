@@ -42,7 +42,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
       var self = this,
           quiriiLink = prompt("Copy Link Below", "http://quirii.herokuapp.com/#/quiriis/" + this.model.id);
 
-      if(navigator.userAgent.match(/Android/i)
+     /* if(navigator.userAgent.match(/Android/i)
           || navigator.userAgent.match(/webOS/i)
           || navigator.userAgent.match(/iPhone/i)
           || navigator.userAgent.match(/iPad/i)
@@ -54,7 +54,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
 
       } else {
         alert("you are not using a mobile device");
-      }
+      }*/
       
       e.preventDefault();
     },
