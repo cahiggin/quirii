@@ -576,11 +576,11 @@ app.post('/api/quiriis/:quiriiid/feedback', function(req, res){
   var quiriiId = req.params.quiriiid;
   var user = req.user;
   var anonymous = req.body.anonymous;
-  
+
   if (!user || anonymous){
-    var user = {
-      userId: null,
-      username: "Anonymous"
+    user = {
+      _Id: null,
+      name: "Anonymous"
     }
   }
   var feedback = req.body;
