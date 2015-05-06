@@ -17,6 +17,7 @@ module.exports = function(mongoose) {
     mediaUrl: { type: String },
     prompt: { type: String },
     feedback: [Feedback],
+    feedbackIsPublic: { type: Boolean },
     created: { type: Date, default: Date.now }
   });
 
@@ -37,7 +38,8 @@ module.exports = function(mongoose) {
                             title: doc.title,
                             mediaUrl: doc.mediaUrl,
                             prompt: doc.prompt,
-                            created: doc.created
+                            created: doc.created,
+                            feedbackIsPublic: doc.feedbackIsPublic
         });
       });
       callback(publicQuiriis);
@@ -96,6 +98,7 @@ module.exports = function(mongoose) {
       publicQuirii.mediaUrl = doc.mediaUrl;
       publicQuirii.prompt = doc.prompt;
       publicQuirii.quiriiTime = doc.quiriiTime;
+      publicQuirii.feedbackIsPublic = doc.feedbackIsPublic;
       var privateQuiriiDetail = doc.feedback;
       callback(publicQuirii, privateQuiriiDetail);
     });
@@ -108,6 +111,7 @@ module.exports = function(mongoose) {
     newQuirii.mediaUrl = quirii.mediaUrl;
     newQuirii.prompt = quirii.prompt;
     newQuirii.quiriiTime = quirii.quiriiTime;
+    newQuirii.feedbackIsPublic = quirii.feedbackIsPublic;
     newQuirii.save(function(err, obj) {
           if(err) { throw err; }
           callback(obj);
@@ -122,6 +126,7 @@ module.exports = function(mongoose) {
       updateQuirii.mediaUrl = quirii.mediaUrl;
       updateQuirii.prompt = quirii.prompt;
       updateQuirii.quiriiTime = quirii.quiriiTime;
+      updateQuirii.feedbackIsPublic = quirii.feedbackIsPublic;
       updateQuirii.save(function(err, obj){
         if (err) { throw err; }
         callback(obj);

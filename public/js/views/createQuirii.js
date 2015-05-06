@@ -53,7 +53,8 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
       var self = this,
           titleText = $('input[name=title]').val(),
           promptText = $('input[name=prompt]').val(),
-          mediaUrlText = $('input[name=image_url]').val();
+          mediaUrlText = $('input[name=image_url]').val(),
+          publicFeedback = $('#feedbackIsPublic').prop('checked');
           
       e.preventDefault();
       
@@ -65,7 +66,8 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
         this.model.set({
           title: titleText,
           prompt: promptText,
-          mediaUrl: mediaUrlText
+          mediaUrl: mediaUrlText,
+          feedbackIsPublic: publicFeedback
         });
 
         this.model.save(null, {

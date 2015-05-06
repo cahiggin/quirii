@@ -55,9 +55,9 @@ var models = {
 
 // Moodl Me Local Env Twitter App Credentials
 //Local Env Twitter app credentials:
-/*var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
+var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
 var TWITTER_CONSUMER_SECRET = 'VUvrJsap9MA8UWULi2oPasj31FyFtiI2Nt3sNYqb6E';
-var TWITTER_CALLBACK_URL = 'http://localhost:5000/auth/twitter/callback';*/
+var TWITTER_CALLBACK_URL = 'http://localhost:5000/auth/twitter/callback';
 
 //UPDATE WITH CONFIG VARS FOR HEROKU
 var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
@@ -419,6 +419,7 @@ app.get('/api/me/quiriis/:quiriiid/aggregate', ensureAuthenticated, function(req
   } else {
   var quiriiId = req.params.quiriiid;
   models.Quirii.aggregateMorphii(quiriiId, function(aggregatemorphii){
+
     res.send({
               meta: {
                 code: 200
@@ -558,16 +559,25 @@ app.get('/api/me/quiriis/:quiriiid/feedback', ensureAuthenticated, function(req,
 //GET public feedback for a quirii
 app.get('/api/quiriis/:quiriiid/feedback', function(req, res){
   var quiriiId = req.params.quiriiid;
-  models.Quirii.findQuiriiInfo(quiriiId, function(quirii, privateFeedback){
+  models.Quirii.findQuiriiInfo(quiriiId, function(quirii, publicFeedback){
+    if (quirii.feedbackIsPublic === true) {
       res.send({
               meta: {
                 code: 200
               },
               data: {
                 quirii: quirii,
-                feedback: privateFeedback
+                feedback: publicFeedback
               }
             });
+    } else {
+      res.send({
+        meta: {
+          code: 400,
+          message: "This feedback is not publicly available"
+        }
+      });
+    }
     });
 });
 
