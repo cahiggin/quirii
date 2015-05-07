@@ -92,6 +92,9 @@ module.exports = function(mongoose) {
 
   var findQuiriiInfo = function(quiriiId, callback){
     Quirii.findOne({_id:quiriiId}).populate('owner').exec(function(err, doc){
+      if (doc.feedbackIsPublic == undefined){
+        doc.feedbackIsPublic = true;
+      };
       var publicQuirii = {};
       publicQuirii.owner = doc.owner;
       publicQuirii.title = doc.title;
