@@ -6116,13 +6116,12 @@ td.visible-print {
   margin-top: 10px;
 }
 input,
-button,
 textarea,
 .form-control {
   font-size: 16px;
 }
 .big-btn {
-  padding: 6px 12px;
+  padding: 4px 10px;
   background-color: #fff;
   border: 1px solid #28d425;
   border-radius: 20px;
@@ -6320,7 +6319,7 @@ textarea,
 }
 .quirii-details .big-btn.twitter {
   min-width: 0;
-  padding: 6px 12px;
+  padding: 4px 10px;
 }
 .quirii-details .feedback-list {
   margin-left: -15px;
