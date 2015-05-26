@@ -558,9 +558,17 @@ app.get('/api/me/quiriis/:quiriiid/feedback', ensureAuthenticated, function(req,
 
 //GET public feedback for a quirii
 app.get('/api/quiriis/:quiriiid/feedback', function(req, res){
-  var quiriiId = req.params.quiriiid;
+  var quiriiId = req.params.quiriiid,
+      isOwnersQuirii = false;
+      
   models.Quirii.findQuiriiInfo(quiriiId, function(quirii, publicFeedback){
-    if (quirii.feedbackIsPublic === true) {
+    if (quirii.owner && req.user) {
+      if (quirii.owner.uid && req.user.uid) {
+        isOwnersQuirii = quirii.owner.uid === req.user.uid;
+      }
+    }
+    
+    if (quirii.feedbackIsPublic === true || isOwnersQuirii) {
       res.send({
               meta: {
                 code: 200
