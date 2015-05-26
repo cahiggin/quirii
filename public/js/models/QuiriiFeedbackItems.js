@@ -4,7 +4,9 @@ define(['authenticated-collection', 'models/QuiriiFeedbackItem'], function(Authe
     model: QuiriiFeedbackItem,
 
     parse: function(response){
-  		return response.data.feedback;
+        if (response.meta.code === 200) { // Public
+  		    return response.data.feedback;
+        }
  	}
  	
   });
