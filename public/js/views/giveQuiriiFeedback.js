@@ -86,9 +86,8 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       var container = $('#public-quirii'),
           shareAnchor = $('<a>').attr('href', QuiriiScope.twitterShareLink('Quirii:')).addClass('big-btn twitter').html('<i class="fa fa-twitter"></i> Tweet this Quirii');
           
-     $('.col-sm-8:not(.hidden)', container).remove();
-     $('.col-sm-8.hidden', container).removeClass('hidden');
-     $('.col-sm-8', container).append(shareAnchor);
+     $('#respond-view', container).remove();
+     $('#success-view', container).removeClass('hidden').append(shareAnchor);
     },
 
     renderMorphii: function(morphiiType){

@@ -1,12 +1,13 @@
 <form id="public-quirii" class="row">
-  <div class="col-sm-8 col-sm-offset-2 text-center hidden">
+  <div id="success-view" class="col-sm-8 col-sm-offset-2 text-center hidden">
     <h2>Feedback Sent!</h2>
     <div class="success-circle">
       <i class="fa fa-check"></i>
     </div>
     <div class="well well-sm">Share Your Feedback</div>
   </div>
-  <div class="col-sm-8 col-sm-offset-2">
+
+  <div id="respond-view" class="col-sm-8 col-sm-offset-2 hidden">
     <h3><%= model.title %></h3>
     <h4><%= model.prompt %></h4>
     <div class="responsive-img">
@@ -15,5 +16,17 @@
     
     <h4>Give Feedback:</h4>
     <div id="quirii-feedback"></div>
+  </div>
+  
+  <div id="landing-view" class="col-sm-8 col-sm-offset-2">
+    <h3>You've received a Quirii!</h3>
+    
+    <p>[Quirii administrator] would like to know how YOU feel about something today. Let them know HOW you feel and HOW MUCH you feel it!</p>
+    <p>Just open the Quirii, and pick the Morphii face that best matches your feeling. Then ADJUST the face to show how intense your feeling really is.
+    You can elaborate if you'd like, too.</p>
+
+--(Put the Morpii demo animation here)--
+
+    <p>You can post your reply with your Twitter ID or anonymously if you prefer</p>
   </div>
 </form>
