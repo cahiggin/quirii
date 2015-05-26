@@ -13,7 +13,7 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
     events: {
       "input input[name=intensity]": "updateMorphii",
       "click input[name=scale]:checked": "switchMorphii",
-      "click #postMorphy":"postMorphii"
+      "click #postMorphy": "postMorphii"
     },
 
     initialize: function(options) {
@@ -86,8 +86,8 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
       var container = $('#public-quirii'),
           shareAnchor = $('<a>').attr('href', QuiriiScope.twitterShareLink('Quirii:')).addClass('big-btn twitter').html('<i class="fa fa-twitter"></i> Tweet this Quirii');
           
-     $('#respond-view', container).remove();
-     $('#success-view', container).removeClass('hidden').append(shareAnchor);
+     $('#respond-view', container).fadeOut().remove();
+     $('#success-view', container).hide().removeClass('hidden').fadeIn().append(shareAnchor);
     },
 
     renderMorphii: function(morphiiType){

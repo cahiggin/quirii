@@ -5,6 +5,10 @@ define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiri
   var publicQuiriiView = QuiriiNetView.extend({
     requireLogin: false,
     el: '#content',
+    
+    events: {
+      "click #show-quirii": "showQuirii"
+    },
 
     initialize: function(options) {
       var thisView = this;
@@ -23,7 +27,12 @@ define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiri
         morphiis:this.morphiis
       }));
     },
-
+    
+    showQuirii: function () {
+      $('#landing-view').remove();
+      $('#respond-view').hide().removeClass('hidden').fadeIn();      
+    },
+    
     render: function() {
       QuiriiScope.setTitle('Quirii');
       
