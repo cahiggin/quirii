@@ -21,7 +21,7 @@
   <div id="landing-view" class="col-sm-8 col-sm-offset-2">
     <h3>You've received a Quirii!</h3>
     
-    <p>[Quirii administrator] would like to know how YOU feel about something today. Let them know HOW you feel and HOW MUCH you feel it!</p>
+    <p><% if (model.owner) { %><%= model.owner.name %><% } %> would like to know how YOU feel about something today. Let them know HOW you feel and HOW MUCH you feel it!</p>
     <p>Just open the Quirii, and pick the Morphii face that best matches your feeling. Then ADJUST the face to show how intense your feeling really is.
     You can elaborate if you'd like, too.</p>
 
