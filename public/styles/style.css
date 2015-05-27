@@ -6067,6 +6067,10 @@ td.visible-print {
 #navigation.hidden + #content {
   padding: 0;
 }
+#navigation.hidden.give-feedback + #content {
+  padding-right: 15px;
+  padding-left: 15px;
+}
 #navigation .prev,
 #navigation .cancel,
 #navigation .next,

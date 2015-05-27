@@ -36,7 +36,7 @@ define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiri
     
     render: function() {
       QuiriiScope.setTitle('Quirii');
-      $('#navigation').addClass('hidden');
+      $('#navigation').addClass('hidden give-feedback');
       
       $(this.el).html(_.template(publicQuiriiTemplate)( {
         model: this.model.toJSON()
