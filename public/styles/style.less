@@ -410,3 +410,16 @@ input, textarea, .form-control {
     max-height: 240px;
   }
 }
+
+#landing-view, #login {
+  min-height: ~"calc(100vh - 70px)";
+}
+
+@media (min-width: 768px) {
+  #powered-by {
+    p { margin: 0; }
+  }
+  #landing-view, #login {
+    min-height: ~"calc(100vh - 50px)";
+  }
+}
