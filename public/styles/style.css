@@ -6302,6 +6302,18 @@ textarea,
   line-height: 150px;
   font-size: 7em;
 }
+.gif-instructions {
+  text-align: center;
+}
+.gif-instructions img {
+  max-width: 150px;
+}
+.gif-instructions img + p {
+  margin-bottom: 0;
+}
+.gif-instructions #show-quirii {
+  display: inline-block;
+}
 .quirii-details #aggregate-morphii svg {
   min-width: 150px;
   max-height: 150px;
