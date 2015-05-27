@@ -30,11 +30,13 @@ define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiri
     
     showQuirii: function () {
       $('#landing-view').remove();
-      $('#respond-view').hide().removeClass('hidden').fadeIn();      
+      $('#respond-view').hide().removeClass('hidden').fadeIn();    
+      $('#navigation').hide().removeClass('hidden').fadeIn();    
     },
     
     render: function() {
       QuiriiScope.setTitle('Quirii');
+      $('#navigation').addClass('hidden');
       
       $(this.el).html(_.template(publicQuiriiTemplate)( {
         model: this.model.toJSON()
