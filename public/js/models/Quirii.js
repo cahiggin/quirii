@@ -7,7 +7,13 @@ define(["authenticated-model"], function(AuthenticatedModel){
       if(!this.id){
         return data;
       } else {
-        return data.data.quirii;
+        if (data.meta.code === 404 || !data.data) {
+          Backbone.history.navigate("login", {
+            trigger: true
+          });
+        } else {
+          return data.data.quirii;
+        }
       };
     }
   });
