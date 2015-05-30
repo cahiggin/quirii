@@ -353,6 +353,7 @@ app.get('/api/me/quiriis/:quiriiid', function(req, res){
         },
         data: {
           quirii: quirii,
+          isOwner: isOwnersQuirii,
           feedback: privateFeedback
         }
       });
