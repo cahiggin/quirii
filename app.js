@@ -336,11 +336,17 @@ app.get('/api/quiriis/:quiriiid', function(req, res){
 
 // GET a quirii for Current user
 app.get('/api/me/quiriis/:quiriiid', function(req, res){
-  var quiriiId = req.params.quiriiid;
+  var quiriiId = req.params.quiriiid,
+      isOwnersQuirii = false;
       
   models.Quirii.findQuiriiInfo(quiriiId, function(quirii, privateFeedback){
+    if (quirii.owner && req.user) {
+      if (quirii.owner.uid && req.user.uid) {
+        isOwnersQuirii = quirii.owner.uid === req.user.uid;
+      }
+    }
     
-    if (quirii.feedbackIsPublic) {
+    if (quirii.feedbackIsPublic || isOwnersQuirii) {
       res.send({
         meta: {
           code: 200
