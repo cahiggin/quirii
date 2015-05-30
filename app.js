@@ -335,28 +335,30 @@ app.get('/api/quiriis/:quiriiid', function(req, res){
 
 
 // GET a quirii for Current user
-app.get('/api/me/quiriis/:quiriiid', ensureAuthenticated, function(req, res){
-  if (!req.user){
-    res.send({
-              meta: {
-                code: 404, 
-                message: "user not signed in"
-              }
-            });
-  } else {
+app.get('/api/me/quiriis/:quiriiid', function(req, res){
   var quiriiId = req.params.quiriiid;
+      
   models.Quirii.findQuiriiInfo(quiriiId, function(quirii, privateFeedback){
-    res.send({
-              meta: {
-                code: 200
-              },
-              data: {
-                quirii: quirii,
-                feedback: privateFeedback
-              }
-            });
+    
+    if (quirii.feedbackIsPublic) {
+      res.send({
+        meta: {
+          code: 200
+        },
+        data: {
+          quirii: quirii,
+          feedback: privateFeedback
+        }
+      });
+    } else {
+      res.send({
+        meta: {
+          code: 404, 
+          message: "Feedback is not public."
+        }
+      });
+    }
   });
-}
 });
 
 // PUT a quirii for current user - updates the persisted quirii with given id
