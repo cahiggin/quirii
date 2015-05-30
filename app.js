@@ -417,10 +417,17 @@ app.delete('/api/me/quiriis/:quiriiid', ensureAuthenticated, function(req, res){
 
 //GET the aggregate morphii for the current user's Quirii with specified id
 app.get('/api/me/quiriis/:quiriiid/aggregate', function(req, res){
-  var quiriiId = req.params.quiriiid;
+  var quiriiId = req.params.quiriiid,
+      isOwnersQuirii = false;
       
-  models.Quirii.findQuiriiInfo(quiriiId, function(quirii, privateFeedback){    
-    if (quirii.feedbackIsPublic) {
+  models.Quirii.findQuiriiInfo(quiriiId, function(quirii, privateFeedback){
+    if (quirii.owner && req.user) {
+      if (quirii.owner.uid && req.user.uid) {
+        isOwnersQuirii = quirii.owner.uid === req.user.uid;
+      }
+    }
+    
+    if (quirii.feedbackIsPublic || isOwnersQuirii) {
       models.Quirii.aggregateMorphii(quiriiId, function(aggregatemorphii){
         res.send({
           meta: {
@@ -440,7 +447,7 @@ app.get('/api/me/quiriis/:quiriiid/aggregate', function(req, res){
       });
     }
   });
-
+});
 
 
 /*
