@@ -1,7 +1,7 @@
 define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem', 'views/morphy'], 
   function(QuiriiNetView, quiriiDetailTemplate, FeedbackItemView, MorphiiView) {
   var quiriiDetailView = QuiriiNetView.extend({
-   
+    requireLogin: false,
     el: $('#content'),
 
     events: {
