@@ -29,7 +29,7 @@ define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiri
     },
     
     showQuirii: function () {
-      $('#landing-view', '#powered-by').remove();
+      $('#landing-view, #powered-by').remove();
       $('#respond-view').hide().removeClass('hidden').fadeIn();    
       $('#navigation').hide().removeClass('hidden').fadeIn();    
     },
