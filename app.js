@@ -410,29 +410,30 @@ app.delete('/api/me/quiriis/:quiriiid', ensureAuthenticated, function(req, res){
 });
 
 //GET the aggregate morphii for the current user's Quirii with specified id
-app.get('/api/me/quiriis/:quiriiid/aggregate', ensureAuthenticated, function(req, res){
-  if (!req.user){
-    res.send({
-              meta: {
-                code: 404, 
-                message: "user not signed in"
-              }
-            });
-  } else {
+app.get('/api/me/quiriis/:quiriiid/aggregate', function(req, res){
   var quiriiId = req.params.quiriiid;
-  models.Quirii.aggregateMorphii(quiriiId, function(aggregatemorphii){
-
-    res.send({
-              meta: {
-                code: 200
-              },
-              data: {
-                aggMorphii: aggregatemorphii
-              }
-    });
+      
+  models.Quirii.findQuiriiInfo(quiriiId, function(quirii, privateFeedback){    
+    if (quirii.feedbackIsPublic) {
+      models.Quirii.aggregateMorphii(quiriiId, function(aggregatemorphii){
+        res.send({
+          meta: {
+            code: 200
+          },
+          data: {
+            aggMorphii: aggregatemorphii
+          }
+        });
+      });
+    } else {
+      res.send({
+        meta: {
+          code: 404, 
+          message: "Feedback is not public."
+        }
+      });
+    }
   });
-}
-});
 
 
 
