@@ -1,12 +1,12 @@
 <div class="row quirii-details">  
   <div class="col-sm-8 col-sm-offset-2">
-    <a href="#" id="view-all-quiriis"><i class="fa fa-long-arrow-left"></i> View all Quiriis</a>
+    <% if (model.isOwner) { %><a href="#" id="view-all-quiriis"><i class="fa fa-long-arrow-left"></i> View all Quiriis</a><% } %>
     
     <div class="responsive-img">
-      <img src="<%=model.mediaUrl %>" />
+      <img src="<%=model.quirii.mediaUrl %>" />
     </div>
-    <h3><%= model.title %></h3> 
-    <h4><%= model.prompt %></h4>
+    <h3><%= model.quirii.title %></h3> 
+    <h4><%= model.quirii.prompt %></h4>
     
     <div class="well well-sm">
       <h4>Share</h4>
@@ -14,7 +14,7 @@
     
     <div class="text-center">
       <div style="margin-bottom: 10px;">
-        <a id="share-twitter" class="big-btn twitter" data-url="#/quiriis/<%=model.id %>">
+        <a id="share-twitter" class="big-btn twitter" data-url="#/quiriis/<%=model.quirii.id %>">
           <i class="fa fa-twitter"></i> Tweet Quirii
         </a>
         <button id="copyQuirii" class="big-btn blue"><i class="fa fa-link"></i> View Quirii Link</button> 
@@ -22,7 +22,7 @@
 
       <div>
         <a href="#/quiriis/<%=model.id %>" class="big-btn blue">Go to Quirii</a>
-        <a href="#" class="big-btn destroy" id="deleteQuirii">Delete Quirii</a>
+        <% if (model.isOwner) { %><a href="#" class="big-btn destroy" id="deleteQuirii">Delete Quirii</a><% } %>
       </div>
     </div>
     

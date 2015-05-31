@@ -161,9 +161,12 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     render: function() {
       QuiriiScope.setTitle('Quirii Details');
     
-      $(this.el).html(_.template(quiriiDetailTemplate)( {
-        model: this.model.toJSON()
-      }));
+      console.log(this.model.toJSON());
+      if (_.has(this.model.toJSON(), 'quirii')) {
+        $(this.el).html(_.template(quiriiDetailTemplate)( {
+          model: this.model.toJSON()
+        }));
+      }
       
       $('#share-twitter').attr('href', QuiriiScope.twitterShareLink('Quirii:', location.origin + '/' + $('#share-twitter').data('url')));
       return this;
