@@ -84,10 +84,10 @@ function(QuiriiNetView, morphyUiTemplate, Morphii,
     
     renderFeedbackSuccessView: function () {
       var container = $('#public-quirii'),
-          shareAnchor = $('<a>').attr('href', QuiriiScope.twitterShareLink('Quirii:')).addClass('big-btn twitter').html('<i class="fa fa-twitter"></i> Tweet this Quirii');
+          shareAnchor = $('<a>').attr('href', QuiriiScope.twitterShareLink('Quirii:')).addClass('big-btn twitter btn-block').html('<i class="fa fa-twitter"></i> Tweet this Quirii');
           
      $('#respond-view', container).fadeOut().remove();
-     $('#success-view', container).hide().removeClass('hidden').fadeIn().append(shareAnchor);
+     $('#success-view', container).hide().removeClass('hidden').fadeIn().find('.button-group:last').append(shareAnchor);
     },
 
     renderMorphii: function(morphiiType){
