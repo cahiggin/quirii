@@ -592,6 +592,7 @@ app.get('/api/quiriis/:quiriiid/feedback', function(req, res){
               },
               data: {
                 quirii: quirii,
+                isOwner: isOwnersQuirii,
                 feedback: publicFeedback
               }
             });

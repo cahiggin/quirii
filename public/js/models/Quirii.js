@@ -12,7 +12,7 @@ define(["authenticated-model"], function(AuthenticatedModel){
             trigger: true
           });
         } else {
-          return data.data.quirii;
+          return data.data;
         }
       };
     }
