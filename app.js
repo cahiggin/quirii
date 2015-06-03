@@ -116,7 +116,7 @@ app.get('/', function(req, res){
 // GET login route
 app.get('/login', function(req, res){
   //res.send(401);
-  res.render('login');
+  res.redirect('/#login');
 });
 
 // GET twitter authentication route
