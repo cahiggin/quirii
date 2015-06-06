@@ -54,6 +54,8 @@ function(QuiriiNetView, emailTemplate) {
           
           if (self.user.email) {
             self.redirect();
+          } else {
+            $('#login, #powered-by').removeClass('hidden');
           }
         }
       });
