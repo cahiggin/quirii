@@ -1,7 +1,7 @@
-define(['views/index', 'views/login', 'views/logout', 'views/quirii', 'views/quiriiDetail', 
+define(['views/index', 'views/login', 'views/logout', 'views/email', 'views/quirii', 'views/quiriiDetail', 
   'views/publicQuirii', 'models/User', 'models/Quirii', 'models/Quiriis', 'models/Morphiis',
   'models/PublicQuirii', 'models/PublicQuiriis', 'models/QuiriiFeedbackItems'],
-function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView, 
+function(IndexView, LoginView, LogoutView, EmailView, QuiriiView, QuiriiDetailView, 
   PublicQuiriiView, User, Quirii, Quiriis, Morphiis,
   PublicQuirii, PublicQuiriis, QuiriiFeedbackItems) {
   var QuiriiRouter = Backbone.Router.extend({
@@ -40,10 +40,12 @@ function(IndexView, LoginView, LogoutView, QuiriiView, QuiriiDetailView,
     },
 
     loggedin: function(){
-      window.location.hash = '/'
+      QuiriiScope.hideNavigation();
+      this.changeView(new EmailView);
     },
 
     logout: function(){
+      QuiriiScope.hideNavigation();
       this.changeView(new LogoutView);
     },
 
