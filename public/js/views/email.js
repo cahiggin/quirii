@@ -8,22 +8,34 @@ function(QuiriiNetView, emailTemplate) {
     },
     
     handleEmail: function () {
-      this.updateEmail(this.$el.find('#email').val());
+      var input = this.$el.find('#email').val();
+      
+      if (this.isValidEmail(input.trim())) {
+        $('#invalid-email').hide();
+        this.updateEmail(input);
+      } else {
+        $('#invalid-email').show();
+      }
     },
     
     updateEmail: function (email) {
       var self = this;
       
       this.user.email = email;
+      
       $.ajax({
         method: 'PUT',
         url: '/api/me/settings',
         data: self.user,
         success: function (data) {
-          console.log(data);
           self.redirect();
         }
       });
+    },
+    
+    isValidEmail: function (email) {
+        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        return re.test(email);
     },
     
     redirect: function () {
@@ -39,11 +51,9 @@ function(QuiriiNetView, emailTemplate) {
         url: '/api/me/settings',
         success: function (data) {
           self.user = data.data.user;
-          console.log(self.user);
           
           if (self.user.email) {
             self.redirect();
-          } else {
           }
         }
       });
