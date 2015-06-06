@@ -21,8 +21,14 @@ function(QuiriiNetView, emailTemplate) {
         data: self.user,
         success: function (data) {
           console.log(data);
+          self.redirect();
         }
       });
+    },
+    
+    redirect: function () {
+      QuiriiScope.showNavigation();
+      window.location.hash = '/';
     },
     
     initialize: function() {
@@ -36,6 +42,7 @@ function(QuiriiNetView, emailTemplate) {
           console.log(self.user);
           
           if (self.user.email) {
+            self.redirect();
           } else {
           }
         }
