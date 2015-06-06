@@ -10,7 +10,7 @@ function(IndexView, LoginView, LogoutView, EmailView, QuiriiView, QuiriiDetailVi
       '': 'index',
       'create': 'index',
       'view': 'index',
-      'api/me/settings': 'loggedin',
+      'email': 'email',
       'login': 'login',
       'me/quiriis/:id': 'quiriiDetail',
       'quiriis/:id': 'publicQuirii',
@@ -39,7 +39,7 @@ function(IndexView, LoginView, LogoutView, EmailView, QuiriiView, QuiriiDetailVi
       this.changeView(new LoginView);
     },
 
-    loggedin: function(){
+    email: function(){
       QuiriiScope.hideNavigation();
       this.changeView(new EmailView);
     },
