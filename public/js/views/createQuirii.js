@@ -141,7 +141,7 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
             }
             var url = getId(urlText);
             console.log("url is ", url);
-            var html = '<iframe class="embed-responsive-item" width="100%" height="450" scrolling="no" frameborder="no" src="//youtube.com/v/' + url + '"></iframe>'
+            var html = '<iframe class="embed-responsive-item" width="100%" height="450" scrolling="no" frameborder="no" src="http://youtube.com/v/' + url + '"></iframe>'
             mediaUrlText = html;
             console.log("youtube link is ", html);
             break
