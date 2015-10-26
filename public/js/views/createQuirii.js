@@ -6,7 +6,8 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
     events: {
       "submit #quirii-form": "postQuirii",
       "change #files": "s3upload",
-      "change input:radio[name='mediaType']": "selectType"
+      "change input:radio[name='mediaType']": "selectType",
+      "change input:radio[name='linkType']": "setLinkType"
     },
 
     initialize: function(options) {
@@ -31,6 +32,38 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
         $('.photo-upload').addClass('hidden');
         $('.photo-preview').addClass('hidden');
 
+      }
+    },
+
+    setLinkType: function(e){
+      var linkTypeText = $("input:radio[name='linkType']:checked").val();
+      console.log(linkTypeText);
+
+      switch(linkTypeText){
+        case "soundcloud":
+            $('.alert').removeClass('hidden');
+            $('#embedLink').attr('placeholder', "must be a valid iframe");
+            break
+        case "youtube":
+            console.log("youtube")
+            $('.alert').addClass('hidden');
+            $('#embedLink').attr('placeholder', "https://youtu.be/OTRmyXX6ipU");
+            break
+        case "twitter":
+            console.log("twitter")
+            $('.alert').removeClass('hidden');
+            $('#embedLink').attr('placeholder', "must be a valid iframe");
+            break
+        case "tumblr":
+            console.log("tumblr")
+            $('.alert').removeClass('hidden');
+            $('#embedLink').attr('placeholder', "must be a valid iframe");
+            break
+        case "iframe":
+            console.log("iframe")
+            $('.alert').removeClass('hidden');
+            $('#embedLink').attr('placeholder', "must be a valid iframe");
+            break
       }
     },
 
@@ -73,6 +106,7 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
           titleText = $('input[name=title]').val(),
           promptText = $('input[name=prompt]').val(),
           mediaTypeText = $("input:radio[name='mediaType']:checked").val();
+          linkTypeText = $("input:radio[name='linkType']:checked").val();
           //mediaUrlText = $('input[name=image_url]').val(),
           publicFeedback = $('#feedbackIsPublic').prop('checked');
 
@@ -81,7 +115,49 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
       if (mediaTypeText == "PHOTO"){
         mediaUrlText = $('input[name=image_url]').val();
       } else if (mediaTypeText == "EMBED"){
-        mediaUrlText = $('input[name=embedLink]').val();
+        //mediaUrlText = $('input[name=embedLink]').val();
+
+        switch(linkTypeText){
+        case "soundcloud":
+            //var url = $('input[name=embedLink]').val();
+            //var html = '<iframe class="embed-responsive-item" width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + url + '"></iframe>'
+            //mediaUrlText = html;
+            mediaUrlText = $('input[name=embedLink]').val();
+            break
+        case "youtube":
+            var urlText = $('input[name=embedLink]').val();
+            function getId(url){
+              var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+              var match = url.match(regExp);
+
+              if (match && match[2].length == 11) {
+                  console.log("match ", match[2]);
+                  return match[2];
+                  
+              } else {
+                  console.log("ERROR");
+                  return 'error';
+              }
+            }
+            var url = getId(urlText);
+            console.log("url is ", url);
+            var html = '<iframe class="embed-responsive-item" width="100%" height="450" scrolling="no" frameborder="no" src="http://youtube.com/v/' + url + '"></iframe>'
+            mediaUrlText = html;
+            console.log("youtube link is ", html);
+            break
+        case "twitter":
+            console.log("twitter")
+            mediaUrlText = $('input[name=embedLink]').val();
+            break
+        case "tumblr":
+            console.log("tumblr")
+            mediaUrlText = $('input[name=embedLink]').val();
+            break
+        case "iframe":
+            console.log("iframe")
+            mediaUrlText = $('input[name=embedLink]').val();
+            break
+        }
       }
           
       e.preventDefault();

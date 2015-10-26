@@ -20,7 +20,7 @@
       <img src="<%=model.target.mediaUrl %>" />
     </div>
     <%} else if (model.target.mediaType == "EMBED"){%>
-    <div class="embedded-content">
+    <div class="embedded-content embed-responsive embed-responsive-4by3">
     <%= model.target.mediaUrl %>
     </div>
     <%}%>

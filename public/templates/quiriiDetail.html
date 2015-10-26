@@ -7,7 +7,7 @@
       <img src="<%=model.quirii.target.mediaUrl %>" />
     </div>
     <%} else if (model.quirii.target.mediaType == "EMBED"){%>
-    <div class="embedded-content">
+    <div class="embedded-content embed-responsive embed-responsive-4by3">
     <%= model.quirii.target.mediaUrl %>
     </div>
     <%}%>

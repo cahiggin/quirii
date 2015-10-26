@@ -6,9 +6,16 @@
     </div>
     <div class="form-group">
       <label for="mediaType" class="control-label">Are you uploading:</label>
-      <input type="radio" name="mediaType" value="PHOTO" />A Photo
-      <input type="radio" name="mediaType" value="EMBED" />An iFrame
-
+      <div data-toggle="buttons">
+        <label class="btn btn-default active">
+          <input type="radio" name="mediaType" id="photo" value="PHOTO"checked><i class="fa fa-photo"></i> A Photo
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" name="mediaType" id="embed" value="EMBED"><i class="fa fa-link"></i> A Link
+        </label>
+      </div>
+      <!--<input type="radio" name="mediaType" value="PHOTO" />A Photo
+      <input type="radio" name="mediaType" value="EMBED" />A Link-->
     </div>
     <div class="form-group photo-upload hidden">
       <label for="files" class="control-label">Please select a file</label>
@@ -20,10 +27,43 @@
       </div>
     </div>
     <input type="hidden" id="image_url" name="image_url" value="/images/default.png" required="required"/>
+
     <div class="form-group embed-content hidden">
-      <label for="embedLink" class="control-label">Please paste a valid iFrame</label>
-      <input type="text" id="embedLink" name="embedLink" class="form-control" />
+      <label for="linkType" class="control-label">Specify type of link:</label>
+      <br />
+      <!--
+      <input type="radio" name="linkType" value="soundcloud" /><i class="fa fa-soundcloud"></i> Soundcloud 
+      <input type="radio" name="linkType" value="youtube" /><i class="fa fa-youtube-play"></i> YouTube 
+      <input type="radio" name="linkType" value="twitter" /><i class="fa fa-twitter-square"></i> Twitter 
+      <input type="radio" name="linkType" value="tumblr" /><i class="fa fa-tumblr-square"></i> Tumblr
+      <input type="radio" name="linkType" value="iframe" /><i class="fa fa-ellipsis-h"></i> Other iFrame<br />
+      -->
+      <div class="embed-content hidden" data-toggle="buttons">
+        <label class="btn btn-default">
+          <input type="radio" name="linkType" id="soundcloud" value="soundcloud" autocomplete="off" ><i class="fa fa-soundcloud"></i> Soundcloud
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" name="linkType" id="youtube" value="youtube" autocomplete="off"><i class="fa fa-youtube-play"></i> YouTube 
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" name="linkType" id="twitter" value="twitter" autocomplete="off"><i class="fa fa-twitter-square"></i> Twitter 
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" name="linkType" id="tumblr" value="tumblr" autocomplete="off"><i class="fa fa-tumblr-square"></i> Tumblr 
+        </label>
+        <label class="btn btn-default">
+          <input type="radio" name="linkType" id="iframe" value="iframe" autocomplete="off"><i class="fa fa-compass"></i> Paste iFrame 
+        </label>
+      </div>
+      <br />
+      <label for="embedLink" class="control-label">Please paste a valid embed link</label>
+      <div class="alert alert-warning hidden" id="iframe-alert" role="alert">WARNING! This must be a valid iFrame element or embed element.</div>
+      <input type="text" id="embedLink" name="embedLink" class="form-control" placeholder="http://youtube.com/12345" />
     </div>
+
+
+    
+
     <div class="form-group">
       <label for="prompt" class="control-label"><span>Prompt or question: </span><sub>(optional)</sub></label>
       <input type="text" id="prompt" class="form-control" name="prompt" placeholder="Add a prompt or question"/>

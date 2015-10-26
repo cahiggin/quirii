@@ -33,3 +33,11 @@
   border-color: #000;
   color: #0080ff;
 }
+
+iframe {
+  overflow: scroll; 
+  -webkit-overflow-scrolling: touch;
+  width: 100% !important;
+  min-width: 100% !important;
+  *width: 100% !important;
+}
