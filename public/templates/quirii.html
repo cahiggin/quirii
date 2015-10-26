@@ -1,6 +1,13 @@
+
+<% if (model.target.mediaType == "PHOTO"){%>
 <div class="view-img">
-  <img src="<%=model.mediaUrl %>" />
+  <img src="<%=model.target.mediaUrl %>" />
 </div>
+<%} else if (model.target.mediaType == "EMBED"){%>
+<div class="view-img">
+	<img src="../images/link.png" />
+</div>
+<%}%>
 <div class="view-text">
   <a href="#/me/quiriis/<%=model._id %>">
     <h3><%= model.title %></h3> 

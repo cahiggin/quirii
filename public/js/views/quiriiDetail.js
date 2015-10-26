@@ -161,6 +161,8 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
     render: function() {
       QuiriiScope.setTitle('Quirii Details');
     
+      
+
       if (_.has(this.model.toJSON(), 'quirii')) {
         $(this.el).html(_.template(quiriiDetailTemplate)( {
           model: this.model.toJSON()

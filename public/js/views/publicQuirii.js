@@ -38,9 +38,16 @@ define(['QuiriiNetView', 'text!templates/publicQuirii.html', 'models/PublicQuiri
       QuiriiScope.setTitle('Quirii');
       $('#navigation').addClass('hidden give-feedback');
       
-      $(this.el).html(_.template(publicQuiriiTemplate)( {
-        model: this.model.toJSON()
-      }));
+
+      if (_.has(this.model.toJSON(), 'target')) {
+        $(this.el).html(_.template(publicQuiriiTemplate)( {
+          model: this.model.toJSON()
+        }));
+      }
+
+
+
+      
       return this;
     }
 

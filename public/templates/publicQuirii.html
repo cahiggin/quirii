@@ -11,12 +11,20 @@
     </div>
   </div>
 
-  <div id="respond-view" class="col-sm-8 col-sm-offset-2 hidden">
-    <h3><%= model.title %></h3>
+
+    <div id="respond-view" class="col-sm-8 col-sm-offset-2 hidden">
+    <h3><%= model.title %></h3> 
     <h4><%= model.prompt %></h4>
+    <% if (model.target.mediaType == "PHOTO"){%>
     <div class="responsive-img">
-      <img src="<%=model.mediaUrl %>" />
+      <img src="<%=model.target.mediaUrl %>" />
     </div>
+    <%} else if (model.target.mediaType == "EMBED"){%>
+    <div class="embedded-content">
+    <%= model.target.mediaUrl %>
+    </div>
+    <%}%>
+    
     
     <h4>Give Feedback:</h4>
     <div id="quirii-feedback"></div>

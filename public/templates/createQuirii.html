@@ -5,15 +5,25 @@
       <input type="text" id="title" class="form-control" name="title" placeholder="Name Your Quirii" required="required"/>
     </div>
     <div class="form-group">
+      <label for="mediaType" class="control-label">Are you uploading:</label>
+      <input type="radio" name="mediaType" value="PHOTO" />A Photo
+      <input type="radio" name="mediaType" value="EMBED" />An iFrame
+
+    </div>
+    <div class="form-group photo-upload hidden">
       <label for="files" class="control-label">Please select a file</label>
       <input type="file" id="files" class="form-control" />
     </div>
-    <div class="form-group">
+    <div class="form-group photo-preview hidden">
       <div class="responsive-img" id="preview">
         <img src="/images/default.png" />
       </div>
     </div>
     <input type="hidden" id="image_url" name="image_url" value="/images/default.png" required="required"/>
+    <div class="form-group embed-content hidden">
+      <label for="embedLink" class="control-label">Please paste a valid iFrame</label>
+      <input type="text" id="embedLink" name="embedLink" class="form-control" />
+    </div>
     <div class="form-group">
       <label for="prompt" class="control-label"><span>Prompt or question: </span><sub>(optional)</sub></label>
       <input type="text" id="prompt" class="form-control" name="prompt" placeholder="Add a prompt or question"/>

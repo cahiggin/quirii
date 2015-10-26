@@ -2,9 +2,15 @@
   <div class="col-sm-8 col-sm-offset-2">
     <% if (model.isOwner) { %><a href="#" id="view-all-quiriis"><i class="fa fa-long-arrow-left"></i> View all Quiriis</a><% } %>
     
+    <% if (model.quirii.target.mediaType == "PHOTO"){%>
     <div class="responsive-img">
-      <img src="<%=model.quirii.mediaUrl %>" />
+      <img src="<%=model.quirii.target.mediaUrl %>" />
     </div>
+    <%} else if (model.quirii.target.mediaType == "EMBED"){%>
+    <div class="embedded-content">
+    <%= model.quirii.target.mediaUrl %>
+    </div>
+    <%}%>
     <h3><%= model.quirii.title %></h3> 
     <h4><%= model.quirii.prompt %></h4>
     

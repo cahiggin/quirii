@@ -5,7 +5,8 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
 
     events: {
       "submit #quirii-form": "postQuirii",
-      "change #files": "s3upload"
+      "change #files": "s3upload",
+      "change input:radio[name='mediaType']": "selectType"
     },
 
     initialize: function(options) {
@@ -13,6 +14,24 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
       this.collection = options.collection;
       this.model = new Quirii();
       this.model.url = this.collection.url;
+    },
+
+    //select media type handler
+    selectType: function(e){
+
+      var mType = $("input:radio[name='mediaType']:checked").val();
+      
+      if (mType == "PHOTO"){
+        $('.embed-content').addClass('hidden');
+        $('.photo-upload').removeClass('hidden');
+        $('.photo-preview').removeClass('hidden');
+
+      } else if (mType == "EMBED"){
+        $('.embed-content').removeClass('hidden');
+        $('.photo-upload').addClass('hidden');
+        $('.photo-preview').addClass('hidden');
+
+      }
     },
 
     //s3 upload trial run
@@ -53,8 +72,17 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
       var self = this,
           titleText = $('input[name=title]').val(),
           promptText = $('input[name=prompt]').val(),
-          mediaUrlText = $('input[name=image_url]').val(),
+          mediaTypeText = $("input:radio[name='mediaType']:checked").val();
+          //mediaUrlText = $('input[name=image_url]').val(),
           publicFeedback = $('#feedbackIsPublic').prop('checked');
+
+      var mediaUrlText;
+
+      if (mediaTypeText == "PHOTO"){
+        mediaUrlText = $('input[name=image_url]').val();
+      } else if (mediaTypeText == "EMBED"){
+        mediaUrlText = $('input[name=embedLink]').val();
+      }
           
       e.preventDefault();
       
@@ -66,6 +94,7 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
         this.model.set({
           title: titleText,
           prompt: promptText,
+          mediaType: mediaTypeText,
           mediaUrl: mediaUrlText,
           feedbackIsPublic: publicFeedback
         });

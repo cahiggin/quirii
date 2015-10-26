@@ -49,7 +49,8 @@ app.configure(function(){
 var models = {
   User: require('./models/User')(mongoose, passport),
   Morphii: require('./models/Morphii')(mongoose),
-  Quirii: require('./models/Quirii')(mongoose)
+  Quirii: require('./models/Quirii')(mongoose),
+  Target: require('./models/Target')(mongoose)
 };
 
 
@@ -106,6 +107,9 @@ passport.deserializeUser(function(uid, done) {
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
+/*var AWS_ACCESS_KEY = "AKIAJ4OZWALQHVFD6CJA";
+var AWS_SECRET_KEY = "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";
+var S3_BUCKET = "quirii";*/
 
 
 // GET index route
@@ -346,6 +350,7 @@ app.get('/api/me/quiriis/:quiriiid', function(req, res){
     }
     
     if (quirii.feedbackIsPublic || isOwnersQuirii) {
+      console.log("the quirii is ", quirii);
       res.send({
         meta: {
           code: 200
@@ -468,15 +473,16 @@ app.get('/api/me/quiriis', ensureAuthenticated, function(req, res){
     models.Quirii.findForUser(usr._id, function(quiriis){
       //return quiriis with matching userid
       //for general feedback use the Quiriis.getAllFeedback route
-    res.send({
-              meta: {
-                code: 200,
-              },
-              data:{
-                quiriis: quiriis
-              }
-            });
-  });
+      console.log("Quirii info is ", quiriis);
+      res.send({
+                meta: {
+                  code: 200,
+                },
+                data:{
+                  quiriis: quiriis
+                }
+              });
+    });
   }
 });
 
@@ -527,16 +533,22 @@ app.post('/api/me/quiriis', function(req, res){
   } else {
   var user = req.user;
   var newQuirii = req.body;
-  console.log(req.body);
-  models.Quirii.saveQuirii(user, newQuirii, function(quirii){
-    res.send({
-              meta: {
-                code: 201
-              },
-              data: {
-                quirii: quirii
-              }
-            });
+  console.log("The BODY is ", req.body);
+  //save the quirii target
+  models.Target.saveTarget(user, newQuirii, function(target){
+
+
+    models.Quirii.saveQuirii(user, newQuirii, target, function(quirii){
+      res.send({
+                meta: {
+                  code: 201
+                },
+                data: {
+                  quirii: quirii
+                }
+              });
+    });
+
   });
 }
 });
@@ -706,6 +718,6 @@ app.get('/api/morphiis/:id', function(req, res){
 // configuration:
 var port = process.env.PORT || CONFIG.port || 3000;
 //local port
-//var port = 3000;
+//var port = 5000;
 app.listen(port);
 console.log("The magic is happening on port "+ port);

@@ -14,8 +14,12 @@ module.exports = function(mongoose) {
   var QuiriiSchema = new mongoose.Schema({
     owner: { type: mongoose.Schema.ObjectId, ref:'User' },
     title: { type: String },
+    //had commented these out but uncommenting for legacy quiriis
+    
     mediaUrl: { type: String },
     prompt: { type: String },
+    //end uncommenting for legacy quiriis
+    target: { type: mongoose.Schema.ObjectId, ref: 'Target' }, //that gives a ref to the id of the target
     feedback: [Feedback],
     feedbackIsPublic: { type: Boolean },
     created: { type: Date, default: Date.now }
@@ -33,52 +37,57 @@ module.exports = function(mongoose) {
     Quirii.find().populate('owner').sort({ created : 1}).exec(function(err, docs){
       var publicQuiriis = [];
       docs.forEach(function(doc){
-        publicQuiriis.push({ _id: doc._id,
+        //handle legacy quiriis:
+        if (doc.target === undefined){
+          console.log("legacy quirii");
+          publicQuiriis.push({ _id: doc._id,
                             owner: doc.owner,
                             title: doc.title,
                             mediaUrl: doc.mediaUrl,
                             prompt: doc.prompt,
                             created: doc.created,
                             feedbackIsPublic: doc.feedbackIsPublic
+          });
+        } else {
+        publicQuiriis.push({ _id: doc._id,
+                            owner: doc.owner,
+                            title: doc.title,
+                            /*mediaUrl: doc.mediaUrl,
+                            prompt: doc.prompt,*/
+                            target: doc.target,
+                            created: doc.created,
+                            feedbackIsPublic: doc.feedbackIsPublic
         });
+      }
       });
       callback(publicQuiriis);
     });
   };
 
-
-/* stopped editing here */
-
-
-  /*var findForUser = function(userid, callback){
-    Quirii.find({ owner: userid }, function(err, docs){
-      var publicQuiriis = [];
-      docs.forEach(function(doc){
-        publicQuiriis.push({ _id: doc._id,
-                            //owner: doc.owner,
-                            title: doc.title,
-                            mediaUrl: doc.mediaUrl,
-                            prompt: doc.prompt,
-                            created: doc.created
-        });
-
-      });
-      callback(publicQuiriis);
-    });
-  }*/
-
   var findForUser = function(userid, callback){
-    Quirii.find({ owner: userid }).sort({ created : 1}).exec(function(err, docs){
+    Quirii.find({ owner: userid }).populate('owner').populate('target').sort({ created : 1}).exec(function(err, docs){
       var publicQuiriis = [];
       docs.forEach(function(doc){
+        //handle legacy quiriis
+        if (doc.target === null){
+          publicQuiriis.push({ _id: doc._id,
+                              //owner: doc.owner,
+                              title: doc.title,
+                              mediaUrl: doc.mediaUrl,
+                              prompt: doc.prompt,
+                              created: doc.created
+          });
+          //new quiriis
+        } else {
         publicQuiriis.push({ _id: doc._id,
                             //owner: doc.owner,
                             title: doc.title,
-                            mediaUrl: doc.mediaUrl,
-                            prompt: doc.prompt,
+                            //mediaUrl: doc.target.mediaUrl,
+                            prompt: doc.target.comment,
+                            target: doc.target,
                             created: doc.created
         });
-
+      }
       });
       callback(publicQuiriis);
     });
@@ -91,33 +100,59 @@ module.exports = function(mongoose) {
   };
 
   var findQuiriiInfo = function(quiriiId, callback){
-    Quirii.findOne({_id:quiriiId}).populate('owner').exec(function(err, doc){
-      if (doc.feedbackIsPublic == undefined){
+    //Quirii.findOne({_id:quiriiId}).populate('owner').exec(function(err, doc){
+    Quirii.findOne({_id:quiriiId}).populate('owner').populate('target').exec(function(err, doc){
+
+      if (doc.feedbackIsPublic === undefined){
         doc.feedbackIsPublic = true;
       };
       var publicQuirii = {};
-      publicQuirii.owner = doc.owner;
-      publicQuirii.title = doc.title;
-      publicQuirii.mediaUrl = doc.mediaUrl;
-      publicQuirii.prompt = doc.prompt;
-      publicQuirii.quiriiTime = doc.quiriiTime;
-      publicQuirii.feedbackIsPublic = doc.feedbackIsPublic;
-      var privateQuiriiDetail = doc.feedback;
+      //handle the legacy quirii schema
+      if (doc.target === undefined){
+        console.log("legacy quirii ii");
+        publicQuirii.owner = doc.owner;
+        publicQuirii.title = doc.title;
+        publicQuirii.mediaUrl = doc.mediaUrl;
+        publicQuirii.prompt = doc.prompt;
+        publicQuirii.quiriiTime = doc.quiriiTime;
+        publicQuirii.feedbackIsPublic = doc.feedbackIsPublic;
+        var privateQuiriiDetail = doc.feedback;
+      } else {
+        console.log("not a legacy quirii ", doc);
+        publicQuirii.owner = doc.owner;
+        publicQuirii.title = doc.title;
+        //publicQuirii.mediaUrl = doc.target.mediaUrl;
+        publicQuirii.prompt = doc.target.comment;
+        publicQuirii.target = doc.target;
+        publicQuirii.quiriiTime = doc.quiriiTime;
+        publicQuirii.feedbackIsPublic = doc.feedbackIsPublic;
+        var privateQuiriiDetail = doc.feedback;
+      }
+
       callback(publicQuirii, privateQuiriiDetail);
     });
   };
 
-  var saveQuirii = function(user, quirii, callback){
+  var saveQuirii = function(user, quirii, target, callback){
     var newQuirii = new Quirii();
     newQuirii.owner = user._id;
     newQuirii.title = quirii.title;
-    newQuirii.mediaUrl = quirii.mediaUrl;
-    newQuirii.prompt = quirii.prompt;
-    newQuirii.quiriiTime = quirii.quiriiTime;
+    //try saving full target compare to just saving _id and populating on recall
+    //newQuirii.target = target._id;
+    newQuirii.target = target;
+    newQuirii.quiriiTime = new Date();
     newQuirii.feedbackIsPublic = quirii.feedbackIsPublic;
-    newQuirii.save(function(err, obj) {
-          if(err) { throw err; }
-          callback(obj);
+
+    //save the quirii and the target
+    newQuirii.save(function(err, doc) {
+      
+          if(err) { 
+            console.log("OOPS there was an error saving your quirii ", err);
+            throw err; 
+          } else {
+            console.log("Quirii Saved! ", doc)
+            callback(doc);
+          } 
         });
   };
 
@@ -125,9 +160,10 @@ module.exports = function(mongoose) {
     Quirii.findOne({_id:quiriiId}, function(err, doc){
 
       var updateQuirii = doc;
-      updateQuirii.title = quirii.title;
+      /*updateQuirii.title = quirii.title;
       updateQuirii.mediaUrl = quirii.mediaUrl;
-      updateQuirii.prompt = quirii.prompt;
+      updateQuirii.prompt = quirii.prompt;*/
+      updateQuirii.target = quirii.target;
       updateQuirii.quiriiTime = quirii.quiriiTime;
       updateQuirii.feedbackIsPublic = quirii.feedbackIsPublic;
       updateQuirii.save(function(err, obj){
