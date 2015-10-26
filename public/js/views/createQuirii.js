@@ -38,6 +38,7 @@ function(QuiriiNetView, createQuiriiTemplate, CreateQuiriiView, Quirii) {
     setLinkType: function(e){
       var linkTypeText = $("input:radio[name='linkType']:checked").val();
       console.log(linkTypeText);
+      $('#embedLink').removeClass('hidden');
 
       switch(linkTypeText){
         case "soundcloud":
