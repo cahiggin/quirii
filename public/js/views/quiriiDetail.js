@@ -169,6 +169,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
         }));
       }
       
+      //commented out to remove functionality due to share bug
       //$('#share-twitter').attr('href', QuiriiScope.twitterShareLink('Quirii:', location.origin + '/' + $('#share-twitter').data('url')));
       return this;
     }
