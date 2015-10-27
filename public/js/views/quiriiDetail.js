@@ -169,7 +169,7 @@ define(['QuiriiNetView', 'text!templates/quiriiDetail.html', 'views/feedbackItem
         }));
       }
       
-      $('#share-twitter').attr('href', QuiriiScope.twitterShareLink('Quirii:', location.origin + '/' + $('#share-twitter').data('url')));
+      //$('#share-twitter').attr('href', QuiriiScope.twitterShareLink('Quirii:', location.origin + '/' + $('#share-twitter').data('url')));
       return this;
     }
 
