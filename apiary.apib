@@ -1,0 +1,395 @@
+FORMAT: 1A
+HOST: http://quirii.com
+
+# Quirii API
+Quirii API is a tool that allows you to upload media and Quirii anyone about it.
+
+# Group Quirii
+Quirii related resources of the **Quirii API**
+   
+## Current User Quirii [/api/me/quiriis/{quirii_id}]
+A single Quirii object with all its details
+
++ Parameters
+    + quirii_id (required, string, `53221bc11cbe9d0200bd27df`) ... The MongoDB-generated ObjectId of the Quirii to perform action with.
+    
++ Model (application/json)
+    ```js
+    {
+        "data": {
+            "id": "53221bc11cbe9d0200bd27df",
+            "user": {
+                ...
+            },
+            "created_at": "2014-03-12T17:23:48Z",
+            "quiriiName": "Culture-Driven Strategies",
+            "imageUrl": "http://moodlme.s3.amazonaws.com/quiriis/quirii_53221bc11cbe8d0200bd19df.jpg",
+            "quiriiLocation": "Embassy Suites, North Charleston, SC",
+            "quiriiTime": "2014-04-15T09:00:00Z",
+            "description: "Learn more about building a great culture and how to...",
+            "feedback": [{
+                ...
+                }]
+        },
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Retrieve a Quirii [GET]
+Retrieve a specific Quirii.  This returns the entire feedback object for the currently logged in user.
+
++ Response 200
+
+    [Current User Quirii][]
+
+### Update a Quirii [PUT]
+Update a specific Quirii.  The current user must be the same user who created the quirii.
+
++ Response 200
+    
+    [Current User Quirii][]
+
+### Delete a Quirii [DELETE]
+Delete a Quirii.  The current user must be the same user who created the Quirii.  It returns the deleted Quirii on success.
+
++ Response 204
+
+## Current User Quirii Collection [/api/me/quiriis]
+The currently logged in user's quirii collection.
+
++ Model (application/json)
+    
+    ```js
+    {
+        "data": [
+            {
+                "id": "53221bc11cbe9d0200bd27df", 
+                "created_at": "2014-03-12T17:23:48Z",
+                "quiriiName": "Culture-Driven Strategies",
+                "imageUrl": "http://moodlme.s3.amazonaws.com/quiriis/quirii_53221bc11cbe8d0200bd19df.jpg",
+                "quiriiLocation": "Embassy Suites, North Charleston, SC",
+                "quiriiTime": "2014-04-15T09:00:00Z",
+                "description: "Learn more about building a great culture and how to...",
+                "feedback": [{
+                    ...
+                    }]
+            },
+            {
+                "id": "59921dex1cbe9d0200ad18fz", 
+                "created_at": "2014-03-12T17:23:48Z",
+                "quiriiName": "Culture-Driven Strategies",
+                "imageUrl": "http://moodlme.s3.amazonaws.com/quiriis/quirii_53221bc11cbe8d0200bd19df.jpg",
+                "quiriiLocation": "Embassy Suites, North Charleston, SC",
+                "quiriiTime": "2014-04-15T09:00:00Z",
+                "description: "Learn more about building a great culture and how to...",
+                "feedback": [{
+                    ...
+                    }]
+            },
+            {
+                "id": "53251bc31cbe9d0581jt31po", 
+                "created_at": "2014-03-12T17:23:48Z",
+                "quiriiName": "Culture-Driven Strategies",
+                "imageUrl": "http://moodlme.s3.amazonaws.com/quiriis/quirii_53221bc11cbe8d0200bd19df.jpg",
+                "quiriiLocation": "Embassy Suites, North Charleston, SC",
+                "quiriiTime": "2014-04-15T09:00:00Z",
+                "description: "Learn more about building a great culture and how to...",
+                "feedback": [{
+                    ...
+                    }]
+            },
+        ],
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Retrieve Current User Quiriis [GET]
+Retrieves a list of the current user's quiriis
+
++ Response 200 
+    
+    [Current User Quirii Collection][]
+
+
+### Create Current User Quirii [POST]
+Creates a new quirii for the currently logged in user.
+
++ Request
+    
+    [Current User Quirii][]
+
++ Response 201
+    
+    [Current User Quirii][]
+
+# Group Feedback
+Feedback related resources of the **Feedback API**
+
+## Quiriis Feedback [/api/quiriis/{quirii_id}/feedback]
+A single Quirii Feedback object with feedback details
+
++ Parameters
+    + quirii_id (required, string, `53221bc11cbe9d0200bd27df`) ... The MongoDB-generated ObjectId of the Quirii to append feedback to.
+    
++ Model (application/json)
+    
+    ```js
+    {
+        "data": {
+            "id": "53221bc11cbe9d0200bd27df",
+            "user": {
+                "id": "53221bc11cbe9d0200bd27df",
+                "username": "lifeworkscharle",
+                "full_name": "Brian Sullivan",
+                "imageUrl": "http://pbs.twimg.com/profile_images/1235779674/brian_sullivan_listening_sml_normal.jpg",
+                "bio": "Our job is to work ourselves out of a job.  Too bad all shrinks aren't that way.",
+                "email": "sullivanb@lifeworkscharleston.com",
+                "created_at": "2014-03-10T11:32:18Z"
+            },
+            "quirii": {
+                "created_at": "2014-03-12T17:23:48Z",
+                "quiriiName": "Culture-Driven Strategies",
+                "imageUrl": "http://moodlme.s3.amazonaws.com/quiriis/quirii_53221bc11cbe8d0200bd19df.jpg",
+                "quiriiLocation": "Embassy Suites, North Charleston, SC",
+                "quiriiTime": "2014-04-15T09:00:00Z",
+                "description: "Learn more about building a great culture and how to...",
+                "feedback": [{
+                    ...
+                    }]
+            },
+            "created_at": "2014-03-12T17:23:48Z",
+            "morphyType": "Delight", //Note this is the Scale Name
+            "morphyIntensity": "0.562", //Note this is a floating point decimal between 0 and 1, rounded to thousandths
+            "feedback": "Very informative ad for this product!"
+        },
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Create Feedback for Quirii [POST]
+Create feedback for a specific quirii.  
+
++ Request
+
+    [Quiriis Feedback][]
+
++ Response 201
+
+    [Quiriis Feedback][]
+    
+### Delete Feedback for Quirii [DELETE]
+Delete a feedback object from a quirii's feedback array.  The current user must be the same user who created the feedback object.  It returns the quirii with deleted feedback on success.
+
++ Response 204
+
+# Group Users
+User related resources of the **Users API**
+
+## User [/api/users/{username}]
+A single User object with all its details
+
++ Parameters
+    + username (required, string, `lifeworkscharle`) ... The username of the User to perform action with.
+    
++ Model (application/json)
+    ```js
+    {
+        "data": {
+            "id": "53221bc11cbe9d0200bd27df",
+            "username": "lifeworkscharle",
+            "full_name": "Brian Sullivan",
+            "imageUrl": "http://pbs.twimg.com/profile_images/1235779674/brian_sullivan_listening_sml_normal.jpg",
+            "bio": "Our job is to work ourselves out of a job.  Too bad all shrinks aren't that way.",
+            "email": "sullivanb@lifeworkscharleston.com",
+            "created_at": "2014-03-10T11:32:18Z"
+        },
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Retrieve a User [GET]
+Returns a specific User.
+
++ Response 200 
+
+    [User][]
+    
+## User Collection [/api/users]
+The collection of all users.
+
++ Model (application/json)
+
+    ```js
+    {
+        "data": [
+            {
+                "id": "53221bc11cbe9d0200bd27df", 
+                "username": "lifeworkscharle",
+                "full_name": "Brian Sullivan",
+                "imageUrl": "http://pbs.twimg.com/profile_images/1235779674/brian_sullivan_listening_sml_normal.jpg",
+                "bio": "Our job is to work ourselves out of a job.  Too bad all shrinks aren't that way.",
+                "email": "sullivanb@lifeworkscharleston.com",
+                "created_at": "2014-03-10T11:32:18Z"
+            },
+            {
+                "id": "59921dex1cbe9d0200ad18fz", 
+                "username": "corleyhiggins",
+                "full_name": "Corley Higgins",
+                "imageUrl": "http://pbs.twimg.com/profile_images/1235779674/img_1098_corley.jpg",
+                "bio": "magical unicorn etc.",
+                "email": "theicor@corley.com",
+                "created_at": "2014-03-10T11:32:18Z"
+            },
+            {
+                "id": "53251bc31cbe9d0581jt31po", 
+                ...
+            },
+        ],
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Retrieve All Users [GET]
+Retrieves a list of all users.
+
++ Response 200
+
+    [User Collection][]
+    
+    
+## Current User [/api/me/settings]
+The currently logged in user details.  **The user must be logged in to view this page.**
+    
++ Model (application/json)
+
+    ```js
+    {
+        "data": {
+            "id": "53221bc11cbe9d0200bd27df",
+            "username": "lifeworkscharle",
+            "full_name": "Brian Sullivan",
+            "imageUrl": "http://pbs.twimg.com/profile_images/1235779674/brian_sullivan_listening_sml_normal.jpg",
+            "bio": "Our job is to work ourselves out of a job.  Too bad all shrinks aren't that way.",
+            "email": "sullivanb@lifeworkscharleston.com",
+            "created_at": "2014-03-10T11:32:18Z"
+        },
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Retrieve User [GET]
+Returns the currently logged in user's account details. 
+
++ Response 200 
+
+    [Current User][]
+
+### Update User [PUT]
+Updates the currently logged in user's account details.
+
++ Response 201
+
+    [Current User][]
+
+### Delete User [DELETE]
+Deletes the currently logged in user.
+
++ Response 204
+
+# Group Morphiis
+Morphii related resources of the **Morphiis API**
+
+## Morphii [/api/morphiis/{morphiiName}]
+A single Morphii object with all its details
+
++ Parameters
+    + morphiiName (required, string, `Delight`) ... The name of the Morphii to retrieve from db.
+    
++ Model (application/json)
+    ```js
+    {
+        "data": {
+            "morphii": {
+                "_id": "55e3032ff252511c17000005",
+                "name": "Delighted",
+                "scaleType": "0",
+                "staticUrl": "http://s3.amazonaws.com/ViizbiProducts/morphies/Delighted.png",
+                "anchor": "{\"0\":{\"color\":\"#D5E741\",\"st\":{\"x\":239,\"y\":474},\"c1\":{\"x1\":369.3389892578125,\"y1\":474,\...}"
+                "delta": "{\"0\":{\"st\":{\"x\":0,\"y\":0},\"c1\":{\"x1\":0,\"y1\":0,\"x2\":0,\"y2\":0,\"x\":0,\"y\":0},\"c2\":...}"
+            }
+        },
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Retrieve a Morphii [GET]
+Returns a specific Morphii.
+
++ Response 200 
+
+    [Morphii][]
+    
+## Morphii Collection [/api/morphiis]
+The collection of all morphiis.
+
++ Model (application/json)
+
+    ```js
+    {
+        "data": [
+            {
+                "id": "53221bc11cbe9d0200bd27df", 
+                ...
+            },
+            {
+                "id": "59921dex1cbe9d0200ad18fz", 
+                ...
+            },
+            {
+                "id": "53251bc31cbe9d0581jt31po", 
+                ...
+            },
+        ],
+        "meta": {
+            "code": 200,
+        }
+    }
+    ```
+
+### Retrieve All Morphiis [GET]
+Retrieves a list of all morphiis.
+
++ Response 200
+
+    [Morphii Collection][]
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
