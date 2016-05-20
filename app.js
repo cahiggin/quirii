@@ -736,6 +736,6 @@ app.get('/api/morphiis/:id', function(req, res) {
 // configuration:
 //var port = process.env.PORT || CONFIG.port || 3000;
 //local port
-var port = 5000;
+//var port = 5000;
 app.listen(port);
 console.log("The magic is happening on port " + port);
