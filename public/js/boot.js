@@ -3,6 +3,7 @@ require.config({
   paths: {
     jQuery: '/js/libs/jquery',
     Underscore: '/js/libs/underscore',
+    pathseg: '/js/libs/pathseg.js',
     Backbone: '/js/libs/backbone',
     S3Upload: '/js/libs/s3upload',
     bootstrap: '/js/libs/bootstrap',
@@ -25,7 +26,7 @@ require.config({
 });
 
 
-require(['jQuery', 'QuiriiNet', 'bootstrap', 'S3Upload'], function($, QuiriiNet) {
+require(['jQuery', 'QuiriiNet', 'bootstrap', 'S3Upload', 'pathseg'], function($, QuiriiNet) {
   QuiriiNet.initialize();
   return{};
 });
