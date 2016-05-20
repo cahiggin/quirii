@@ -3,7 +3,7 @@ require.config({
   paths: {
     jQuery: '/js/libs/jquery',
     Underscore: '/js/libs/underscore',
-    pathseg: '/js/libs/pathseg.js',
+    pathseg: '/js/libs/pathseg',
     Backbone: '/js/libs/backbone',
     S3Upload: '/js/libs/s3upload',
     bootstrap: '/js/libs/bootstrap',
