@@ -56,6 +56,10 @@ var models = {
 };
 
 
+//TO CHANGE FROM LOCAL TO HEROKU:
+//UPDATE TO LOCAL VARS
+//CHANGE PORT AT BOTTOM OF THIS PAGE
+
 //UPDATE WITH CONFIG VARS FOR HEROKU
 var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
@@ -734,7 +738,7 @@ app.get('/api/morphiis/:id', function(req, res) {
 
 
 // configuration:
-//var port = process.env.PORT || CONFIG.port || 3000;
+var port = process.env.PORT || CONFIG.port || 5000;
 //local port
 //var port = 5000;
 app.listen(port);
