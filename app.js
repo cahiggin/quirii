@@ -57,16 +57,16 @@ var models = {
 
 
 //UPDATE WITH CONFIG VARS FOR HEROKU
-/*var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
+var TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
-var TWITTER_CALLBACK_URL = process.env.TWITTER_CALLBACK_URL;*/
+var TWITTER_CALLBACK_URL = process.env.TWITTER_CALLBACK_URL;
 
 //#TODO:0 Move all env variables to AWS
 // Moodl Me Local Env Twitter App Credentials
 //Local Env Twitter app credentials:
-var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
+/*var TWITTER_CONSUMER_KEY = '9DR3Nv9T9mJVo5LIGK7y4Q';
 var TWITTER_CONSUMER_SECRET = 'VUvrJsap9MA8UWULi2oPasj31FyFtiI2Nt3sNYqb6E';
-var TWITTER_CALLBACK_URL = 'http://localhost:5000/auth/twitter/callback';
+var TWITTER_CALLBACK_URL = 'http://localhost:5000/auth/twitter/callback';*/
 
 
 //set up Twitter Passport strategy
